@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author brunofgo
- *
- */
-package deckofcards;
