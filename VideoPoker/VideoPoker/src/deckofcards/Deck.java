@@ -1,6 +1,7 @@
 package deckofcards;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
 	
@@ -12,17 +13,49 @@ public class Deck {
 	
 	Deck(){
 		
-		for (char suit : suits) {
+		for (char suit : suits) 
 			for(char rank: ranks){
 				Card card = new Card(rank, suit);
 				deck.add(card);
 			}
-		}	
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Deck [deck=" + deck + "]";
 	}
 	
 	
 	
+	public void shuffleDeck(){
+		
+		
+		Collections.shuffle(deck);
+		
+		
+	}
+	public Card drawCard(){
+		
+		Card card = this.deck.get(0);
+		this.deck.remove(0);
+		return card;
+		
+		
+	}
 	
+	public static void main(String[] args) {
+		
+		
+		Deck deck = new Deck();
+		
+		System.out.println(deck);
+		
+		
+		
+		
+	}
+
 	
 	
 }
