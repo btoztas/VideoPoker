@@ -1,15 +1,28 @@
 package deckofcards;
 
-public class Card {
+
+public class Card{
 	
 	char rank;
 	char suit;
+	int score;
 
 
-	Card(char rank, char suit){
+	public Card(char rank, char suit, int score){
 		
 		this.rank = rank;
 		this.suit = suit;
+		this.score = score;
+	}
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 
@@ -26,7 +39,5 @@ public class Card {
 	@Override
 	public String toString() {
 		return "" + rank + suit;
-	}
-
-	
+	}	
 }

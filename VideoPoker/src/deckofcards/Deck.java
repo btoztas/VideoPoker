@@ -7,16 +7,17 @@ public class Deck {
 	
 	ArrayList<Card> deck = new ArrayList<Card>();
 	private char[] suits = {'H', 'S', 'D', 'C'};
-	private char[] ranks = {'2', '3', '4', '5', '6', '7', '8', '9', 'D', 'J', 'Q', 'K', 'A'};
+	private char[] ranks = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
 	
 	
 	
-	Deck(){
+	public Deck(){
 		
-		for (char suit : suits) 
-			for(char rank: ranks){
-				Card card = new Card(rank, suit);
-				deck.add(card);
+		for(int i=0; i< suits.length; i++)
+			for(int j=0; j<ranks.length; j++){
+				
+				deck.add(new Card(ranks[j], suits[i], j+2));
+		
 			}
 	}
 	
@@ -37,10 +38,13 @@ public class Deck {
 	}
 	public Card drawCard(){
 		
-		Card card = this.deck.get(0);
-		this.deck.remove(0);
-		return card;
+		return this.deck.remove(0);	
 		
+	}
+	
+	public void collectCard(Card card){
+		
+		deck.add(card);
 		
 	}
 	
@@ -48,11 +52,23 @@ public class Deck {
 		
 		
 		Deck deck = new Deck();
-		
 		System.out.println(deck);
 		
 		deck.shuffle();
+		System.out.println(deck);
 		
+		Card card = deck.drawCard();
+		
+		
+		
+		System.out.println(card);
+		System.out.println(deck);
+		card = deck.drawCard();
+		System.out.println(card);
+		System.out.println(deck);
+		card = deck.drawCard();
+		
+		System.out.println(card);
 		System.out.println(deck);
 		
 		
