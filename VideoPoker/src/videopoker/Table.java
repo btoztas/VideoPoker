@@ -32,6 +32,24 @@ public class Table {
 		this.hand.addCard(index, this.deck.drawCard());
 		
 	}
+	/**
+	 * ola Eu sou O bruno
+	 * 
+	 * 
+	 * @param indexes
+	 */
+	public void holdCards(int[] indexes){
+		
+		
+		for(int i=0; i<5; i++){
+			boolean sw=true;
+			for(int j=0; j<indexes.length; j++)
+				if(i==(indexes[j]-1))
+					sw = false;
+			if(sw)
+				this.switchCard(i);
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -40,22 +58,20 @@ public class Table {
 
 	public static void main(String[] args) {
 		
-		Table table = new Table();
-		Card card;
-		card = new Card('Q', 'H', 6);
-		table.hand.addCard(card);
-		card = new Card('T', 'C', 7);
-		table.hand.addCard(card);
-		card = new Card('K', 'H', 2);
-		table.hand.addCard(card);
-		card = new Card('J', 'H', 11);
-		table.hand.addCard(card);
-		card = new Card('A', 'H', 11);
-		table.hand.addCard(card);
-		
-		System.out.println(table.hand.evaluateHand());
-		
-		
+			Table table = new Table();
+			table.shuffleDeck();
+			table.drawHand();
+			System.out.println(table.hand);
+			int[] hold = {1,2,3};
+			table.holdCards(hold);
+			System.out.println(table.hand);
+			int[] hold2 = {2};
+			table.holdCards(hold2);
+			System.out.println(table.hand);
+			int[] hold3 = {5,3};
+			table.holdCards(hold3);
+			System.out.println(table.hand);
+			System.out.println(table.hand.evaluateHand());
 		
 	}
 }

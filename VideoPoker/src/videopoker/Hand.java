@@ -89,7 +89,6 @@ public class Hand {
 	public int evaluateHand(){
 		if(this.checkFlush()){
 			this.sortRank();
-			System.out.println(this);
 			if(this.checkRoyalFlush())
 				return 250;
 			else if(this.checkStraightFlush())
@@ -98,12 +97,9 @@ public class Hand {
 				return 7;
 		}
 		this.sortRank();
-		System.out.println(this);
 		if(this.checkStraight())
 			return 5;
 		
-		
-		System.out.println(this);
 		
 		if(hand.get(0).getScore()==hand.get(3).getScore()){
 			if(hand.get(0).getScore()==14)
