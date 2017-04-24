@@ -30,126 +30,61 @@ public class Hand {
 	}
 	
 	
-	private void sortRank(){
+	void sortRank(){
 		
 		Collections.sort(this.hand, new RankComparator());
 		
 	}
 	
-	private void sortSuit(){
+	void sortSuit(){
 		
 		Collections.sort(this.hand, new SuitComparator());
 		
 	}
 	
-	private boolean checkFlush(){
+	Card getCard(int index){
 		
-		this.sortSuit();
-		if(hand.get(0).getSuit() == hand.get(4).getSuit())
-			return true;
-		return false;
-	}
-	
-	private boolean checkRoyalFlush(){
-		
-		if(hand.get(0).getScore()==10)
-			return true;
-		return false;
-	}
-	
-	private boolean checkStraightFlush(){
-		
-		if(hand.get(0).getScore() == hand.get(4).getScore() - 4 || (hand.get(0).getScore()==2 && hand.get(4).getScore()==14))
-			return true;
-		return false;
-			
-	}
-	
-	private boolean checkStraight(){
-		
-		
-		for(int i=0; i<4; i++){
-			if(i==3 && hand.get(4).getScore()==14 && hand.get(0).getScore()==2)
-				return true;
-			if(hand.get(i).getScore()!=hand.get(i+1).getScore()-1)
-				return false;
-		}
-		return true;
-	}
-	
-	private boolean checkPair(int index){
-		
-		for(int i=index; i<4; i++)
-			if(hand.get(i).getScore()==hand.get(i+1).getScore())
-				return true;
-		return false;
-		
+		return this.hand.get(index);
 	}
 	
 
 	
 	HandType evaluateHand(){
-		if(this.checkFlush()){
-			this.sortRank();
-			if(this.checkRoyalFlush())
-				return new RoyalFlush();
-			else if(this.checkStraightFlush())
-				return new StraightFlush();
-			else
-				return new Flush();
-		}
-		this.sortRank();
-		if(this.checkStraight())
+		
+		if(RoyalFlush.isRoyalFlush(this))
+			return new RoyalFlush();
+
+		if(StraightFlush.isStraightFlush(this))
+			return new StraightFlush();
+
+		if(FourAces.isFourAces(this))
+			return new FourAces();
+
+		if(Four2_4.isFour2_4(this))
+			return new Four2_4();
+		
+		if(Four5_K.isFour5_K(this))
+			return new Four5_K();
+		
+		if(FullHouse.isFullHouse(this))
+			return new FullHouse();
+		
+		if(Flush.isFlush(this))
+			return new Flush();
+		
+		if(Straight.isStraight(this))
 			return new Straight();
 		
+		if(ThreeOfAKind.isThreeOfAKind(this))
+			return new ThreeOfAKind();
 		
-		if(hand.get(0).getScore()==hand.get(3).getScore()){
-			if(hand.get(0).getScore()==14)
-				return new FourAces(); /*Four of a kind of aces */
-			else if(hand.get(0).getScore()>4)
-				return new Four5_K(); /*Four of a kind of 5 - K */
-			else
-				return new Four2_4(); /*Four of a kind of 2 - 4 */
-		}else if(hand.get(0).getScore()==hand.get(2).getScore()){
-			if(hand.get(3).getScore()==hand.get(4).getScore())
-				return new FullHouse(); /*Full House*/
-			else
-				return new ThreeOfAKind();  /*Three of a Kind*/
-		}else if(hand.get(0).getScore()==hand.get(1).getScore()){
-			if(hand.get(2).getScore()==hand.get(4).getScore())
-				return new FullHouse(); /*Full House*/
-			else if(checkPair(2))
-				return new TwoPair(); /* Two Pairs */
-			else if(hand.get(0).getScore()>10)
-				return new JacksOrBetter(); /* One Pair */
-		}
+		if(TwoPair.isTwoPair(this))
+			return new TwoPair();
 		
-		if(hand.get(1).getScore()==hand.get(4).getScore()){
-			if(hand.get(1).getScore()==14)
-				return new FourAces(); /*Four of a kind of aces */
-			else if(hand.get(1).getScore()>4)
-				return new Four5_K(); /*Four of a kind of 5 - K */
-			else
-				return new Four2_4(); /*Four of a kind of 2 - 4 */
-		}else if(hand.get(1).getScore()==hand.get(3).getScore()){
-			return new ThreeOfAKind(); /*Three of a Kind*/
-		}else if(hand.get(1).getScore()==hand.get(2).getScore()){
-			if(hand.get(3).getScore()==hand.get(4).getScore())
-				return new TwoPair(); /* Two Pairs */
-			else if(hand.get(1).getScore()>10)
-				return new JacksOrBetter(); /* One Pair */
-		}
-		
-		if(hand.get(2).getScore()==hand.get(4).getScore()){
-			return new ThreeOfAKind(); /*Three of a Kind*/
-		}else if(hand.get(2).getScore()==hand.get(3).getScore())
-			if(hand.get(2).getScore()>10)
-				return new JacksOrBetter(); /* One Pair */
-		if(hand.get(3).getScore()==hand.get(4).getScore() && hand.get(3).getScore()>10)
-			return new JacksOrBetter(); /*One Pair*/
+		if(JacksOrBetter.isJacksOrBetter(this))
+			return new JacksOrBetter();
 		
 		return null;
-		
 		
 		
 	}

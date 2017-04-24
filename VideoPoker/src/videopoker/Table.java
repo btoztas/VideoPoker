@@ -31,7 +31,7 @@ public class Table {
 		return credit.getCredit();
 	}
 	
-	int remFromPot(){
+	int rmvFromPot(){
 		return pot.outPot();
 	}
 	
@@ -87,24 +87,15 @@ public class Table {
 		
 			Table table = new Table(1000, new Deck());
 			table.shuffleDeck();
-			table.drawHand();
-			//table.hand.addCard(new Card('3', 'D', 3));
-			//System.out.println(table.hand);
-			//table.hand.addCard(new Card('5', 'D', 5));
-			//table.hand.addCard(new Card('4', 'H', 4));
-			//table.hand.addCard(new Card('2', 'D', 2));
-			//table.hand.addCard(new Card('A', 'D', 14));
-			System.out.println(table.hand);
-			int[] hold = {1,2,3};
-			//System.out.println(hold);
-			table.holdCards(hold);
-			System.out.println(table.hand);
-			int[] hold2 = {2};
-			table.holdCards(hold2);
-			System.out.println(table.hand);
-			int[] hold3 = {5,3};
-			table.holdCards(hold3);
+			table.hand.addCard(new Card('J', 'C', 11));
+			table.hand.addCard(new Card('J', 'D', 11));
+			table.hand.addCard(new Card('2', 'H', 2));
+			table.hand.addCard(new Card('3', 'S', 3));
+			table.hand.addCard(new Card('5', 'D', 5));
 			System.out.println(table.hand);
 			System.out.println(table.hand.evaluateHand());
+			
+			
+			
 	}
 }
