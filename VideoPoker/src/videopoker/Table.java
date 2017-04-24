@@ -6,27 +6,47 @@ public class Table {
 	
 	Deck deck;
 	Hand hand;
+	Pot pot;
+	Credit credit;
 	
 
-	Table(){
+	Table(int c, Deck d){
 		
-		deck = new Deck();
+		pot = new Pot();
 		hand = new Hand();
-		
+		credit = new Credit(c);
+		deck = d;
 	}
 	
-	public void drawHand(){
+	void addToPot(int bet){
+		credit.redraw(bet);
+		pot.inPot(bet);
+	}
+	
+	void addCredit(int payout){
+		credit.add(payout);
+	}
+	
+	int getCredit(){
+		return credit.getCredit();
+	}
+	
+	int remFromPot(){
+		return pot.outPot();
+	}
+	
+	void drawHand(){
 		for(int i=0; i<5; i++){
 		 	this.hand.addCard(this.deck.drawCard());
 		}
 	}
 	
-	public void shuffleDeck(){
+	void shuffleDeck(){
 		
 		this.deck.shuffle();
 	}
 	
-	public void switchCard(int index){
+	void switchCard(int index){
 		
 		this.deck.collectCard(this.hand.removeCard(index));
 		this.hand.addCard(index, this.deck.drawCard());
@@ -38,7 +58,7 @@ public class Table {
 	 * 
 	 * @param indexes
 	 */
-	public void holdCards(int[] indexes){
+	void holdCards(int[] indexes){
 		
 		
 		for(int i=0; i<5; i++){
@@ -49,6 +69,13 @@ public class Table {
 			if(sw)
 				this.switchCard(i);
 		}
+		System.out.println(this.hand);
+		System.out.println(this.hand.evaluateHand());
+		
+	}
+	
+	String getHand(){
+		return this.hand.toString();
 	}
 
 	@Override
@@ -58,11 +85,18 @@ public class Table {
 
 	public static void main(String[] args) {
 		
-			Table table = new Table();
+			Table table = new Table(1000, new Deck());
 			table.shuffleDeck();
 			table.drawHand();
+			//table.hand.addCard(new Card('3', 'D', 3));
+			//System.out.println(table.hand);
+			//table.hand.addCard(new Card('5', 'D', 5));
+			//table.hand.addCard(new Card('4', 'H', 4));
+			//table.hand.addCard(new Card('2', 'D', 2));
+			//table.hand.addCard(new Card('A', 'D', 14));
 			System.out.println(table.hand);
 			int[] hold = {1,2,3};
+			//System.out.println(hold);
 			table.holdCards(hold);
 			System.out.println(table.hand);
 			int[] hold2 = {2};
@@ -72,6 +106,5 @@ public class Table {
 			table.holdCards(hold3);
 			System.out.println(table.hand);
 			System.out.println(table.hand.evaluateHand());
-		
 	}
 }

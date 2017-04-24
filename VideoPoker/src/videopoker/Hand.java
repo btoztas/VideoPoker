@@ -59,7 +59,7 @@ public class Hand {
 	
 	private boolean checkStraightFlush(){
 		
-		if(hand.get(0).getScore() == hand.get(4).getScore() - 4)
+		if(hand.get(0).getScore() == hand.get(4).getScore() - 4 || (hand.get(0).getScore()==2 && hand.get(4).getScore()==14))
 			return true;
 		return false;
 			
@@ -68,10 +68,12 @@ public class Hand {
 	private boolean checkStraight(){
 		
 		
-		for(int i=0; i<4; i++)
+		for(int i=0; i<4; i++){
+			if(i==3 && hand.get(4).getScore()==14 && hand.get(0).getScore()==2)
+				return true;
 			if(hand.get(i).getScore()!=hand.get(i+1).getScore()-1)
 				return false;
-		
+		}
 		return true;
 	}
 	
@@ -86,67 +88,67 @@ public class Hand {
 	
 
 	
-	public int evaluateHand(){
+	HandType evaluateHand(){
 		if(this.checkFlush()){
 			this.sortRank();
 			if(this.checkRoyalFlush())
-				return 250;
+				return new RoyalFlush();
 			else if(this.checkStraightFlush())
-				return 50;
+				return new StraightFlush();
 			else
-				return 7;
+				return new Flush();
 		}
 		this.sortRank();
 		if(this.checkStraight())
-			return 5;
+			return new Straight();
 		
 		
 		if(hand.get(0).getScore()==hand.get(3).getScore()){
 			if(hand.get(0).getScore()==14)
-				return 160; /*Four of a kind of aces */
+				return new FourAces(); /*Four of a kind of aces */
 			else if(hand.get(0).getScore()>4)
-				return 50; /*Four of a kind of 5 - K */
+				return new Four5_K(); /*Four of a kind of 5 - K */
 			else
-				return 80; /*Four of a kind of 2 - 4 */
+				return new Four2_4(); /*Four of a kind of 2 - 4 */
 		}else if(hand.get(0).getScore()==hand.get(2).getScore()){
 			if(hand.get(3).getScore()==hand.get(4).getScore())
-				return 10; /*Full House*/
+				return new FullHouse(); /*Full House*/
 			else
-				return 3;  /*Three of a Kind*/
+				return new ThreeOfAKind();  /*Three of a Kind*/
 		}else if(hand.get(0).getScore()==hand.get(1).getScore()){
 			if(hand.get(2).getScore()==hand.get(4).getScore())
-				return 10; /*Full House*/
+				return new FullHouse(); /*Full House*/
 			else if(checkPair(2))
-				return 1; /* Two Pairs */
+				return new TwoPair(); /* Two Pairs */
 			else if(hand.get(0).getScore()>10)
-				return 1; /* One Pair */
+				return new JacksOrBetter(); /* One Pair */
 		}
 		
 		if(hand.get(1).getScore()==hand.get(4).getScore()){
 			if(hand.get(1).getScore()==14)
-				return 160; /*Four of a kind of aces */
+				return new FourAces(); /*Four of a kind of aces */
 			else if(hand.get(1).getScore()>4)
-				return 50; /*Four of a kind of 5 - K */
+				return new Four5_K(); /*Four of a kind of 5 - K */
 			else
-				return 80; /*Four of a kind of 2 - 4 */
+				return new Four2_4(); /*Four of a kind of 2 - 4 */
 		}else if(hand.get(1).getScore()==hand.get(3).getScore()){
-				return 3; /*Three of a Kind*/
+			return new ThreeOfAKind(); /*Three of a Kind*/
 		}else if(hand.get(1).getScore()==hand.get(2).getScore()){
 			if(hand.get(3).getScore()==hand.get(4).getScore())
-				return 1; /* Two Pairs */
+				return new TwoPair(); /* Two Pairs */
 			else if(hand.get(1).getScore()>10)
-				return 1; /* One Pair */
+				return new JacksOrBetter(); /* One Pair */
 		}
 		
 		if(hand.get(2).getScore()==hand.get(4).getScore()){
-			return 3; /*Three of a Kind*/
+			return new ThreeOfAKind(); /*Three of a Kind*/
 		}else if(hand.get(2).getScore()==hand.get(3).getScore())
 			if(hand.get(2).getScore()>10)
-				return 1; /* One Pair */
+				return new JacksOrBetter(); /* One Pair */
 		if(hand.get(3).getScore()==hand.get(4).getScore() && hand.get(3).getScore()>10)
-			return 1; /*One Pair*/
+			return new JacksOrBetter(); /*One Pair*/
 		
-		return 0;
+		return null;
 		
 		
 		
@@ -155,7 +157,7 @@ public class Hand {
 
 	@Override
 	public String toString() {
-		return "Hand [hand=" + hand + "]";
+		return "" + hand;
 	}
 	
 	
