@@ -6,6 +6,7 @@ public class Pot {
 	Pot(){
 		value = 0;
 	}
+	
 	void inPot(int bet){
 		value = bet;
 	}
