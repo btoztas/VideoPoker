@@ -103,6 +103,7 @@ public class Table {
 		
 			Table table = new Table(1000, new Deck());
 			table.shuffleDeck();
+			
 			table.hand.addCard(new Card('J', 'C', 11));
 			table.hand.addCard(new Card('J', 'D', 11));
 			table.hand.addCard(new Card('J', 'H', 11));

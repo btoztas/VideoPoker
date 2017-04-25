@@ -108,28 +108,28 @@ public class Hand {
 	
 	HandType evaluateHand(){
 		
-		if(RoyalFlush.isRoyalFlush(this))
+		if(RoyalFlush.isRoyalFlush(this)!=null)
 			return new RoyalFlush();
 
-		if(StraightFlush.isStraightFlush(this))
+		if(StraightFlush.isStraightFlush(this)!=null)
 			return new StraightFlush();
 
-		if(FourAces.isFourAces(this))
+		if(FourAces.isFourAces(this)!=null)
 			return new FourAces();
 
-		if(Four2_4.isFour2_4(this))
+		if(Four2_4.isFour2_4(this)!=null)
 			return new Four2_4();
 		
-		if(Four5_K.isFour5_K(this))
+		if(Four5_K.isFour5_K(this)!=null)
 			return new Four5_K();
 		
 		if(FullHouse.isFullHouse(this)!=null)
 			return new FullHouse();
 		
-		if(Flush.isFlush(this))
+		if(Flush.isFlush(this)!=null)
 			return new Flush();
 		
-		if(Straight.isStraight(this))
+		if(Straight.isStraight(this)!=null)
 			return new Straight();
 		
 		if(ThreeOfAKind.isThreeOfAKind(this)!=null)
