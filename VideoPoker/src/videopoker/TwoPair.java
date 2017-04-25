@@ -14,6 +14,7 @@ public class TwoPair extends HandType {
 		// 2S 2C KC KS AH
 		// 2S 4C 4C 5S 5H
 		
+		
 		hand.sortRank();
 		
 		// First and second case
@@ -35,6 +36,8 @@ public class TwoPair extends HandType {
 			return res;
 		}
 		return null;
+		
+		
 		
 	}
 }

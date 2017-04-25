@@ -2,16 +2,17 @@ package videopoker;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 import deckofcards.*;
 
 public class Hand {
 	
-	ArrayList<Card> hand;
+	LinkedList<Card> hand;
 	
 	Hand(){
 		
-		hand = new ArrayList<Card>();
+		hand = new LinkedList<Card>();
 		
 	}
 		
@@ -52,8 +53,48 @@ public class Hand {
 		return this.hand.get(index);
 	}
 	
+	 private Hand copyHand(){
+		 
+		 Hand hand = new Hand();
+		 
+		 for(int i=0; i<5; i++)
+			 hand.addCard(this.getCard(i));
+		 
+		 return hand;
+ 
+	 }
+	 
+	 private int getIndex(Card card){
+		 
+		 return this.hand.indexOf(card);
+		 
+	 }
+	 
+	 private int[] getOriginalIndexes(ArrayList<Card> holdList){
+		 
+		 
+		 int[] res = new int[holdList.size()];
+		 int i=0;
+		 
+		 for(Card c : holdList){
+			 res[i] = this.hand.indexOf(c);
+			 i++;
+		 }
+		 return res;
+		 
+	 }
 	
+	 
+	 
+	 
 	int[] getAdvice(){
+		
+		Hand playerHand = this.copyHand();
+		
+		// invocar metodos de teste sobre a playerHand
+		
+		this.getOriginalIndexes(arraylist que cenas mandaram);
+		
 		
 		// Funcoes vao retornar posiçoes em hand ordenada
 		// Guardar hand original. Guardar posiçoes trocadas depois saber a ponte entre as duas
@@ -110,6 +151,8 @@ public class Hand {
 	public String toString() {
 		return "player's hand " + hand.get(0) + " " + hand.get(1) + " " + hand.get(2) + " " + hand.get(3) + " " + hand.get(4);
 	}
+
+	
 	
 	
 	
