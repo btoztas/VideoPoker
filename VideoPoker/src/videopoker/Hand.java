@@ -93,7 +93,7 @@ public class Hand {
 		
 		// invocar metodos de teste sobre a playerHand
 		
-		this.getOriginalIndexes(arraylist que cenas mandaram);
+		//this.getOriginalIndexes(arraylist que cenas mandaram);
 		
 		
 		// Funcoes vao retornar posiçoes em hand ordenada
@@ -123,7 +123,7 @@ public class Hand {
 		if(Four5_K.isFour5_K(this))
 			return new Four5_K();
 		
-		if(FullHouse.isFullHouse(this))
+		if(FullHouse.isFullHouse(this)!=null)
 			return new FullHouse();
 		
 		if(Flush.isFlush(this))
@@ -132,7 +132,7 @@ public class Hand {
 		if(Straight.isStraight(this))
 			return new Straight();
 		
-		if(ThreeOfAKind.isThreeOfAKind(this))
+		if(ThreeOfAKind.isThreeOfAKind(this)!=null)
 			return new ThreeOfAKind();
 		
 		if(TwoPair.isTwoPair(this)!=null)
