@@ -30,18 +30,17 @@ public class RoyalFlush extends Flush{
 		return null;
 	}
 	
-	static int[] isNToRoyalFlush(Hand hand, int n){
+	static ArrayList<Card> isNToRoyalFlush(Hand hand, int n){
 		
-		int res[] = isNToFlush(hand, n);
+		ArrayList<Card> toHold = isNToFlush(hand, n);
 		
 		
-		if(res!=null){
-			for(int i=0; i<res.length; i++)
-				if(hand.getCard(res[i]).getScore() < 10)
+		if(toHold!=null){
+			for(int i=0; i<n; i++)
+				if(toHold.get(i).getScore()<10)
 					return null;
 		}
-		
-		return res;
+		return toHold;
 		
 	}
 }

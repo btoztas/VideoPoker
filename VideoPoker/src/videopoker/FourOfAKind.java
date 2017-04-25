@@ -1,14 +1,24 @@
 package videopoker;
 
+import java.util.ArrayList;
+
+import deckofcards.Card;
+
 public class FourOfAKind extends HandType {
 	
-	static boolean isFourOfAKind(Hand hand){
+	static ArrayList<Card> isFourOfAKind(Hand hand){
 		
 		hand.sortRank();
+		ArrayList<Card> tohold = new ArrayList<Card>();
 		
-		if(hand.getCard(0).getScore()==hand.getCard(3).getScore() || hand.getCard(1).getScore()==hand.getCard(4).getScore())
-			return true;
-		return false;
+		for(int i=0; i<2; i++)
+			if(hand.getCard(i).getScore()==hand.getCard(i+3).getScore()){
+				for(int j=i;j<i+3;j++){
+					tohold.add(hand.getCard(j));
+				}
+				return tohold;
+			}		
+		return null;
 		
 	}
 

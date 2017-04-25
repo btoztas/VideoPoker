@@ -13,29 +13,29 @@ public class Flush extends HandType {
 	
 	static ArrayList<Card> isFlush(Hand hand){
 		
-		ArrayList<Card> tohold = new ArrayList<Card>();
+		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortSuit();
 		if(hand.getCard(0).getSuit() == hand.getCard(4).getSuit()){
 			for(int j=0;j<5;j++){
-				tohold.add(hand.getCard(j));
+				toHold.add(hand.getCard(j));
 			}
-			return tohold;
+			return toHold;
 		}
 		return null;
 		
 	}
 	
-	static int[] isNToFlush(Hand hand, int n){
+	static ArrayList<Card> isNToFlush(Hand hand, int n){
 		
-		int[] res = new int[n];
+		ArrayList<Card> toHold = new ArrayList<Card>();
 		
 		hand.sortSuit();
 		
 		for(int i=0; i<=5-n; i++)
 			if(hand.getCard(i).getSuit() == hand.getCard(i+n-1).getSuit()){
 				for(int j=i; j<i+n; j++)
-					res[j-i] = j;
-				return res;
+					toHold.add(hand.getCard(j));
+				return toHold;
 			}
 		return null;
 		

@@ -12,6 +12,7 @@ public class Straight extends HandType {
 	}
 	
 	static ArrayList<Card> isStraight(Hand hand){
+		
 		ArrayList<Card> tohold = new ArrayList<Card>();
 		hand.sortRank();
 		//Esta função está provavelmente mal

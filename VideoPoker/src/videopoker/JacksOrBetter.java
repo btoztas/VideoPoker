@@ -1,5 +1,9 @@
 package videopoker;
 
+import java.util.ArrayList;
+
+import deckofcards.Card;
+
 public class JacksOrBetter extends HandType {
 	
 	JacksOrBetter(){
@@ -7,7 +11,7 @@ public class JacksOrBetter extends HandType {
 		multiplier = 1;
 	}
 	
-	static boolean isJacksOrBetter(Hand hand){
+	static ArrayList<Card> isThereAPair(Hand hand){
 		
 		// Cases for Jacks or Better on a sorted by rank hand:
 		// JS JC QC KH AS
@@ -15,15 +19,38 @@ public class JacksOrBetter extends HandType {
 		// 2S TC JC JH AS
 		// 2S 9C TC JH JS
 		
+		ArrayList<Card> tohold = new ArrayList<Card>();
+		
 		hand.sortRank();
 		
-		if( (isPair(hand.getCard(0), hand.getCard(1)) && hand.getCard(0).getScore()>=11) || 
-		    (isPair(hand.getCard(1), hand.getCard(2)) && hand.getCard(1).getScore()>=11) ||
-		    (isPair(hand.getCard(2), hand.getCard(3)) && hand.getCard(2).getScore()>=11) || 
-		    (isPair(hand.getCard(3), hand.getCard(4)) && hand.getCard(3).getScore()>=11))
-			return true;
+		for(int i=0; i<4; i++)
+			if(isPair(hand.getCard(i), hand.getCard(i+1))){
+				for(int j=0; j<2; j++)
+					tohold.add(hand.getCard(j));
+				return tohold;
+			}
+			
+		return null;
+	}
+	
+	static ArrayList<Card> isJacksOrBetter(Hand hand){
 		
-		return false;
+		ArrayList<Card> tohold = isThereAPair(hand);
+		
+		if(tohold.get(0).getScore()>=10)
+			return tohold;
+		return null;
+		
+	}
+	
+	static ArrayList<Card> isLowPair(Hand hand){
+		
+		ArrayList<Card> tohold = isThereAPair(hand);
+		
+		if(tohold.get(0).getScore()<10)
+			return tohold;
+		return null;
+		
 	}
 	
 	

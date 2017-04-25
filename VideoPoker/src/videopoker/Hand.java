@@ -91,6 +91,53 @@ public class Hand {
 		
 		Hand playerHand = this.copyHand();
 		
+		ArrayList<Card> holdList;
+		
+		holdList = RoyalFlush.isRoyalFlush(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = FourOfAKind.isFourOfAKind(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = StraightFlush.isStraightFlush(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = RoyalFlush.isNToRoyalFlush(playerHand, 4);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = RoyalFlush.isRoyalFlush(playerHand); //Three Aces
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = FullHouse.isFullHouse(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = Flush.isFlush(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = Straight.isStraight(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = RoyalFlush.isRoyalFlush(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		holdList = RoyalFlush.isRoyalFlush(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		
+		
+		
+		
+		
 		// invocar metodos de teste sobre a playerHand
 		
 		//this.getOriginalIndexes(arraylist que cenas mandaram);
@@ -138,7 +185,7 @@ public class Hand {
 		if(TwoPair.isTwoPair(this)!=null)
 			return new TwoPair();
 		
-		if(JacksOrBetter.isJacksOrBetter(this))
+		if(JacksOrBetter.isJacksOrBetter(this)!=null)
 			return new JacksOrBetter();
 		
 		return null;

@@ -1,8 +1,10 @@
 package videopoker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import deckofcards.Card;
+import deckofcards.RankComparator;
 
 public class StraightFlush extends Flush{
 	
@@ -25,6 +27,33 @@ public class StraightFlush extends Flush{
 				}
 				return tohold;
 			}
+		}
+		return null;
+	}
+	
+	static ArrayList<Card> isNToStraightFlush(Hand hand, int n){
+		
+		ArrayList<Card> toHold = isNToFlush(hand, n);
+		
+		if(toHold!=null){
+			
+			Collections.sort(toHold, new RankComparator());
+			
+			if( toHold.get(n).getScore() - toHold.get(0).getScore()<=4 ){ 
+				return toHold;
+			}
+			if(toHold.get(n).getScore()==14){
+				if(toHold.get(0).getScore()<10){
+					if(toHold.get(n-1).getScore()-1<=4){
+						return toHold;
+					}
+				}else{
+					if(14 - toHold.get(0).getScore()<=4){
+						return toHold;
+					}
+				}
+			}
+			
 		}
 		return null;
 	}
