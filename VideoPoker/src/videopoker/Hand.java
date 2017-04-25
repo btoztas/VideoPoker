@@ -89,7 +89,7 @@ public class Hand {
 		if(ThreeOfAKind.isThreeOfAKind(this))
 			return new ThreeOfAKind();
 		
-		if(TwoPair.isTwoPair(this))
+		if(TwoPair.isTwoPair(this)!=null)
 			return new TwoPair();
 		
 		if(JacksOrBetter.isJacksOrBetter(this))
