@@ -20,6 +20,20 @@ public class RoyalFlush extends Flush{
 				return true;
 		}
 		return false;
+	}
+	
+	static int[] isNToRoyalFlush(Hand hand, int n){
+		
+		int res[] = isNToFlush(hand, n);
+		
+		if(res!=null){
+			hand.sortRank();
+			
+			if(hand.getCard(0).getScore()==10)
+				return true;
+			
+		}
+		return res;
 		
 	}
 }

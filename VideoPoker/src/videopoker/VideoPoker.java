@@ -24,6 +24,7 @@ public class VideoPoker {
 	
 	public String hold(int[] cards){
 		table.holdCards(cards);
+		
 		return table.getHand();
 	}
 	

@@ -47,6 +47,17 @@ public class Hand {
 		return this.hand.get(index);
 	}
 	
+	
+	int[] getAdvice(){
+		
+		// Funcoes vao retornar posiçoes em hand ordenada
+		// Guardar hand original. Guardar posiçoes trocadas depois saber a ponte entre as duas
+		
+		
+		return null;
+	}
+	
+	
 
 	
 	HandType evaluateHand(){

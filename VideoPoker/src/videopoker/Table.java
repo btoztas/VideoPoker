@@ -52,12 +52,7 @@ public class Table {
 		this.hand.addCard(index, this.deck.drawCard());
 		
 	}
-	/**
-	 * ola Eu sou O bruno
-	 * 
-	 * 
-	 * @param indexes
-	 */
+	
 	void holdCards(int[] indexes){
 		
 		
@@ -82,6 +77,7 @@ public class Table {
 	public String toString() {
 		return "Table ["+ deck + "\n"+ hand + "]";
 	}
+	
 
 	public static void main(String[] args) {
 		
