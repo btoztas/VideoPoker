@@ -26,13 +26,13 @@ public class RoyalFlush extends Flush{
 		
 		int res[] = isNToFlush(hand, n);
 		
+		
 		if(res!=null){
-			hand.sortRank();
-			
-			if(hand.getCard(0).getScore()==10)
-				return true;
-			
+			for(int i=0; i<res.length; i++)
+				if(hand.getCard(res[i]).getScore() < 10)
+					return null;
 		}
+		
 		return res;
 		
 	}
