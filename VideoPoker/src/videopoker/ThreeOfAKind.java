@@ -34,10 +34,18 @@ public class ThreeOfAKind extends HandType {
 		return null;
 	}
 	
-	static boolean isThreeOfAKindAces(Hand hand){
+	static ArrayList<Card> isThreeOfAKindAces(Hand hand){
+				
+		ArrayList<Card> toHold = new ArrayList<Card>();
+		hand.sortRank();
 		
-		
-		
-		return false;
+		for(int i=0; i<3; i++){
+			if(isPair(hand.getCard(i),hand.getCard(i+2)) && hand.getCard(i).getRank()==14){
+				for(int j=i; j<i+3; j++)
+					toHold.add(hand.getCard(j));
+				return toHold;		
+			}
+		}
+		return null;
 	}
 }
