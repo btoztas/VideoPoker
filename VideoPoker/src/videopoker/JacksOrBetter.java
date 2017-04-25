@@ -19,15 +19,15 @@ public class JacksOrBetter extends HandType {
 		// 2S TC JC JH AS
 		// 2S 9C TC JH JS
 		
-		ArrayList<Card> tohold = new ArrayList<Card>();
+		ArrayList<Card> toHold = new ArrayList<Card>();
 		
 		hand.sortRank();
 		
 		for(int i=0; i<4; i++)
 			if(isPair(hand.getCard(i), hand.getCard(i+1))){
 				for(int j=0; j<2; j++)
-					tohold.add(hand.getCard(j));
-				return tohold;
+					toHold.add(hand.getCard(j));
+				return toHold;
 			}
 			
 		return null;
@@ -35,10 +35,10 @@ public class JacksOrBetter extends HandType {
 	
 	static ArrayList<Card> isJacksOrBetter(Hand hand){
 		
-		ArrayList<Card> tohold = isThereAPair(hand);
-		
-		if(tohold.get(0).getScore()>=10)
-			return tohold;
+		ArrayList<Card> toHold = isThereAPair(hand);
+		if(toHold!=null)
+			if(toHold.get(0).getScore()>=10)
+				return toHold;
 		return null;
 		
 	}

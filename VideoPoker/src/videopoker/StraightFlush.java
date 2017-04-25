@@ -39,12 +39,12 @@ public class StraightFlush extends Flush{
 			
 			Collections.sort(toHold, new RankComparator());
 			
-			if( toHold.get(n).getScore() - toHold.get(0).getScore()<=4 ){ 
+			if( toHold.get(n-1).getScore() - toHold.get(0).getScore()<=4 ){ 
 				return toHold;
 			}
-			if(toHold.get(n).getScore()==14){
+			if(toHold.get(n-1).getScore()==14){
 				if(toHold.get(0).getScore()<10){
-					if(toHold.get(n-1).getScore()-1<=4){
+					if(toHold.get(n-2).getScore()-1<=4){
 						return toHold;
 					}
 				}else{

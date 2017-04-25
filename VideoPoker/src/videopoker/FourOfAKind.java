@@ -13,7 +13,7 @@ public class FourOfAKind extends HandType {
 		
 		for(int i=0; i<2; i++)
 			if(hand.getCard(i).getScore()==hand.getCard(i+3).getScore()){
-				for(int j=i;j<i+3;j++){
+				for(int j=i;j<i+4;j++){
 					tohold.add(hand.getCard(j));
 				}
 				return tohold;

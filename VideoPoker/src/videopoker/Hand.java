@@ -77,7 +77,7 @@ public class Hand {
 		 int i=0;
 		 
 		 for(Card c : holdList){
-			 res[i] = this.hand.indexOf(c);
+			 res[i] = getIndex(c);
 			 i++;
 		 }
 		 return res;
@@ -93,46 +93,72 @@ public class Hand {
 		
 		ArrayList<Card> holdList;
 		
+	    System.out.println("TESTING RoyalFlush");
 		holdList = RoyalFlush.isRoyalFlush(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
-		
+	    		
+		System.out.println("TESTING FourOfAKind");
 		holdList = FourOfAKind.isFourOfAKind(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING StraightFlush");
 		holdList = StraightFlush.isStraightFlush(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING RoyalFlush");
 		holdList = RoyalFlush.isNToRoyalFlush(playerHand, 4);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		holdList = RoyalFlush.isRoyalFlush(playerHand); //Three Aces
+		System.out.println("TESTING ThreeOfAKind");
+		holdList = ThreeOfAKind.isThreeOfAKindAces(playerHand); //Three Aces
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING FullHouse");
 		holdList = FullHouse.isFullHouse(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING Flush");
 		holdList = Flush.isFlush(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING Straight");
 		holdList = Straight.isStraight(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		holdList = RoyalFlush.isRoyalFlush(playerHand);
+		System.out.println("TESTING StraightFlush");
+		holdList = StraightFlush.isNToStraightFlush(playerHand, 4);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		holdList = RoyalFlush.isRoyalFlush(playerHand);
+		System.out.println("TESTING TwoPair");
+		holdList = TwoPair.isTwoPair(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING JacksOrBetter");
+		holdList = JacksOrBetter.isJacksOrBetter(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING Flush");
+		holdList = Flush.isNToFlush(playerHand, 4);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING RoyalFlush");
+		holdList = RoyalFlush.isNToRoyalFlush(playerHand, 3);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+
+		return null;
 		
 		
 		
@@ -147,7 +173,6 @@ public class Hand {
 		// Guardar hand original. Guardar posiçoes trocadas depois saber a ponte entre as duas
 		
 		
-		return null;
 	}
 	
 	

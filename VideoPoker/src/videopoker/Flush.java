@@ -37,6 +37,7 @@ public class Flush extends HandType {
 					toHold.add(hand.getCard(j));
 				return toHold;
 			}
+		
 		return null;
 		
 	}
