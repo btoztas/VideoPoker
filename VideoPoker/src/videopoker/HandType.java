@@ -23,7 +23,5 @@ public abstract class HandType {
 		
 	}
 	
-	static
-	
 	
 }

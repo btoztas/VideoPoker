@@ -103,11 +103,11 @@ public class Table {
 		
 			Table table = new Table(1000, new Deck());
 			table.shuffleDeck();
-			table.hand.addCard(new Card('J', 'C', 11));
-			table.hand.addCard(new Card('J', 'D', 11));
-			table.hand.addCard(new Card('2', 'H', 2));
-			table.hand.addCard(new Card('3', 'S', 3));
-			table.hand.addCard(new Card('5', 'D', 5));
+			table.hand.addCard(new Card('T', 'H', 10));
+			table.hand.addCard(new Card('J', 'H', 11));
+			table.hand.addCard(new Card('Q', 'H', 12));
+			table.hand.addCard(new Card('K', 'H', 13));
+			table.hand.addCard(new Card('A', 'H', 14));
 			System.out.println(table.hand);
 			System.out.println(table.hand.evaluateHand());
 			
