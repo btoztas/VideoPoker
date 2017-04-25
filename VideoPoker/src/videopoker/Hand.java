@@ -29,6 +29,11 @@ public class Hand {
 		
 	}
 	
+	boolean existsHand(){
+		if(this.hand.isEmpty()==true)
+			return false;
+		return true;
+	}
 	
 	void sortRank(){
 		
@@ -103,7 +108,7 @@ public class Hand {
 
 	@Override
 	public String toString() {
-		return "" + hand;
+		return "player's hand " + hand.get(0) + " " + hand.get(1) + " " + hand.get(2) + " " + hand.get(3) + " " + hand.get(4);
 	}
 	
 	

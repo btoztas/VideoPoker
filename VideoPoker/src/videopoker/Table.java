@@ -27,6 +27,10 @@ public class Table {
 		credit.add(payout);
 	}
 	
+	void redrawCredit(int bet){
+		credit.redraw(bet);
+	}
+	
 	int getCredit(){
 		return credit.getCredit();
 	}
@@ -44,6 +48,14 @@ public class Table {
 	void shuffleDeck(){
 		
 		this.deck.shuffle();
+	}
+	
+	void collectHand(){
+		if(this.hand.existsHand()==true){
+			for(int i=0; i<5; i++){
+				this.deck.collectCard(this.hand.removeCard(0));
+			}
+		}
 	}
 	
 	void switchCard(int index){
@@ -64,8 +76,16 @@ public class Table {
 			if(sw)
 				this.switchCard(i);
 		}
+		
 		System.out.println(this.hand);
-		System.out.println(this.hand.evaluateHand());
+		if(this.hand.evaluateHand()==null){
+			this.rmvFromPot();
+			System.out.println("player loses and his credit is " + this.getCredit());
+		}else{
+			HandType eval = this.hand.evaluateHand();
+			this.addCredit(eval.getMult()*this.rmvFromPot());
+			System.out.println("player wins with a " + this.hand.evaluateHand() + " and his credit is " + this.getCredit());
+		}
 		
 	}
 	
