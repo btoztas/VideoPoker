@@ -40,7 +40,7 @@ public class ThreeOfAKind extends HandType {
 		hand.sortRank();
 		
 		for(int i=0; i<3; i++){
-			if(isPair(hand.getCard(i),hand.getCard(i+2)) && hand.getCard(i).getRank()==14){
+			if(isPair(hand.getCard(i),hand.getCard(i+2)) && hand.getCard(i).getScore()==14){
 				for(int j=i; j<i+3; j++)
 					toHold.add(hand.getCard(j));
 				return toHold;		

@@ -17,7 +17,7 @@ public abstract class HandType {
 	
 	static boolean isPair(Card card1, Card card2){
 		
-		if(card1.getRank()==card2.getRank())
+		if(card1.getScore()==card2.getScore())
 			return true;
 		return false;
 		

@@ -1,6 +1,7 @@
 package videopoker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -80,6 +81,7 @@ public class Hand {
 			 res[i] = getIndex(c);
 			 i++;
 		 }
+		 Arrays.sort(res);
 		 return res;
 		 
 	 }
@@ -157,7 +159,45 @@ public class Hand {
 		holdList = RoyalFlush.isNToRoyalFlush(playerHand, 3);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING 4 Outside Straight");
+		holdList = Straight.is4OutsideStraight(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING Low Pair");
+		holdList = JacksOrBetter.isLowPair(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING AKQJ");
+		holdList = Straight.isAKQJUnsuited(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING 3 to Straight Flush");
+		holdList = StraightFlush.isNToStraightFlush(playerHand, 3);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
 
+		System.out.println("TESTING 4 to Inside Straight");
+		holdList = Straight.is4InsideStraightNHighCards(playerHand, 3);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING 4 to QJ Suited");
+		holdList = Miscellanious.isQJSuited(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		
+		
+		
+		
+		
+
+		
+		
 		return null;
 		
 		

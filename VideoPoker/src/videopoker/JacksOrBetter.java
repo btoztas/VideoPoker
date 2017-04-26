@@ -46,9 +46,9 @@ public class JacksOrBetter extends HandType {
 	static ArrayList<Card> isLowPair(Hand hand){
 		
 		ArrayList<Card> tohold = isThereAPair(hand);
-		
-		if(tohold.get(0).getScore()<10)
-			return tohold;
+		if(tohold != null)
+			if(tohold.get(0).getScore()<10)
+				return tohold;
 		return null;
 		
 	}
