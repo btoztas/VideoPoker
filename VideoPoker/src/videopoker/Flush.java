@@ -37,8 +37,29 @@ public class Flush extends HandType {
 					toHold.add(hand.getCard(j));
 				return toHold;
 			}
-		
 		return null;
 		
 	}
+	
+	static ArrayList<Card> isNToFlushNHighCards(Hand hand, int n, int n1){
+		
+		ArrayList<Card> tohold = new ArrayList<Card>();
+		
+		tohold = Flush.isNToFlush(hand, n);
+		int count = 0;
+		if(tohold!=null){
+			for(Card c : tohold){
+				if(c.getScore()>10){
+					count++;
+				}
+			}
+		}
+		if(count>=n1){
+			return tohold;
+		}
+		return null;
+		
+		
+	}
+	
 }

@@ -104,11 +104,11 @@ public class Table {
 			Table table = new Table(1000, new Deck());
 			table.shuffleDeck();
 			
+			table.hand.addCard(new Card('A', 'H', 14));
 			table.hand.addCard(new Card('2', 'C', 2));
-			table.hand.addCard(new Card('T', 'H', 10));
-			table.hand.addCard(new Card('Q', 'S', 12));
-			table.hand.addCard(new Card('4', 'D', 4));
-			table.hand.addCard(new Card('J', 'S', 11));
+			table.hand.addCard(new Card('3', 'C', 3));
+			table.hand.addCard(new Card('6', 'C', 6));
+			table.hand.addCard(new Card('9', 'H', 9));
 			System.out.println(table.hand);
 			System.out.print("Advice ");
 			for(int i : table.hand.getAdvice())

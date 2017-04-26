@@ -110,12 +110,12 @@ public class Hand {
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING RoyalFlush");
+		System.out.println("TESTING 4 to RoyalFlush");
 		holdList = RoyalFlush.isNToRoyalFlush(playerHand, 4);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING ThreeOfAKind");
+		System.out.println("TESTING Three Aces");
 		holdList = ThreeOfAKind.isThreeOfAKindAces(playerHand); //Three Aces
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
@@ -135,7 +135,12 @@ public class Hand {
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING StraightFlush");
+		System.out.println("TESTING Three ofaKind Aces-low");
+		holdList = ThreeOfAKind.isThreeOfAKind(playerHand); //Three Aces
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING 4 to StraightFlush");
 		holdList = StraightFlush.isNToStraightFlush(playerHand, 4);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
@@ -150,17 +155,17 @@ public class Hand {
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING Flush");
+		System.out.println("TESTING 4 to a Flush");
 		holdList = Flush.isNToFlush(playerHand, 4);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING RoyalFlush");
+		System.out.println("TESTING 3 to a RoyalFlush");
 		holdList = RoyalFlush.isNToRoyalFlush(playerHand, 3);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING 4 Outside Straight");
+		System.out.println("TESTING 4 to Outside Straight");
 		holdList = Straight.is4OutsideStraight(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
@@ -175,22 +180,45 @@ public class Hand {
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING 3 to Straight Flush");
-		holdList = StraightFlush.isNToStraightFlush(playerHand, 3);
+		System.out.println("TESTING 3 to Straight Flush type 1");
+		holdList = StraightFlush.isNToStraightFlushNType(playerHand, 3, 1);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 
-		System.out.println("TESTING 4 to Inside Straight");
+		System.out.println("TESTING 4 to Inside Straight 3 High Cards");
 		holdList = Straight.is4InsideStraightNHighCards(playerHand, 3);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
-		System.out.println("TESTING 4 to QJ Suited");
+		System.out.println("TESTING QJ Suited");
 		holdList = Miscellanious.isQJSuited(playerHand);
 		if(holdList!=null)
 			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING 3 to a flush with 2 High Cards");
+		holdList = Flush.isNToFlushNHighCards(playerHand, 3, 2);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
 		
+		System.out.println("TESTING 2 suited high cards");
+		holdList = Miscellanious.is2SuitedHCard(playerHand);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		System.out.println("TESTING 4 to Inside Straight 2 High Cards");
+		holdList = Straight.is4InsideStraightNHighCards(playerHand, 2);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
+		
+		
+		
+		
+		
+		
+		System.out.println("TESTING 3 to Straight Flush type 3");
+		holdList = StraightFlush.isNToStraightFlushNType(playerHand, 3, 3);
+		if(holdList!=null)
+			return getOriginalIndexes(holdList);
 		
 		
 		

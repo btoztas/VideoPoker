@@ -25,7 +25,7 @@ public class JacksOrBetter extends HandType {
 		
 		for(int i=0; i<4; i++)
 			if(isPair(hand.getCard(i), hand.getCard(i+1))){
-				for(int j=0; j<2; j++)
+				for(int j=i; j<i+2; j++)
 					toHold.add(hand.getCard(j));
 				return toHold;
 			}
