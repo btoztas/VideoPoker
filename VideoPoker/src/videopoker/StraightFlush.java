@@ -94,6 +94,7 @@ public class StraightFlush extends Flush{
 						if(c.getScore()>10)
 							count++;
 					}
+					System.out.println("count = " + count + " ngaps = " + ngaps);
 					if(count>=ngaps){
 						return toHold;
 					}

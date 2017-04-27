@@ -23,6 +23,10 @@ public class VideoPoker {
 		return table.getHand();
 	}
 	
+	public int[] advice(){
+		return table.hand.getAdvice();
+	}
+	
 	public String deal(){
 		table.collectHand();
 		table.shuffleDeck();

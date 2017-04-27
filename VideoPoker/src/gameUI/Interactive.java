@@ -72,6 +72,17 @@ public class Interactive implements GameMode {
 				}
 			}else if(s.contains("$")){
 				System.out.println("player's credit is " + v.credit());
+			}else if(s.contains("a")){
+				
+				int res [] = v.advice();
+				if(res!=null){
+					System.out.print("player should hold ");
+					for(int i=0;i<res.length;i++){
+						System.out.print(res[i]+" ");
+					}
+				}else{
+					System.out.print("player should discard everything");
+				}
 			}
 		}
 	}
