@@ -78,7 +78,7 @@ public class StraightFlush extends Flush{
 					if(toHold.get(5-n-1).getScore()==5 || toHold.get(0).getScore()==10)
 						return null;
 				}else if((toHold.get(5-n).getScore() - toHold.get(0).getScore())==4){
-					return null;
+					ngaps=2;
 				}
 				if(type==1){
 					if(toHold.get(5-n).getScore()==14){
@@ -94,7 +94,7 @@ public class StraightFlush extends Flush{
 						if(c.getScore()>10)
 							count++;
 					}
-					System.out.println("count = " + count + " ngaps = " + ngaps);
+					//System.out.println("count = " + count + " ngaps = " + ngaps);
 					if(count>=ngaps){
 						return toHold;
 					}

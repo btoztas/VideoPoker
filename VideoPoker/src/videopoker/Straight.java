@@ -40,12 +40,13 @@ public class Straight extends HandType {
 		hand.sortRank();
 		
 		for(int i=0; i<2; i++){
-			for(int j=i; j<i+3; j++){
+			int j;
+			for(j=i; j<i+3; j++){
 				if(hand.getCard(j).getScore()!=hand.getCard(j+1).getScore()-1){
-					return null;
+					break;
 				}
 			}
-			if(hand.getCard(i+3).getScore()!=14){
+			if(hand.getCard(i+3).getScore()!=14 && j == i+3){
 				for(int w=i;w<i+4;w++)
 					toHold.add(hand.getCard(w));
 				return toHold;
@@ -100,7 +101,7 @@ public class Straight extends HandType {
 			
 			// There may be two equal cards in the middle
 			if(1 == hand.getCard(3).getScore()-4){
-				for(int i=0; i<5; i++){
+				for(int i=1; i<5; i++){
 					if(hand.getCard(i).getScore()!=toHold.get(i-1).getScore())
 						toHold.add(hand.getCard(i));
 				}
@@ -108,7 +109,7 @@ public class Straight extends HandType {
 			}
 			
 			if(1 == hand.getCard(2).getScore()-4){
-				for(int i=0; i<4; i++)
+				for(int i=1; i<5; i++)
 					toHold.add(hand.getCard(i));
 				return toHold;
 			}
@@ -122,13 +123,16 @@ public class Straight extends HandType {
 	static ArrayList<Card> is4InsideStraightNHighCards(Hand hand, int n){
 		
 		ArrayList<Card> toHold = is4InsideStraight(hand);
+		//System.out.print(toHold);
+
 		if(toHold!=null){
+			//System.out.print("vou contar ");
 			int count=0;
 			
 			for(Card c : toHold)
 				if(c.getScore()>10)
 					count++;
-			
+			//System.out.println(count);
 			if(count == n)
 				return toHold;
 			
@@ -151,8 +155,12 @@ public class Straight extends HandType {
 	static ArrayList<Card> isKQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
-		if(hand.getCard(2).getScore()==11){
+		if(hand.getCard(2).getScore()==11 && hand.getCard(2).getScore()==13){
 			for(int i=2;i<5;i++)
+				toHold.add(hand.getCard(i));
+			return toHold;
+		}else if(hand.getCard(1).getScore()==11){
+			for(int i=1;i<4;i++)
 				toHold.add(hand.getCard(i));
 			return toHold;
 		}
@@ -162,10 +170,18 @@ public class Straight extends HandType {
 	static ArrayList<Card> isQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
-		if(hand.getCard(3).getScore()==11){
-			for(int i=2;i<5;i++)
-				toHold.add(hand.getCard(i));
-			return toHold;
+		if(hand.getCard(4).getScore()==14){
+			if(hand.getCard(2).getScore()==11 && hand.getCard(2).getScore()==12){
+				for(int i=2;i<4;i++)
+					toHold.add(hand.getCard(i));
+				return toHold;
+			}
+		}else{
+			if(hand.getCard(3).getScore()==11 && hand.getCard(2).getScore()==12){
+				for(int i=3;i<5;i++)
+					toHold.add(hand.getCard(i));
+				return toHold;
+			}
 		}
 		return null;
 	}

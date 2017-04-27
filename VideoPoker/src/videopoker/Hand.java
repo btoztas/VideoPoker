@@ -310,6 +310,11 @@ public class Hand {
 			System.out.println("TESTING KQ Unsuited");
 			return getOriginalIndexes(holdList);
 		}
+		holdList = Miscellanious.isKJUnsuited(playerHand);
+		if(holdList!=null){
+			System.out.println("TESTING KJ Unsuited");
+			return getOriginalIndexes(holdList);
+		}
 		playerHand.sortRank();
 		if(playerHand.getCard(4).getScore()==14){
 			System.out.println("TESTING Ace");

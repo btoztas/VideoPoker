@@ -91,7 +91,7 @@ public class Miscellanious extends HandType{
 	static ArrayList<Card> isKQUnsuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
-		
+
 		for(int i=0; i<5; i++){
 			if(hand.getCard(i).getScore()==13 || hand.getCard(i).getScore()==12){
 				for(int j=i+1; j<5; j++){
@@ -109,7 +109,6 @@ public class Miscellanious extends HandType{
 	static ArrayList<Card> isKJUnsuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
-		
 		for(int i=0; i<5; i++){
 			if(hand.getCard(i).getScore()==13 || hand.getCard(i).getScore()==11){
 				for(int j=i+1; j<5; j++){

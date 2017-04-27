@@ -128,7 +128,7 @@ public class Table {
 	            String line;
 	            int i = 0;
 	            while ((line = br.readLine()) != null) {
-	            	System.out.println("printing line" + i);
+	            	System.out.println("printing line" + (i+1));
 	            	for(int j=0;j<15;j=j+3){
 	            		table.hand.addCard(new Card(line.charAt(j), line.charAt(j+1), table.rankToScore(line.charAt(j))));
 	            	}
