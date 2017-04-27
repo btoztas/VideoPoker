@@ -1,5 +1,14 @@
 package videopoker;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
 import deckofcards.*;
 
 public class Table {
@@ -92,6 +101,10 @@ public class Table {
 	String getHand(){
 		return this.hand.toString();
 	}
+	
+	int rankToScore(char rank){
+		return this.deck.rankToScore(rank);
+	}
 
 	@Override
 	public String toString() {
@@ -104,16 +117,46 @@ public class Table {
 			Table table = new Table(1000, new Deck());
 			table.shuffleDeck();
 			
-			table.hand.addCard(new Card('6', 'S', 6));
-			table.hand.addCard(new Card('A', 'H', 14));
+			/*table.hand.addCard(new Card('7', 'S', 7));
+			table.hand.addCard(new Card('5', 'H', 5));
 			table.hand.addCard(new Card('T', 'H', 10));
 			table.hand.addCard(new Card('4', 'C', 4));
-			table.hand.addCard(new Card('2', 'S', 2));
-			System.out.println(table.hand);
-			System.out.print("Advice ");
-			for(int i : table.hand.getAdvice())
-				System.out.print(i+" ");
-			System.out.println();
+			table.hand.addCard(new Card('2', 'S', 2));*/
+			BufferedReader br = null;
+	        try {
+	            br = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\cardtestadvisor.txt"));
+	            String line;
+	            int i = 0;
+	            while ((line = br.readLine()) != null) {
+	            	System.out.println("printing line" + i);
+	            	for(int j=0;j<15;j=j+3){
+	            		table.hand.addCard(new Card(line.charAt(j), line.charAt(j+1), table.rankToScore(line.charAt(j))));
+	            	}
+	            	System.out.println(table.hand);
+	            	int[] res = table.hand.getAdvice();
+	    			if(res!=null){
+	    				for(int k : res)
+	    					System.out.print(k+" ");
+	    				System.out.println();
+	    			}else{
+	    				System.out.println("Discard everything");
+	    			}
+	    			table.collectHand();
+	                //System.out.println(line);
+	                i++;
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (br != null) {
+	                    br.close();
+	                }
+	            } catch (IOException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+			
 			
 			
 			

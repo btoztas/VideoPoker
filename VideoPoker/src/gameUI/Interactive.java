@@ -29,7 +29,7 @@ public class Interactive implements GameMode {
 	            e.printStackTrace();
 	        }
 			if(s.contains("b")){
-				if(state=="deal"){
+				if(state=="deal" || state=="advise"){
 					System.out.println("can't bet right now. You must choose the cards to hold");
 				}else if(state=="bet"){
 					System.out.println("can't bet right now. You must deal");
@@ -48,7 +48,7 @@ public class Interactive implements GameMode {
 				if(state=="bet"){
 					System.out.println(v.deal());
 					state = "deal";
-				}else if(state=="deal"){
+				}else if(state=="deal" || state=="advise"){
 					System.out.println("can't deal right now. You must choose the cards to hold");
 				}else{
 					System.out.println("can't deal right now. You must choose the ammount to bet first");
@@ -73,15 +73,23 @@ public class Interactive implements GameMode {
 			}else if(s.contains("$")){
 				System.out.println("player's credit is " + v.credit());
 			}else if(s.contains("a")){
-				
-				int res [] = v.advice();
-				if(res!=null){
-					System.out.print("player should hold ");
-					for(int i=0;i<res.length;i++){
-						System.out.print(res[i]+" ");
+				if(state=="deal"){
+					int res [] = v.advice();
+					if(res!=null){
+						System.out.print("player should hold ");
+						for(int i=0;i<res.length;i++){
+							System.out.print(res[i]+" ");
+						}
+					}else{
+						System.out.print("player should discard everything");
 					}
+					state="advise";
+				}else if(state=="bet"){
+					System.out.println("can't advise right now. You must deal first");
+				}else if(state=="hold"){
+					System.out.println("can't advise right now. You must choose the ammount to bet");
 				}else{
-					System.out.print("player should discard everything");
+					System.out.println("can't advise right now. You must choose the cards to hold");
 				}
 			}
 		}

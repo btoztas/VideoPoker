@@ -21,6 +21,7 @@ public class Hand {
 		this.hand.add(card);
 	}
 	
+	
 	void addCard(int index, Card card){
 		this.hand.add(index, card);
 	}
@@ -268,7 +269,7 @@ public class Hand {
 			return getOriginalIndexes(holdList);
 		}
 		
-		holdList = Miscellanious.isJKQUnsuited(playerHand);
+		holdList = Straight.isKQJUnsuited(playerHand);
 		if(holdList!=null){
 			System.out.println("TESTING KQJ unsuited");
 			return getOriginalIndexes(holdList);
@@ -280,7 +281,7 @@ public class Hand {
 			return getOriginalIndexes(holdList);
 		}
 		
-		holdList = Miscellanious.isJQUnsuited(playerHand);
+		holdList = Straight.isQJUnsuited(playerHand);
 		if(holdList!=null){
 			System.out.println("TESTING JQ Unsuited");
 			return getOriginalIndexes(holdList);
@@ -312,6 +313,7 @@ public class Hand {
 		playerHand.sortRank();
 		if(playerHand.getCard(4).getScore()==14){
 			System.out.println("TESTING Ace");
+			holdList = new ArrayList<Card>();
 			holdList.add(playerHand.getCard(4));
 	        return getOriginalIndexes(holdList);
 		}

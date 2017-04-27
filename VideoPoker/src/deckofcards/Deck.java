@@ -9,7 +9,14 @@ public class Deck {
 	private char[] suits = {'H', 'S', 'D', 'C'};
 	private char[] ranks = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
 	
-	
+	public int rankToScore(char rank){
+		for(Card c: deck){
+			if(rank==c.getRank()){
+				return c.getScore();
+			}
+		}
+		return 0;
+	}
 	
 	public Deck(){
 		

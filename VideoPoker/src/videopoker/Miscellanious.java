@@ -106,24 +106,6 @@ public class Miscellanious extends HandType{
 		return null;
 	}
 	
-	static ArrayList<Card> isJQUnsuited(Hand hand){
-		
-		ArrayList<Card> toHold = new ArrayList<Card>();
-		
-		for(int i=0; i<5; i++){
-			if(hand.getCard(i).getScore()==11 || hand.getCard(i).getScore()==12){
-				for(int j=i+1; j<5; j++){
-					if(hand.getCard(j).getScore()==11 || hand.getCard(j).getScore()==12){
-						toHold.add(hand.getCard(j));
-						toHold.add(hand.getCard(i));
-						return toHold;	
-					}
-				}
-			}	
-		}
-		return null;
-	}
-	
 	static ArrayList<Card> isKJUnsuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -150,22 +132,6 @@ public class Miscellanious extends HandType{
 				toHold.add(hand.getCard(i));	
 				return toHold;
 			}	
-		}
-		return null;
-	}
-	
-	static ArrayList<Card> isJKQUnsuited(Hand hand){
-		
-		ArrayList<Card> toHold = new ArrayList<Card>();
-		int count = 0;
-		for(int i=0; i<5; i++){
-			if(hand.getCard(i).getScore()==11 || hand.getCard(i).getScore()==12 || hand.getCard(i).getScore()==13){
-				toHold.add(hand.getCard(i));	
-				count++;
-			}	
-		}
-		if(count==3){
-			return toHold;
 		}
 		return null;
 	}

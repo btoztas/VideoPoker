@@ -37,7 +37,7 @@ public class JacksOrBetter extends HandType {
 		
 		ArrayList<Card> toHold = isThereAPair(hand);
 		if(toHold!=null)
-			if(toHold.get(0).getScore()>=10)
+			if(toHold.get(0).getScore()>10)
 				return toHold;
 		return null;
 		
