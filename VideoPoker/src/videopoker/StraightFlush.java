@@ -22,7 +22,7 @@ public class StraightFlush extends Flush{
 			
 			if( (hand.getCard(0).getScore() == hand.getCard(4).getScore() - 4) || 
 			  ( (hand.getCard(0).getScore() == hand.getCard(3).getScore() - 3) && (hand.getCard(0).getScore()==2) && (hand.getCard(4).getScore()==14))){ 
-				for(int j=0;j<4;j++){
+				for(int j=0;j<5;j++){
 					tohold.add(hand.getCard(j));
 				}
 				return tohold;

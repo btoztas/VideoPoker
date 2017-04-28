@@ -32,8 +32,17 @@ public class RoyalFlush extends Flush{
 	
 	static ArrayList<Card> isNToRoyalFlush(Hand hand, int n){
 		
-		ArrayList<Card> toHold = isNToFlush(hand, n);
+		ArrayList<Card> toHold = isFlush(hand);
+		if(toHold!=null){
+			for(int i=5-n; i<5; i++)
+				if(toHold.get(i).getScore()<10)
+					return null;
+			toHold.remove(0);
+			return toHold;
+		}
 		
+		
+		toHold = isNToFlush(hand, n);
 		
 		if(toHold!=null){
 			for(int i=0; i<n; i++)

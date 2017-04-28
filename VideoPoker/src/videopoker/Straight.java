@@ -68,14 +68,7 @@ public class Straight extends HandType {
 			return toHold;
 		}
 		
-		// There may be two equal cards in the middle
-		if(hand.getCard(0).getScore() == hand.getCard(4).getScore()-4){
-			for(int i=0; i<5; i++){
-				if(hand.getCard(i).getScore()!=toHold.get(i-1).getScore())
-					toHold.add(hand.getCard(i));
-			}
-			return toHold;
-		}
+		
 		
 		if(hand.getCard(0).getScore() == hand.getCard(3).getScore()-4){
 			for(int i=0; i<4; i++)
@@ -89,28 +82,12 @@ public class Straight extends HandType {
 				return toHold;
 			}
 				
-				
-				
-				
-				
-			if(hand.getCard(0).getScore() == hand.getCard(3).getScore()-4){
-				for(int i=1; i<5; i++)
-					toHold.add(hand.getCard(i));
-				return toHold;
-			}
-			
-			// There may be two equal cards in the middle
-			if(1 == hand.getCard(3).getScore()-4){
-				for(int i=1; i<5; i++){
-					if(hand.getCard(i).getScore()!=toHold.get(i-1).getScore())
-						toHold.add(hand.getCard(i));
-				}
-				return toHold;
-			}
 			
 			if(1 == hand.getCard(2).getScore()-4){
-				for(int i=1; i<5; i++)
+				for(int i=0; i<3; i++){
 					toHold.add(hand.getCard(i));
+				}
+				toHold.add(hand.getCard(4));
 				return toHold;
 			}
 		}
@@ -123,7 +100,6 @@ public class Straight extends HandType {
 	static ArrayList<Card> is4InsideStraightNHighCards(Hand hand, int n){
 		
 		ArrayList<Card> toHold = is4InsideStraight(hand);
-		//System.out.print(toHold);
 
 		if(toHold!=null){
 			//System.out.print("vou contar ");
@@ -171,13 +147,13 @@ public class Straight extends HandType {
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
 		if(hand.getCard(4).getScore()==14){
-			if(hand.getCard(2).getScore()==11 && hand.getCard(2).getScore()==12){
+			if(hand.getCard(2).getScore()==11 && hand.getCard(3).getScore()==12){
 				for(int i=2;i<4;i++)
 					toHold.add(hand.getCard(i));
 				return toHold;
 			}
 		}else{
-			if(hand.getCard(3).getScore()==11 && hand.getCard(2).getScore()==12){
+			if(hand.getCard(3).getScore()==11 && hand.getCard(4).getScore()==12){
 				for(int i=3;i<5;i++)
 					toHold.add(hand.getCard(i));
 				return toHold;

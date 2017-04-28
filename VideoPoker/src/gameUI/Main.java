@@ -10,7 +10,9 @@ public class Main {
             Game.play();
         }
 		if (args.length > 0 && args[0].equals("-d")){
-            
+			GameMode Game = new Debug();
+            Game.initGame(args);
+            Game.play();
         }
 		if (args.length > 0 && args[0].equals("-e")){
             

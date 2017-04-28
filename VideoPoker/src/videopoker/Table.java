@@ -3,6 +3,7 @@ package videopoker;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import deckofcards.*;
 
@@ -117,41 +118,55 @@ public class Table {
 			table.hand.addCard(new Card('T', 'H', 10));
 			table.hand.addCard(new Card('4', 'C', 4));
 			table.hand.addCard(new Card('2', 'S', 2));*/
-			BufferedReader br = null;
-	        try {
-	            br = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\cardtestadvisor.txt"));
-	            String line;
-	            int i = 0;
-	            while ((line = br.readLine()) != null) {
-	            	System.out.println("printing line" + (i+1));
-	            	for(int j=0;j<15;j=j+3){
-	            		table.hand.addCard(new Card(line.charAt(j), line.charAt(j+1), table.rankToScore(line.charAt(j))));
-	            	}
-	            	System.out.println(table.hand);
-	            	int[] res = table.hand.getAdvice();
-	    			if(res!=null){
-	    				for(int k : res)
-	    					System.out.print(k+" ");
-	    				System.out.println();
-	    			}else{
-	    				System.out.println("Discard everything");
-	    			}
-	    			table.collectHand();
-	                //System.out.println(line);
-	                i++;
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        } finally {
-	            try {
-	                if (br != null) {
-	                    br.close();
-	                }
-	            } catch (IOException ex) {
-	                ex.printStackTrace();
-	            }
-	        }
-			
+			try{
+			    PrintWriter writer = new PrintWriter("C:\\Users\\Afonso\\Desktop\\resultrui.txt", "UTF-8");
+			    //writer.println("The first line");
+			    //writer.println("The second line");
+				BufferedReader br = null;
+		        try {
+		            br = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\cardtestadvisor.txt"));
+		            String line;
+		            int i = 0;
+		            while ((line = br.readLine()) != null) {
+		            	writer.println("difficult hand " + (i+1));
+		            	System.out.println("difficult hand " + (i+1));
+		            	for(int j=0;j<15;j=j+3){
+		            		table.hand.addCard(new Card(line.charAt(j), line.charAt(j+1), table.rankToScore(line.charAt(j))));
+		            	}
+		            	//writer.println(table.hand);
+		            	int[] res = table.hand.getAdvice();
+		            	int l=1;
+		    			if(res!=null){
+		    				for(int k : res){
+		    					writer.print(k);
+		    					if(l!=res.length){
+		    						writer.print(" ");
+		    					}
+		    					l++;
+		    				}
+		    				writer.println("");
+		    			}else{
+		    				writer.println("Discard everything");
+		    			}
+		    			table.collectHand();
+		                //System.out.println(line);
+		                i++;
+		            }
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } finally {
+		            try {
+		                if (br != null) {
+		                    br.close();
+		                }
+		            } catch (IOException ex) {
+		                ex.printStackTrace();
+		            }
+		        }
+		        writer.close();
+			} catch (IOException e) {
+				   // do something
+				}
 			
 			
 			
