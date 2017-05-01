@@ -72,6 +72,9 @@ public class Interactive implements GameMode {
 				}
 			}else if(s.contains("$")){
 				System.out.println("player's credit is " + v.credit());
+			
+			}else if(s.contains("s")){
+				v.statistics();
 			}else if(s.contains("a")){
 				if(state=="deal"){
 					int res [] = v.advice();

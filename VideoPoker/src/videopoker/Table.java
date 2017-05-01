@@ -13,6 +13,7 @@ public class Table {
 	Hand hand;
 	Pot pot;
 	Credit credit;
+	Statistics stat;
 	
 
 	Table(int c, Deck d){
@@ -21,6 +22,7 @@ public class Table {
 		hand = new Hand();
 		credit = new Credit(c);
 		deck = d;
+		stat = new Statistics();
 	}
 	
 	void addToPot(int bet){
@@ -70,9 +72,11 @@ public class Table {
 		
 	}
 	
-	void holdCards(int[] indexes){
+	HandType holdCards(int[] indexes){
 		
-		
+		if(indexes==null){
+			indexes = new int[0];
+		}
 		for(int i=0; i<5; i++){
 			boolean sw=true;
 			for(int j=0; j<indexes.length; j++)
@@ -85,11 +89,13 @@ public class Table {
 		System.out.println(this.hand);
 		if(this.hand.evaluateHand()==null){
 			this.rmvFromPot();
-			System.out.println("player loses and his credit is " + this.getCredit());
+			//System.out.println("player loses and his credit is " + this.getCredit());
+			return null;
 		}else{
 			HandType eval = this.hand.evaluateHand();
 			this.addCredit(eval.getMult()*this.rmvFromPot());
-			System.out.println("player wins with a " + this.hand.evaluateHand() + " and his credit is " + this.getCredit());
+			//System.out.println("player wins with a " + this.hand.evaluateHand() + " and his credit is " + this.getCredit());
+			return this.hand.evaluateHand();
 		}
 		
 	}

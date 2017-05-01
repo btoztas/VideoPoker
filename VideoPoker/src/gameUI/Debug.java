@@ -109,6 +109,9 @@ public class Debug implements GameMode {
 	    			}else if(ch=='$'){
 	    				System.out.println("player's credit is " + v.credit());
 	    				m=m+1;
+	    			}else if(ch=='s'){
+	    				v.statistics();
+	    				m=m+1;
 	    			}else if(ch=='a'){
 	    				if(state=="deal"){
 	    					int res [] = v.advice();

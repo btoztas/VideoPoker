@@ -1,42 +1,56 @@
 package videopoker;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Statistics {
 	
-	int[] statistic;
-	public enum HAND_TYPE {
-		
-		 JACKSORBETTER(0), TWOPAIR(1), THREEOFAKIND(2), STRAIGHT(3), FLUSH(4), FULLHOUSE(5), FOUROFAKIND(6), STRAIGHTFLUSH(7), ROYALFULSH(8), OTHER(9);
-
-	    private int value;
-	    
-	    private HAND_TYPE(int value){
-	        this.value = value;
-	    }
-	    private int getValue(){
-	    	return this.value;
-	    }
-	    
-	}
+	Map<String, Integer> aMap;
 	
 	
 	Statistics(){
 		
-		statistic = new int[HAND_TYPE.values().length];
+		aMap = new LinkedHashMap<String, Integer>();
+		this.aMap.put("Jacks or Better", 0);
+		this.aMap.put("Two Pair", 0);
+		this.aMap.put("Three of a Kind", 0);
+		this.aMap.put("Straight", 0);
+		this.aMap.put("Flush", 0);
+		this.aMap.put("Full House", 0);
+		this.aMap.put("Four of a Kind", 0);
+		this.aMap.put("Straight Flush", 0);
+		this.aMap.put("Royal Flush", 0);
+		this.aMap.put("Other", 0);
+		this.aMap.put("Total", 0);
+		
 		
 	}
-	public void addStatistic(HAND_TYPE type){
+	void addStatistic(HandType type){
 		
-		this.statistic[type.getValue()]++;
-		
-		
-	}
-	public int getStatistic(HAND_TYPE type){
-		
-		return this.statistic[type.getValue()];
-		
+		if(type.name.contains("Four")){
+			this.aMap.put("Four of a Kind", this.aMap.get("Four of a Kind") + 1);
+		}else{
+			this.aMap.put(type.name, this.aMap.get(type.name)+1);
+		}
 		
 	}
-	
+	void getStatistic(){
+		int i = 0;
+		int nspaces;
+		for (Map.Entry<String, Integer> entry : aMap.entrySet()) {
+			nspaces=21 - entry.getKey().length();
+			if(i+1<aMap.keySet().size()){
+				System.out.print(entry.getKey());
+				for(int k=0;k<nspaces;k++){
+					System.out.print(" ");
+				}
+				System.out.print(entry.getValue());
+				System.out.print("\n");
+			}
+				i++;
+		}
+		
+	}
 	
 	
 }

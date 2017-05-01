@@ -18,9 +18,29 @@ public class VideoPoker {
 		return table.getCredit();
 	}
 	
-	public String hold(int[] cards){
-		table.holdCards(cards);
-		return table.getHand();
+	public void statistics(){
+		//System.out.println(table.stat.getStatistic());
+		double perc = (table.getCredit()/1000.0000)*100.0000;
+		System.out.println("Hand                 Nb");
+		System.out.println("_________________________");
+		table.stat.getStatistic();
+		System.out.println("_________________________");
+		System.out.println("Total                " + table.stat.aMap.get("Total"));
+		System.out.println("_________________________");
+		System.out.println("Credit            " + table.getCredit() + " (" + perc + "%)");
+	}
+	
+	public void hold(int[] cards){
+		HandType h = table.holdCards(cards);
+		if(h==null){
+			table.stat.aMap.put("Other", table.stat.aMap.get("Other") + 1);
+			table.stat.aMap.put("Total", table.stat.aMap.get("Total") + 1);
+			System.out.println("player loses and his credit is " + table.getCredit());
+		}else{
+			table.stat.addStatistic(h);
+			table.stat.aMap.put("Total", table.stat.aMap.get("Total") + 1);
+			System.out.println("player wins with a " + h + " and his credit is " + table.getCredit());
+		}
 	}
 	
 	public int[] advice(){
