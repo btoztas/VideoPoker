@@ -76,14 +76,18 @@ public class StraightFlush extends Flush{
 				int ngaps=1;
 				if(toHold.get(5-n).getScore()==14){
 					if(toHold.get(5-n-1).getScore()==5 || toHold.get(0).getScore()==10)
-						return null;
+						ngaps=2;
 				}else if((toHold.get(5-n).getScore() - toHold.get(0).getScore())==4){
 					ngaps=2;
 				}
 				if(type==1){
+					if(toHold.get(5-n).getScore()==4 && toHold.get(0).getScore()==2)
+						return null;
 					if(toHold.get(5-n).getScore()==14){
-						if(toHold.get(5-n).getScore() - toHold.get(0).getScore() == 2|| toHold.get(5-n).getScore() - toHold.get(0).getScore() == 12)
+						if(toHold.get(5-n).getScore() - toHold.get(0).getScore() == 2)
 							ngaps=0;
+						if(toHold.get(5-n).getScore() - toHold.get(0).getScore() == 12)
+							return null;
 					}else{
 						if((toHold.get(5-n).getScore() - toHold.get(0).getScore())==2){
 							ngaps=0;
@@ -99,7 +103,28 @@ public class StraightFlush extends Flush{
 						return toHold;
 					}
 				}else{
-					//type 2
+					//type2
+					if(toHold.get(5-n).getScore()==4 && toHold.get(0).getScore()==2)
+						return toHold;
+					if(toHold.get(5-n).getScore()==14){
+						if(toHold.get(5-n-1).getScore() == 5)
+							return toHold;
+					}else{
+						if((toHold.get(5-n).getScore() - toHold.get(0).getScore())==2){
+							ngaps=0;
+						}
+					}
+					count = 0;
+					for(Card c : toHold){
+						if(c.getScore()>10)
+							count++;
+					}
+					if(ngaps==1){
+						return toHold;
+					}
+					if(ngaps==2 && count==1){
+						return toHold;
+					}
 				}
 			}
 		}

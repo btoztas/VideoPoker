@@ -257,11 +257,11 @@ public class Hand {
 			return getOriginalIndexes(holdList);
 		}
 		
-		/*holdList = StraightFlush.isNToStraightFlushNType(playerHand, 3, 2);
+		holdList = StraightFlush.isNToStraightFlushNType(playerHand, 3, 2);
 		if(holdList!=null){
 			System.out.println("TESTING 3 to Straight Flush type 2");
 			return getOriginalIndexes(holdList);
-		}*/
+		}
 		
 		holdList = Straight.is4InsideStraightNHighCards(playerHand, 1);
 		if(holdList!=null){
