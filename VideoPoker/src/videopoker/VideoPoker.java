@@ -10,8 +10,8 @@ public class VideoPoker {
 		table = new Table(credit, new Deck());
 	}
 	
-	public void bet(int b){
-		table.addToPot(b);
+	public int bet(int b){
+		return table.addToPot(b);
 	}
 	
 	public int credit(){

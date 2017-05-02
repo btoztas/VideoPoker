@@ -25,9 +25,14 @@ public class Table {
 		stat = new Statistics();
 	}
 	
-	void addToPot(int bet){
-		credit.redraw(bet);
-		pot.inPot(bet);
+	int addToPot(int bet){
+		if(credit.getCredit()-bet<0){
+			return 0;
+		}else{
+			credit.redraw(bet);
+			pot.inPot(bet);
+			return 1;
+		}
 	}
 	
 	void addCredit(int payout){
@@ -116,7 +121,7 @@ public class Table {
 
 	public static void main(String[] args) {
 		
-			Table table = new Table(1000, new Deck());
+			Table table = new Table(40, new Deck());
 			table.shuffleDeck();
 			
 			/*table.hand.addCard(new Card('7', 'S', 7));
@@ -125,17 +130,18 @@ public class Table {
 			table.hand.addCard(new Card('4', 'C', 4));
 			table.hand.addCard(new Card('2', 'S', 2));*/
 			try{
-			    PrintWriter writer = new PrintWriter("C:\\Users\\Afonso\\Desktop\\resultrui.txt", "UTF-8");
+			    PrintWriter writer = new PrintWriter("C:\\Users\\Afonso\\Desktop\\resultrandom.txt", "UTF-8");
 			    //writer.println("The first line");
 			    //writer.println("The second line");
 				BufferedReader br = null;
 		        try {
-		            br = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\cardtestadvisor.txt"));
+		            br = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\new 1.txt"));
 		            String line;
 		            int i = 0;
 		            while ((line = br.readLine()) != null) {
-		            	writer.println("difficult hand " + (i+1));
-		            	System.out.println("difficult hand " + (i+1));
+		            	table.addToPot(5);
+		            	writer.println("hand " + (i+1));
+		            	System.out.println("hand " + (i+1));
 		            	for(int j=0;j<15;j=j+3){
 		            		table.hand.addCard(new Card(line.charAt(j), line.charAt(j+1), table.rankToScore(line.charAt(j))));
 		            	}
@@ -154,7 +160,10 @@ public class Table {
 		    			}else{
 		    				writer.println("Discard everything");
 		    			}
+		    			table.holdCards(res);
+		    			//writer.println("player wins with a " + table.hand.evaluateHand() + " and his credit is " + table.getCredit());
 		    			table.collectHand();
+		    			table.shuffleDeck();
 		                //System.out.println(line);
 		                i++;
 		            }

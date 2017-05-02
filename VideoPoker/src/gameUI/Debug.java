@@ -20,6 +20,7 @@ public class Debug implements GameMode {
             String s = "";
     		String state = "hold";
     		VideoPoker v = new VideoPoker(1000);
+    		int amount=0;
     		if((s = bufferRead.readLine())!=null){
     	        System.out.println(s);
     	        for(int m=0;m<s.length();m++){
@@ -30,20 +31,35 @@ public class Debug implements GameMode {
 	    				}else if(state=="bet"){
 	    					System.out.println("can't bet right now. You must deal");
 	    				}else{
-	    					if((int)s.charAt(m+2)>54 || (int)s.charAt(m+8)==36){
-	    						v.bet(5);
-	    						System.out.println("player is betting 5");
-	    						state = "bet";
+	    					int b;
+	    					if((int)s.charAt(m+2)>57 || (int)s.charAt(m+2)==36){
+	    						b = v.bet(5);
+	    						amount=5;
+	    						if(b==1){
+	    							System.out.println("player is betting 5");
+	    							state = "bet";
+	    						}else{
+	    							System.out.println("b: insuficient funds");
+	    						}
 	    						m=m+1;
 	    					}else{
 	    						int count=0;
 	    						for(int n = m+3; (int)s.charAt(n)<54 && (int)s.charAt(n)!=36; n++){
 	    							count++;
 	    						}
-	    						if(count==0){
-	    							v.bet(Character.getNumericValue(s.charAt(m+2)));
-		    						System.out.println("player is betting " + s.charAt(m+2));
-		    						state = "bet";
+	    						if(count==1){
+	    							if(Character.getNumericValue(s.charAt(m+2)) > 5){
+	    								System.out.println("b: illegal amount");
+	    							}else{
+		    							b = v.bet(Character.getNumericValue(s.charAt(m+2)));
+		    							amount = Character.getNumericValue(s.charAt(m+2));
+		    							if(b==1){
+		    								System.out.println("player is betting " + s.charAt(m+2));
+				    						state = "bet";
+		    							}else{
+		    								System.out.println("b: insuficient funds");
+		    							}
+	    							}
 		    						m=m+3;
 	    						}else{
 		    						System.out.println("b: illegal amount");
@@ -58,7 +74,18 @@ public class Debug implements GameMode {
 	    				}else if(state=="deal" || state=="advise"){
 	    					System.out.println("can't deal right now. You must choose the cards to hold");
 	    				}else{
-	    					System.out.println("can't deal right now. You must choose the ammount to bet first");
+	    					if(amount!=0){
+		    					int b = v.bet(amount);
+	    						if(b==1){
+	    							System.out.println("player is betting " + amount);
+	    							System.out.println(v.deal());
+	    							state = "deal";
+	    						}else{
+	    							System.out.println("b: insuficient funds");
+	    						}
+	    					}else{
+	    						System.out.println("can't deal right now. You must choose the amount to bet first");
+	    					}
 	    				}
 	    				m=m+1;
 	    			}else if(ch=='h'){
