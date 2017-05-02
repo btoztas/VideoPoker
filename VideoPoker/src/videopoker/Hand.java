@@ -281,7 +281,7 @@ public class Hand {
 			return getOriginalIndexes(holdList);
 		}
 		
-		holdList = Straight.isQJUnsuited(playerHand);
+		holdList = Miscellanious.isQJUnsuited(playerHand);
 		if(holdList!=null){
 			System.out.println("TESTING JQ Unsuited");
 			return getOriginalIndexes(holdList);

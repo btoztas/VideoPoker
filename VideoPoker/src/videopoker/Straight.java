@@ -143,25 +143,5 @@ public class Straight extends HandType {
 		return null;
 	}
 	
-	static ArrayList<Card> isQJUnsuited(Hand hand){
-		ArrayList<Card> toHold = new ArrayList<Card>();
-		hand.sortRank();
-		if(hand.getCard(4).getScore()==14){
-			if(hand.getCard(2).getScore()==11 && hand.getCard(3).getScore()==12){
-				for(int i=2;i<4;i++)
-					toHold.add(hand.getCard(i));
-				return toHold;
-			}
-		}else{
-			if(hand.getCard(3).getScore()==11 && hand.getCard(4).getScore()==12){
-				for(int i=3;i<5;i++)
-					toHold.add(hand.getCard(i));
-				return toHold;
-			}
-		}
-		return null;
-	}
-	
-	
 	
 }
