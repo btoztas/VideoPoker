@@ -35,11 +35,11 @@ public class VideoPoker {
 		if(h==null){
 			table.stat.aMap.put("Other", table.stat.aMap.get("Other") + 1);
 			table.stat.aMap.put("Total", table.stat.aMap.get("Total") + 1);
-			System.out.println("player loses and his credit is " + table.getCredit());
+			//System.out.println("player loses and his credit is " + table.getCredit());
 		}else{
 			table.stat.addStatistic(h);
 			table.stat.aMap.put("Total", table.stat.aMap.get("Total") + 1);
-			System.out.println("player wins with a " + h + " and his credit is " + table.getCredit());
+			//System.out.println("player wins with a " + h + " and his credit is " + table.getCredit());
 		}
 	}
 	

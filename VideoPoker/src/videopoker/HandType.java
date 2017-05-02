@@ -3,17 +3,11 @@ package videopoker;
 import deckofcards.Card;
 
 public abstract class HandType {
-	String name;
-	int multiplier;
 	
-	int getMult(){
-		return multiplier;
-	}
+	abstract int getMult();
 	
 	@Override
-	public String toString() {
-		return name;
-	}
+	abstract public String toString();
 	
 	static boolean isPair(Card card1, Card card2){
 		

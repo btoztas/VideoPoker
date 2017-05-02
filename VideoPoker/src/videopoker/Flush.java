@@ -6,9 +6,20 @@ import deckofcards.Card;
 
 public class Flush extends HandType {
 
+	String name;
+	int multiplier;	
+	
 	Flush(){
 		name = "Flush";
 		multiplier = 7;
+	}
+	
+	public int getMult(){
+		return multiplier;
+	}
+	
+	public String toString(){
+		return name;
 	}
 	
 	static ArrayList<Card> isFlush(Hand hand){
@@ -45,7 +56,7 @@ public class Flush extends HandType {
 		
 		ArrayList<Card> tohold = new ArrayList<Card>();
 		
-		tohold = Flush.isNToFlush(hand, n);
+		tohold = isNToFlush(hand, n);
 		int count = 0;
 		if(tohold!=null){
 			for(Card c : tohold){

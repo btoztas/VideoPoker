@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import deckofcards.Card;
 
-public class FourOfAKind extends HandType {
+public abstract class FourOfAKind extends HandType{
+	
+	abstract int getMult();
+	
+	abstract public String toString();
 	
 	static ArrayList<Card> isFourOfAKind(Hand hand){
 		

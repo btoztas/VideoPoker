@@ -86,7 +86,7 @@ public class Table {
 				this.switchCard(i);
 		}
 		
-		System.out.println(this.hand);
+		//System.out.println(this.hand);
 		if(this.hand.evaluateHand()==null){
 			this.rmvFromPot();
 			//System.out.println("player loses and his credit is " + this.getCredit());

@@ -4,8 +4,16 @@ import java.util.ArrayList;
 
 import deckofcards.Card;
 
-public class Miscellanious extends HandType{
-
+public class Miscellanious{
+	
+	public boolean isPair(Card card1, Card card2){
+		
+		if(card1.getScore()==card2.getScore())
+			return true;
+		return false;
+		
+	}
+	
 	static ArrayList<Card> isQJSuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -155,6 +163,7 @@ public class Miscellanious extends HandType{
 		}
 		return null;
 	}
+	
 	static ArrayList<Card> isQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();

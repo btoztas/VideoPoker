@@ -10,24 +10,26 @@ public class Auto implements GameMode {
 	
 	public void play(){
 		int i = 0;
-		VideoPoker v = new VideoPoker(1000);
-		while(i<10){
+		VideoPoker v = new VideoPoker(1000000);
+		while(i<1000000){
 			v.bet(5);
-			System.out.println(v.deal());
+			//System.out.println(v.deal());
+			v.deal();
 			int res [] = v.advice();
 			if(res!=null){
-				System.out.print("player should hold ");
+				//System.out.print("player should hold ");
 				for(int k=0;k<res.length;k++){
-					System.out.print(res[k]+" ");
+					//System.out.print(res[k]+" ");
 				}
 			}else{
-				System.out.print("player should discard everything");
+				//System.out.print("player should discard everything");
 			}
-			System.out.println();
+			//System.out.println();
+			System.out.println(v.credit());
 			v.hold(res);
 			i++;
 		}
-		double perc = (v.credit()/1000.0000)*100.0000;
+		double perc = (v.credit()/1000000.0000)*100.0000;
 		System.out.println(perc);
 	}
 

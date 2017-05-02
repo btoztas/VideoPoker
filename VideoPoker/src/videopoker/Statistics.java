@@ -26,11 +26,10 @@ public class Statistics {
 		
 	}
 	void addStatistic(HandType type){
-		
-		if(type.name.contains("Four")){
+		if(type.toString().contains("Four")){
 			this.aMap.put("Four of a Kind", this.aMap.get("Four of a Kind") + 1);
 		}else{
-			this.aMap.put(type.name, this.aMap.get(type.name)+1);
+			this.aMap.put(type.toString(), this.aMap.get(type.toString())+1);
 		}
 		
 	}

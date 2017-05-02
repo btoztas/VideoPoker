@@ -6,9 +6,20 @@ import deckofcards.Card;
 
 public class TwoPair extends HandType {
 	
+	String name;
+	int multiplier;
+	
 	TwoPair(){
 		name = "Two Pair";
 		multiplier = 1;
+	}
+	
+	public int getMult(){
+		return multiplier;
+	}
+	
+	public String toString(){
+		return name;
 	}
 	
 	static ArrayList<Card> isTwoPair(Hand hand){

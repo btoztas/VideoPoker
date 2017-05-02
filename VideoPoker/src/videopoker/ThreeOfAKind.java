@@ -6,11 +6,25 @@ import deckofcards.Card;
 
 public class ThreeOfAKind extends HandType {
 	
+	String name;
+	int multiplier;
+	
+	
+	
 	ThreeOfAKind(){
 		name = "Three of a Kind";
 		multiplier = 3;
 	}
 	
+	
+	public int getMult(){
+		return multiplier;
+	}
+	
+	public String toString(){
+		return name;
+	}
+
 	
 	static ArrayList<Card> isThreeOfAKind(Hand hand){
 		
