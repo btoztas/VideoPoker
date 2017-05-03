@@ -63,9 +63,24 @@ public class Straight extends HandType {
 				return toHold;
 			}
 		}
-		return null;
-		
-		
+		int k;
+		for(k=0;k<4;k++){
+			if(hand.getCard(k).getScore()!=hand.getCard(k+1).getScore()-1){
+				if(hand.getCard(k).getScore()==hand.getCard(k+1).getScore()){
+					//toHold.add(hand.getCard(k));
+				}else{
+					break;
+				}
+			}else{
+				toHold.add(hand.getCard(k));
+			}
+		}
+		if(k==4){
+			toHold.add(hand.getCard(4));
+			return toHold;
+		}else{
+			return null;
+		}	
 	}
 	
 	static ArrayList<Card> is4InsideStraight(Hand hand){
@@ -142,7 +157,7 @@ public class Straight extends HandType {
 	static ArrayList<Card> isKQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
-		if(hand.getCard(2).getScore()==11 && hand.getCard(2).getScore()==13){
+		if(hand.getCard(2).getScore()==11 && hand.getCard(4).getScore()==13){
 			for(int i=2;i<5;i++)
 				toHold.add(hand.getCard(i));
 			return toHold;
