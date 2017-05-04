@@ -151,9 +151,10 @@ public class Table {
 		    			if(res!=null){
 		    				for(int k : res){
 		    					writer.print(k);
-		    					if(l!=res.length){
+		    					/*if(l!=res.length){
 		    						writer.print(" ");
-		    					}
+		    					}*/
+		    					writer.print(" ");
 		    					l++;
 		    				}
 		    				writer.println("");

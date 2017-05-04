@@ -9,7 +9,7 @@ public class Auto implements GameMode {
 	}
 	
 	public void play(){
-		/*int i = 0;
+		int i = 0;
 		VideoPoker v = new VideoPoker(1000000);
 		while(i<1000000){
 			v.bet(5);
@@ -30,14 +30,15 @@ public class Auto implements GameMode {
 			i++;
 		}
 		double perc = (v.credit()/1000000.0000)*100.0000;
-		System.out.println(perc);*/
-		int i = 0;
+		System.out.println(perc);
+		
+		/*int i = 0;
 		while(i<1000){
 			VideoPoker v = new VideoPoker(1000000);
 			System.out.println(v.deal());
 			v.hold(new int[0]);
 			i++;
-		}
+		}*/
 	}
 
 }
