@@ -97,8 +97,12 @@ public class Table {
 			//System.out.println("player loses and his credit is " + this.getCredit());
 			return null;
 		}else{
-			HandType eval = this.hand.evaluateHand();
-			this.addCredit(eval.getMult()*this.rmvFromPot());
+			if(this.hand.evaluateHand().name=="Royal Flush"){
+				this.addCredit(800*this.rmvFromPot());
+			}else{
+				HandType eval = this.hand.evaluateHand();
+				this.addCredit((eval.getMult())*this.rmvFromPot());
+			}
 			//System.out.println("player wins with a " + this.hand.evaluateHand() + " and his credit is " + this.getCredit());
 			return this.hand.evaluateHand();
 		}

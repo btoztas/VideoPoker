@@ -6,20 +6,9 @@ import deckofcards.Card;
 
 public class JacksOrBetter extends HandType {
 	
-	String name;
-	int multiplier;	
-	
 	JacksOrBetter(){
 		name = "Jacks or Better";
 		multiplier = 1;
-	}
-	
-	public int getMult(){
-		return multiplier;
-	}
-	
-	public String toString(){
-		return name;
 	}
 	
 	static ArrayList<Card> isThereAPair(Hand hand){

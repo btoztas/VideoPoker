@@ -6,9 +6,6 @@ import deckofcards.Card;
 
 public abstract class FourOfAKind extends HandType{
 	
-	abstract int getMult();
-	
-	abstract public String toString();
 	
 	static ArrayList<Card> isFourOfAKind(Hand hand){
 		

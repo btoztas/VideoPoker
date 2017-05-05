@@ -6,21 +6,14 @@ import deckofcards.Card;
 
 public class Straight extends HandType {
 	
-	String name;
-	int multiplier;
+	
 	
 	Straight(){
 		name = "Straight";
 		multiplier = 5;
 	}
 	
-	public int getMult(){
-		return multiplier;
-	}
 	
-	public String toString(){
-		return name;
-	}
 	
 	static ArrayList<Card> isStraight(Hand hand){
 		

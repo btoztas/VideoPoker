@@ -4,10 +4,16 @@ import deckofcards.Card;
 
 public abstract class HandType {
 	
-	abstract int getMult();
+	String name;
+	int multiplier;
 	
-	@Override
-	abstract public String toString();
+	public int getMult(){
+		return multiplier;
+	}
+	
+	public String toString(){
+		return name;
+	}
 	
 	static boolean isPair(Card card1, Card card2){
 		

@@ -6,20 +6,9 @@ import deckofcards.Card;
 
 public class FullHouse extends ThreeOfAKind {
 	
-	String name;
-	int multiplier;
-	
 	FullHouse(){
 		name = "Full House";
 		multiplier = 10;
-	}
-	
-	public int getMult(){
-		return multiplier;
-	}
-	
-	public String toString(){
-		return name;
 	}
 	
 	static ArrayList<Card> isFullHouse(Hand hand){

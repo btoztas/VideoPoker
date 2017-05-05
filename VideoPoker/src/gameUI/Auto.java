@@ -11,7 +11,7 @@ public class Auto implements GameMode {
 	public void play(){
 		int i = 0;
 		VideoPoker v = new VideoPoker(1000000);
-		while(i<1000000){
+		while(i<100000){
 			v.bet(5);
 			//System.out.println(v.deal());
 			v.deal();
