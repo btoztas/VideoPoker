@@ -10,6 +10,7 @@ public class VideoPoker {
 	private Credit credit;
 	private Statistics stat;
 	private VideoPokerType type;
+	private String GAMESTATE;
 
 	
 	public VideoPoker(int credit, VideoPokerType type){
@@ -20,22 +21,28 @@ public class VideoPoker {
 		this.deck = new Deck();
 		this.type = type;
 		this.stat = this.type.initStatistics();
+		this.GAMESTATE = "IDLE";
 	}
 	
 	
-	public int bet(int bet){
+	public void bet(int bet) throws InvalidAmountException, InvalidGameStateException{
 		
 		// TODO: THROW EXCEPTION IF CREDIT NEGATIVE AND CHANGE METHOD TO VOID
 		
-		if(this.credit.getCredit()-bet<0){
+		if(this.GAMESTATE != "IDLE" || this.GAMESTATE != "HOLD"){
 			
-			return 0;
+			throw new InvalidGameStateException();
+		}
+		
+		if(this.credit.getCredit()-bet<0 || bet>5 || bet<0){
+			
+			throw new InvalidAmountException();
 			
 		}else{
 			
 			this.credit.withdraw(bet);
 			this.pot.add(bet);
-			return 1;
+			this.GAMESTATE = "BET";
 			
 		}
 	}
@@ -47,6 +54,7 @@ public class VideoPoker {
 	
 	public Statistics statistics(){
 		
+		
 		this.stat.updateCredit(credit.getCredit());
 		return this.stat;
 		
@@ -54,16 +62,22 @@ public class VideoPoker {
 		*/
 	}
 	
-	public ResultHold hold(int[] indexes){
+	public ResultHold hold(int[] indexes) throws InvalidCardIndexException, InvalidGameStateException{
+		
+		if(this.GAMESTATE != "DEAL")
+			throw new InvalidGameStateException();
 		
 		// Hold input cards
 		if(indexes!=null)
 			for(int i=0; i<5; i++){
 				
 				boolean sw=true;
-				for(int j=0; j<indexes.length; j++)
+				for(int j=0; j<indexes.length; j++){
+					if(indexes[j]>5)
+						throw new InvalidCardIndexException();
 					if(i==(indexes[j]-1))
 						sw = false;
+				}
 				if(sw)
 					this.switchCard(i);
 			}
@@ -91,22 +105,33 @@ public class VideoPoker {
 			result.updateRes("Player loses and his credit is "+ this.credit.getCredit());
 	
 		}*/
+		
+		this.GAMESTATE = "HOLD";
 		return result;
 		
 		
 	}
 	
-	public int[] advice(){
+	public int[] advice() throws InvalidGameStateException{
+		
+		if(this.GAMESTATE != "DEAL")
+			throw new InvalidGameStateException();
 		
 		return type.getAdvice(hand);
 		
 	}
 	
-	public String deal(){
+	public String deal() throws InvalidGameStateException{
+		
+		if(this.GAMESTATE != "BET")
+			throw new InvalidGameStateException();
 		
 		this.collectHand();
 		this.deck.shuffle();
 		this.drawHand();
+		
+		this.GAMESTATE = "DEAL";
+		
 		return this.hand.toString();
 		
 	}
