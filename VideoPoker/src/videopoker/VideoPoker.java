@@ -10,6 +10,7 @@ public class VideoPoker {
 	Credit credit;
 	Statistics stat;
 	VideoPokerType type;
+
 	
 	public VideoPoker(int credit, VideoPokerType type){
 
@@ -18,6 +19,7 @@ public class VideoPoker {
 		this.credit = new Credit(credit);
 		this.deck = new Deck();
 		this.type = type;
+		this.stat = this.type.initStatistics();
 	}
 	
 	
@@ -39,13 +41,14 @@ public class VideoPoker {
 	}
 	
 	public int credit(){
+		
 		return this.credit.getCredit();
 	}
 	
 	public void statistics(){
 		
+		this.stat.printStatistics();
 		double perc = (credit.getCredit()/1000.0000)*100.0000;
-		this.stat.getStatistic();
 		System.out.println("Credit            " + this.credit.getCredit() + " (" + perc + "%)");
 		
 	}
@@ -64,17 +67,35 @@ public class VideoPoker {
 					this.switchCard(i);
 			}
 		
+		System.out.println(this.hand);
+		
 		// Get play result after hold
 		String res = this.type.evaluateHand(this.hand);
 		
+		
 		int payout = this.type.getPayout(res, this.pot.withdraw());
 		
+		this.credit.add(payout);
+
+		this.stat.addStatistics(res);
+		
+		if(res!=null)
+		
+			System.out.println("Player wins with a " + res + "and his credit is " + this.credit.getCredit());
+		
+		else{
+			
+			System.out.println("Player loses and his credit is "+ this.credit.getCredit());
+	
+		}
 		
 		
 	}
 	
 	public int[] advice(){
+		
 		return type.getAdvice(hand);
+		
 	}
 	
 	public String deal(){

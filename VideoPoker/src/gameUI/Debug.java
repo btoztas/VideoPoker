@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import videopoker.VideoPoker;
+import videopoker.*;
 
 
 public class Debug implements GameMode {
@@ -19,7 +19,7 @@ public class Debug implements GameMode {
 			bufferRead = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\debugtest.txt"));
             String s = "";
     		String state = "hold";
-    		VideoPoker v = new VideoPoker(1000);
+    		VideoPoker v = new VideoPoker(1000, new VideoPokerType107DB());
     		int amount=0;
     		if((s = bufferRead.readLine())!=null){
     	        System.out.println(s);

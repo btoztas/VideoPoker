@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import videopoker.VideoPoker;
+import videopoker.VideoPokerType107DB;
 
 
 public class Interactive implements GameMode {
@@ -17,7 +18,7 @@ public class Interactive implements GameMode {
 	public void play() {
 		String s = "";
 		String state = "hold";
-		VideoPoker v = new VideoPoker(10);
+		VideoPoker v = new VideoPoker(1000, new VideoPokerType107DB());
 		int amount=0;
 		BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 		while(true){

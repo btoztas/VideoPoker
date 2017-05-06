@@ -1,6 +1,7 @@
 package gameUI;
 
 import videopoker.VideoPoker;
+import videopoker.VideoPokerType107DB;
 
 public class Auto implements GameMode {
 	
@@ -10,8 +11,8 @@ public class Auto implements GameMode {
 	
 	public void play(){
 		int i = 0;
-		VideoPoker v = new VideoPoker(1000000);
-		while(i<100000){
+		VideoPoker v = new VideoPoker(1000000, new VideoPokerType107DB());
+		while(i<1000000){
 			v.bet(5);
 			//System.out.println(v.deal());
 			v.deal();
@@ -39,6 +40,9 @@ public class Auto implements GameMode {
 			v.hold(new int[0]);
 			i++;
 		}*/
+		
+		v.statistics();
 	}
+
 
 }

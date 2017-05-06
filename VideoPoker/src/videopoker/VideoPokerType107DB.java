@@ -2,11 +2,110 @@ package videopoker;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import deckofcards.Card;
 import deckofcards.RankComparator;
 
 public class VideoPokerType107DB implements VideoPokerType {
+	
+	List<Map<String, Integer>> payouts;
+	
+	
+	public VideoPokerType107DB(){
+		super();
+		
+		initPayouts();
+		
+	}
+	
+	private void initPayouts(){
+		
+		payouts = new ArrayList<Map<String, Integer>>();
+		Map<String, Integer> BET1 = new HashMap<String, Integer>();
+	    BET1.put("Royal Flush", 250);
+		BET1.put("Straight Flush", 50);
+		BET1.put("Four Aces", 160);
+		BET1.put("Four 2-4", 80);
+		BET1.put("Four 5-K", 50);
+		BET1.put("Full House", 10);
+		BET1.put("Flush", 7);
+		BET1.put("Straight", 5);
+		BET1.put("Three of a Kind", 3);
+		BET1.put("Two Pair", 1);
+		BET1.put("Jacks or Better", 1);
+		payouts.add(BET1);
+		Map<String, Integer> BET2 = new HashMap<String, Integer>();
+	    BET2.put("Royal Flush", 500);
+	    BET2.put("Straight Flush", 100);
+	    BET2.put("Four Aces", 320);
+	    BET2.put("Four 2-4", 160);
+	    BET2.put("Four 5-K", 100);
+	    BET2.put("Full House", 20);
+	    BET2.put("Flush", 14);
+	    BET2.put("Straight", 10);
+	    BET2.put("Three of a Kind", 6);
+	    BET2.put("Two Pair", 2);
+	    BET2.put("Jacks or Better", 2);
+		payouts.add(BET2);
+	    Map<String, Integer> BET3 = new HashMap<String, Integer>();
+	    BET3.put("Royal Flush", 750);
+	    BET3.put("Straight Flush", 150);
+	    BET3.put("Four Aces", 480);
+	    BET3.put("Four 2-4", 240);
+	    BET3.put("Four 5-K", 150);
+	    BET3.put("Full House", 30);
+	    BET3.put("Flush", 21);
+	    BET3.put("Straight", 15);
+	    BET3.put("Three of a Kind", 9);
+	    BET3.put("Two Pair", 3);
+	    BET3.put("Jacks or Better", 3);
+		payouts.add(BET3);
+	    Map<String, Integer> BET4 = new HashMap<String, Integer>();
+	    BET4.put("Royal Flush", 1000);
+	    BET4.put("Straight Flush", 200);
+	    BET4.put("Four Aces", 640);
+	    BET4.put("Four 2-4", 320);
+	    BET4.put("Four 5-K", 200);
+	    BET4.put("Full House", 40);
+	    BET4.put("Flush", 28);
+	    BET4.put("Straight", 20);
+	    BET4.put("Three of a Kind", 12);
+	    BET4.put("Two Pair", 4);
+	    BET4.put("Jacks or Better", 4);
+		payouts.add(BET4);
+	    Map<String, Integer> BET5 = new HashMap<String, Integer>();
+	    BET5.put("Royal Flush", 4000);
+	    BET5.put("Straight Flush", 250);
+	    BET5.put("Four Aces", 800);
+	    BET5.put("Four 2-4", 400);
+	    BET5.put("Four 5-K", 250);
+	    BET5.put("Full House", 50);
+	    BET5.put("Flush", 35);
+	    BET5.put("Straight", 25);
+	    BET5.put("Three of a Kind", 15);
+	    BET5.put("Two Pair", 5);
+	    BET5.put("Jacks or Better", 5);
+		payouts.add(BET5);
+	}
+	
+
+	@Override
+	public int getPayout(String handtype, int bet) {
+		if(handtype != null)
+			return payouts.get(bet-1).get(handtype);
+		return 0;
+		
+	}
+	@Override
+	public Statistics initStatistics() {
+		
+		String[] hands = {"Jacks or Better","Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"};
+		return new Statistics107DB(hands);
+		
+	}
 	
 	@Override
 	public String evaluateHand(Hand hand){
@@ -310,16 +409,9 @@ public class VideoPokerType107DB implements VideoPokerType {
         
 	}
 
-	@Override
-	public int getPayout(String handtype, int bet) {
+	
+	
 
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	
-	
 	// Implemented methods to evaluate parts of the strategy
 	
 	private boolean isPair(Card card1, Card card2){
@@ -1051,6 +1143,8 @@ public class VideoPokerType107DB implements VideoPokerType {
 		
 		
 	}
+
+	
 	
 
 }
