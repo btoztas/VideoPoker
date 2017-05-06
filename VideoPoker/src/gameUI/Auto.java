@@ -1,5 +1,7 @@
 package gameUI;
 
+
+import videopoker.Statistics;
 import videopoker.VideoPoker;
 import videopoker.VideoPokerType107DB;
 
@@ -12,7 +14,7 @@ public class Auto implements GameMode {
 	public void play(){
 		int i = 0;
 		VideoPoker v = new VideoPoker(1000000, new VideoPokerType107DB());
-		while(i<1000000){
+		while(i<10000){
 			v.bet(5);
 			//System.out.println(v.deal());
 			v.deal();
@@ -41,7 +43,10 @@ public class Auto implements GameMode {
 			i++;
 		}*/
 		
-		v.statistics();
+		Statistics stat = v.statistics();
+		stat.printStatistics();
+		double percentage = (stat.getCredit()/1000000.0000)*100.0000;
+		System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 	}
 
 

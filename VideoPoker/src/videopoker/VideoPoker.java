@@ -45,15 +45,16 @@ public class VideoPoker {
 		return this.credit.getCredit();
 	}
 	
-	public void statistics(){
+	public Statistics statistics(){
 		
-		this.stat.printStatistics();
-		double perc = (credit.getCredit()/1000.0000)*100.0000;
-		System.out.println("Credit            " + this.credit.getCredit() + " (" + perc + "%)");
+		this.stat.updateCredit(credit.getCredit());
+		return this.stat;
 		
+		/*
+		*/
 	}
 	
-	public void hold(int[] indexes){
+	public ResultHold hold(int[] indexes){
 		
 		// Hold input cards
 		if(indexes!=null)
@@ -67,11 +68,13 @@ public class VideoPoker {
 					this.switchCard(i);
 			}
 		
-		System.out.println(this.hand);
+		ResultHold result = new ResultHold(); 
+		
+		result.updateHand(this.hand.toString());
 		
 		// Get play result after hold
 		String res = this.type.evaluateHand(this.hand);
-		
+		result.updateRes(res);
 		
 		int payout = this.type.getPayout(res, this.pot.withdraw());
 		
@@ -79,15 +82,16 @@ public class VideoPoker {
 
 		this.stat.addStatistics(res);
 		
-		if(res!=null)
-		
-			System.out.println("Player wins with a " + res + "and his credit is " + this.credit.getCredit());
+		result.updateCredit(this.credit.getCredit());
+		/*if(res!=null)
+			result.updateRes("Player wins with a " + res + " and his credit is " + this.credit.getCredit());
 		
 		else{
 			
-			System.out.println("Player loses and his credit is "+ this.credit.getCredit());
+			result.updateRes("Player loses and his credit is "+ this.credit.getCredit());
 	
-		}
+		}*/
+		return result;
 		
 		
 	}

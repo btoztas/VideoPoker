@@ -91,17 +91,17 @@ public static void main(String[] args) throws IOException{
   hold9.setText(" Statistics ");
   currCash.setText("Cash: "+cash);
   
-  frame.add(currCash);
-  frame.add(hold1);
-  frame.add(hold2);
-  frame.add(hold3);
-  frame.add(hold4);
-  frame.add(hold5);
-  frame.add(hold6);
-  frame.add(hold7);
-  frame.add(hold8);
-  frame.add(hold9);
-  frame.add(events);
+  frame2.add(currCash);
+  frame2.add(hold1);
+  frame2.add(hold2);
+  frame2.add(hold3);
+  frame2.add(hold4);
+  frame2.add(hold5);
+  frame2.add(hold6);
+  frame2.add(hold7);
+  frame2.add(hold8);
+  frame2.add(hold9);
+  frame2.add(events);
 
   
   for(int s=0; s<6; ++s){

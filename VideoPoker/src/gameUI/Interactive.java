@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import videopoker.ResultHold;
+import videopoker.Statistics;
 import videopoker.VideoPoker;
 import videopoker.VideoPokerType107DB;
 
@@ -95,14 +97,23 @@ public class Interactive implements GameMode {
 						i = i + 2;
 						j++;
 					}
-					v.hold(h);
+					ResultHold result = v.hold(h);
+					System.out.println(result.getHand());
+					if(result.getRes()!=null){
+						System.out.println("Player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
+					}else{
+						System.out.println("Player loses and his credit is "+ result.getCredit());
+					}
 					state = "hold";
 				}
 			}else if(s.contains("$")){
 				System.out.println("player's credit is " + v.credit());
 			
 			}else if(s.contains("s")){
-				v.statistics();
+				Statistics stat = v.statistics();
+				stat.printStatistics();
+				double percentage = (stat.getCredit()/1000000.0000)*100.0000;
+				System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 			}else if(s.contains("a")){
 				if(state=="deal"){
 					int res [] = v.advice();

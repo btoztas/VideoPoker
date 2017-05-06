@@ -6,6 +6,7 @@ import java.util.Map;
 public abstract class Statistics {
 	
 	private Map<String, Integer> aMap;
+	int credit;
 	
 	public Statistics(String[] hands){
 		
@@ -20,6 +21,14 @@ public abstract class Statistics {
 		
 	}
 	
+	void updateCredit(int credit){
+		this.credit=credit;
+	}
+	
+	public int getCredit(){
+		return this.credit;
+	}
+	
 	abstract void addStatistics(String type);
 	
 	
@@ -31,7 +40,7 @@ public abstract class Statistics {
 	}
 	
 	
-	void printStatistics(){
+	public void printStatistics(){
 		int i = 0;
 		int nspaces;
 		

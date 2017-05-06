@@ -130,14 +130,23 @@ public class Debug implements GameMode {
 	    						//System.out.print(i);
 	    						ho[i]=h[i];
 	    					}
-	    					v.hold(h);
+	    					ResultHold result = v.hold(h);
+	    					System.out.println(result.getHand());
+	    					if(result.getRes()!=null){
+	    						System.out.println("Player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
+	    					}else{
+	    						System.out.println("Player loses and his credit is "+ result.getCredit());
+	    					}
 	    					state = "hold";
 	    				}
 	    			}else if(ch=='$'){
 	    				System.out.println("player's credit is " + v.credit());
 	    				m=m+1;
 	    			}else if(ch=='s'){
-	    				v.statistics();
+	    				Statistics stat = v.statistics();
+	    				stat.printStatistics();
+	    				double percentage = (stat.getCredit()/1000000.0000)*100.0000;
+	    				System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 	    				m=m+1;
 	    			}else if(ch=='a'){
 	    				if(state=="deal"){
