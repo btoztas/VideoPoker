@@ -11,7 +11,7 @@ import deckofcards.RankComparator;
 
 public class VideoPokerType107DB implements VideoPokerType {
 	
-	List<Map<String, Integer>> payouts;
+	private List<Map<String, Integer>> payouts;
 	
 	
 	public VideoPokerType107DB(){

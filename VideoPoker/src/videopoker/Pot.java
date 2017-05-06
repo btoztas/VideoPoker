@@ -1,7 +1,8 @@
 package videopoker;
 
 public class Pot {
-	int value;
+	
+	private int value;
 	
 	Pot(){
 		value = 0;

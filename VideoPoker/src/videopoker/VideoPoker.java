@@ -4,12 +4,12 @@ import deckofcards.Deck;
 
 public class VideoPoker {
 	
-	Deck deck;
-	Hand hand;
-	Pot pot;
-	Credit credit;
-	Statistics stat;
-	VideoPokerType type;
+	private Deck deck;
+	private Hand hand;
+	private Pot pot;
+	private Credit credit;
+	private Statistics stat;
+	private VideoPokerType type;
 
 	
 	public VideoPoker(int credit, VideoPokerType type){

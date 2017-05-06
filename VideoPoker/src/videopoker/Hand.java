@@ -9,7 +9,7 @@ import deckofcards.*;
 
 public class Hand {
 	
-	LinkedList<Card> hand;
+	private LinkedList<Card> hand;
 	
 	Hand(){
 		
@@ -66,12 +66,6 @@ public class Hand {
  
 	 }
 	 
-	 private int getIndex(Card card){
-		 
-		 return this.hand.indexOf(card);
-		 
-	 }
-	 
 	 int[] getOriginalIndexes(ArrayList<Card> holdList){
 		 
 		 
@@ -87,6 +81,12 @@ public class Hand {
 		 
 	 }
 	
+	 private int getIndex(Card card){
+		 
+		 return this.hand.indexOf(card);
+		 
+	 }
+	 
 
 	@Override
 	public String toString() {
