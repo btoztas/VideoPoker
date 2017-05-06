@@ -14,13 +14,13 @@ public class Interactive implements GameMode {
 	
 	int credit;
 	public void initGame(String[] args){
-		
+		credit = Integer.parseInt(args[1]);
 	}
 	
 	public void play() {
 		String s = "";
 		String state = "hold";
-		VideoPoker v = new VideoPoker(1000, new VideoPokerType107DB());
+		VideoPoker v = new VideoPoker(credit, new VideoPokerType107DB());
 		int amount=0;
 		BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 		while(true){
@@ -112,7 +112,7 @@ public class Interactive implements GameMode {
 			}else if(s.contains("s")){
 				Statistics stat = v.statistics();
 				stat.printStatistics();
-				double percentage = (stat.getCredit()/1000000.0000)*100.0000;
+				double percentage = (stat.getCredit()/credit)*100.0000;
 				System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 			}else if(s.contains("a")){
 				if(state=="deal"){

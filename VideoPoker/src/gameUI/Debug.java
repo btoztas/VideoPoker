@@ -9,8 +9,14 @@ import videopoker.*;
 
 public class Debug implements GameMode {
 	
+	int credit;
+	String cmd_file;
+	String card_file;
+	
 	public void initGame(String[] args){
-		
+		credit = Integer.parseInt(args[1]);
+		cmd_file = args[2];
+		card_file = args[3];
 	}
 	
 	public void play(){
@@ -19,7 +25,7 @@ public class Debug implements GameMode {
 			bufferRead = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\debugtest.txt"));
             String s = "";
     		String state = "hold";
-    		VideoPoker v = new VideoPoker(1000, new VideoPokerType107DB());
+    		VideoPoker v = new VideoPoker(credit, new VideoPokerType107DB());
     		int amount=0;
     		if((s = bufferRead.readLine())!=null){
     	        System.out.println(s);
@@ -145,7 +151,7 @@ public class Debug implements GameMode {
 	    			}else if(ch=='s'){
 	    				Statistics stat = v.statistics();
 	    				stat.printStatistics();
-	    				double percentage = (stat.getCredit()/1000000.0000)*100.0000;
+	    				double percentage = (stat.getCredit()/credit)*100.0000;
 	    				System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 	    				m=m+1;
 	    			}else if(ch=='a'){
