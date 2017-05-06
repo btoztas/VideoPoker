@@ -32,11 +32,6 @@ public class Debug implements GameMode {
     	        for(int m=0;m<s.length();m++){
     	        	Character ch = s.charAt(m);
 	    			if(ch=='b'){
-	    				if(state=="deal" || state=="advise"){
-	    					System.out.println("can't bet right now. You must choose the cards to hold");
-	    				}else if(state=="bet"){
-	    					System.out.println("can't bet right now. You must deal");
-	    				}else{
 	    					int b;
 	    					if((int)s.charAt(m+2)>57 || (int)s.charAt(m+2)==36){
 	    						b = v.bet(5);
@@ -72,7 +67,6 @@ public class Debug implements GameMode {
 		    						m=m+2+count;
 	    						}
 	    					}
-	    				}
 	    			}else if(ch=='d'){
 	    				if(state=="bet"){
 	    					System.out.println(v.deal());
