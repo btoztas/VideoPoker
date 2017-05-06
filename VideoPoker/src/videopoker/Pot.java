@@ -7,10 +7,10 @@ public class Pot {
 		value = 0;
 	}
 	
-	void inPot(int bet){
+	void add(int bet){
 		value = bet;
 	}
-	int outPot(){
+	int withdraw(){
 		int out = value;
 		value = 0;
 		return out;

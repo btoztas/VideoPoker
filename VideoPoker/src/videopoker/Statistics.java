@@ -25,18 +25,20 @@ public class Statistics {
 		
 		
 	}
-	void addStatistic(HandType type){
-		if(type.toString().contains("Four")){
+	void addStatistic(String type){
+		if(type.contains("Four")){
 			this.aMap.put("Four of a Kind", this.aMap.get("Four of a Kind") + 1);
 		}else{
-			this.aMap.put(type.toString(), this.aMap.get(type.toString())+1);
+			this.aMap.put(type, this.aMap.get(type)+1);
 		}
 		
 	}
 	void getStatistic(){
 		int i = 0;
 		int nspaces;
-		for (Map.Entry<String, Integer> entry : aMap.entrySet()) {
+		System.out.println("Hand                 Nb");
+		System.out.println("_________________________");
+		for (Map.Entry<String, Integer> entry : this.aMap.entrySet()) {
 			nspaces=21 - entry.getKey().length();
 			if(i+1<aMap.keySet().size()){
 				System.out.print(entry.getKey());
@@ -48,6 +50,9 @@ public class Statistics {
 			}
 				i++;
 		}
+		System.out.println("_________________________");
+		System.out.println("Total                " + this.aMap.get("Total"));
+		System.out.println("_________________________");
 		
 	}
 	

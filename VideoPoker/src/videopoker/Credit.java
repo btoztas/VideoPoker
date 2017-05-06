@@ -1,13 +1,14 @@
 package videopoker;
 
 public class Credit {
+	
 	int credit;
 	
 	Credit(int c){
 		credit = c;
 	}
 	
-	void redraw(int r){
+	void withdraw(int r){
 		credit = credit - r;
 	}
 	
