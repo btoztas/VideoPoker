@@ -10,7 +10,10 @@ public class VideoPoker {
 	private Credit credit;
 	private Statistics stat;
 	private VideoPokerType type;
+	
+	// GAME STATE CONTROL
 	private String GAMESTATE;
+	private int lastbet;
 
 	
 	public VideoPoker(int credit, VideoPokerType type){
@@ -29,7 +32,7 @@ public class VideoPoker {
 		
 		// TODO: THROW EXCEPTION IF CREDIT NEGATIVE AND CHANGE METHOD TO VOID
 		
-		if(this.GAMESTATE != "IDLE" || this.GAMESTATE != "HOLD"){
+		if(this.GAMESTATE != "IDLE" && this.GAMESTATE != "HOLD"){
 			
 			throw new InvalidGameStateException();
 		}
@@ -43,6 +46,7 @@ public class VideoPoker {
 			this.credit.withdraw(bet);
 			this.pot.add(bet);
 			this.GAMESTATE = "BET";
+			this.lastbet = bet;
 			
 		}
 	}
@@ -121,10 +125,25 @@ public class VideoPoker {
 		
 	}
 	
-	public String deal() throws InvalidGameStateException{
+	public String deal() throws InvalidGameStateException, InvalidAmountException{
 		
-		if(this.GAMESTATE != "BET")
+		if(this.GAMESTATE != "BET" && this.GAMESTATE != "HOLD")
+			
 			throw new InvalidGameStateException();
+		
+		if(this.GAMESTATE == "HOLD"){
+			
+			try{
+			
+				this.bet(this.lastbet);
+			
+			}catch(InvalidAmountException e1){
+			
+				throw e1;
+			
+			}
+			
+		}
 		
 		this.collectHand();
 		this.deck.shuffle();
