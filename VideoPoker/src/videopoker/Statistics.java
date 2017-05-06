@@ -7,7 +7,7 @@ public abstract class Statistics {
 	
 	private Map<String, Integer> aMap;
 	
-	public Statistics(String[] hands){
+	Statistics(String[] hands){
 		
 		aMap = new LinkedHashMap<String, Integer>();
 		
@@ -27,6 +27,12 @@ public abstract class Statistics {
 	void putStatistic(String type){
 		
 		this.aMap.put(type, this.aMap.get(type)+1);
+		
+	}
+	
+	int getStatistic(String type){
+		
+		return this.aMap.get(type);
 		
 	}
 	
