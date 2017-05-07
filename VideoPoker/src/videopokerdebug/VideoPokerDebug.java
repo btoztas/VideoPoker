@@ -11,12 +11,10 @@ public class VideoPokerDebug extends VideoPoker {
 	
 	public VideoPokerDebug(int credit, VideoPokerType type, String deck) throws InvalidCardException{
 		super(credit, type);
-		String[] cards = deck.split("\\s");
+		String[] cards = deck.split("\\s+");
 		this.deck = new Deck(cards);
 	}
 	
-
-
 	public String deal() throws InvalidGameStateException, InvalidAmountException{
 		
 		if(!this.gamestate.equals("BET") && !this.gamestate.equals("HOLD"))
@@ -36,4 +34,5 @@ public class VideoPokerDebug extends VideoPoker {
 		return this.hand.toString();
 		
 	}
+	
 }

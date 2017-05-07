@@ -1,7 +1,6 @@
 package videopoker;
 
 import deckofcards.Deck;
-import deckofcards.InvalidCardException;
 
 public class VideoPoker {
 	
@@ -16,7 +15,14 @@ public class VideoPoker {
 	protected String gamestate;
 	protected int lastbet;
 
-	
+	/**
+	 * Constructs a new Video Poker, game of a given type, initiated with a credit amount.
+	 * In order to construct a new Video Poker, the programmer must first implement a VideoPokerType.
+	 * 
+	 * @param credit   Credit amount to initiate the game with
+	 * @param type   Video Poker type implemented
+	 * 
+	 */
 	public VideoPoker(int credit, VideoPokerType type){
 
 		this.pot = new Pot();
