@@ -16,10 +16,15 @@ public class Auto extends GameUI {
 	
 	public void initGame(String[] args){
 		
-
-		this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB());
-		bet = Integer.parseInt(args[2]);
-		nbdeals = Integer.parseInt(args[3]);
+		try{
+			this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB());
+			bet = Integer.parseInt(args[2]);
+			nbdeals = Integer.parseInt(args[3]);
+		}catch(NumberFormatException e){
+			System.out.println("Invalid number");
+			System.exit(-1);
+		}
+		
 	}
 	
 	public void play(){

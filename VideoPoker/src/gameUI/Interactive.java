@@ -17,7 +17,12 @@ public class Interactive extends GameUI {
 	
 	public void initGame(String[] args){
 		
-		this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB());
+		try{
+			this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB());
+		}catch(NumberFormatException e){
+			System.out.println("Invalid credit");
+			System.exit(-1);
+		}
 	}
 	
 	public void play() {
@@ -34,7 +39,7 @@ public class Interactive extends GameUI {
 	            e.printStackTrace();
 	        }
 			
-			String[] tokens = s.split("\\s");
+			String[] tokens = s.split("\\s+");
 			
 			
 			if(tokens[0].equals("b")){

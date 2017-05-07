@@ -90,7 +90,7 @@ public class Deck {
 		
 		String input = "AF AC 4C 2S";
 		
-		String[] cards = input.split("\\s");
+		String[] cards = input.split("\\s+");
 		
 		Deck deck;
 		
