@@ -26,7 +26,8 @@ public class Debug extends GameUI {
 			cards = new String(Files.readAllBytes(Paths.get(card_file)));
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Invalid card file");
+			System.exit(0);
 		}
 		try{
 			
@@ -53,6 +54,7 @@ public class Debug extends GameUI {
 				bufferRead = new BufferedReader(new FileReader(cmd_file));
 			}catch(FileNotFoundException e){
 				System.out.println("Invalid command file");
+				System.exit(0);
 			}
             String s = "";
     		if((s = bufferRead.readLine())!=null){
@@ -64,29 +66,32 @@ public class Debug extends GameUI {
     	        	//System.out.print(tokens[m]);
     	        	
 	    			if(tokens[m].equals("b")){
-    					if((int)tokens[m+1].charAt(0)>57 || (int)tokens[m+1].charAt(0)==36){
-    						try{
-	    						videopoker.bet(5);
-	    						System.out.println("player is betting 5");
-	    					}catch(InvalidGameStateException e){
-	    						System.out.println("b: " + e.getMessage());
-	    					}catch(InvalidAmountException e){
-	    						System.out.println("b: " + e.getMessage());
+	    				try{
+	    					if((int)tokens[m+1].charAt(0)>57 || (int)tokens[m+1].charAt(0)==36){
+	    						try{
+		    						videopoker.bet(5);
+		    						System.out.println("player is betting 5");
+		    					}catch(InvalidGameStateException e){
+		    						System.out.println("b: " + e.getMessage());
+		    					}catch(InvalidAmountException e){
+		    						System.out.println("b: " + e.getMessage());
+		    					}
+	    						m=m+1;
+	    					}else{
+	    						try{
+	    						videopoker.bet(Integer.parseInt(tokens[m+1]));
+	    						System.out.println("player is betting " + Integer.parseInt(tokens[m+1]));
+		    					}catch(InvalidGameStateException e){
+		    						System.out.println("b: " + e.getMessage());
+		    					}catch(InvalidAmountException e){
+		    						System.out.println("b: " + e.getMessage());
+		    					}
+	    						m=m+2;
 	    					}
-    						m=m+1;
-    					}else{
-    						try{
-    						videopoker.bet(Integer.parseInt(tokens[m+1]));
-    						System.out.println("player is betting " + Integer.parseInt(tokens[m+1]));
-	    					}catch(InvalidGameStateException e){
-	    						System.out.println("b: " + e.getMessage());
-	    					}catch(InvalidAmountException e){
-	    						System.out.println("b: " + e.getMessage());
-	    					}
-    						m=m+2;
+	    				}catch(ArrayIndexOutOfBoundsException e){
+    						
     					}
 	    			}else if(tokens[m].equals("d")){
-	    				System.out.println("ola");
 	    				try {
 	    					System.out.println(videopoker.deal());
 	    				} catch (InvalidGameStateException e){
@@ -110,6 +115,10 @@ public class Debug extends GameUI {
     							count++;
     						}
     					}
+    					}catch(ArrayIndexOutOfBoundsException e){
+    						
+    					}
+    					try{
     					int [] ho = new int[count];
     					for(int i=0;h[i]!=0;i++){
     						//System.out.print(i);

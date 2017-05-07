@@ -16,7 +16,7 @@ public class VideoPokerDebug extends VideoPoker {
 	}
 	
 
-
+	@Override
 	public String deal() throws InvalidGameStateException, InvalidAmountException{
 		
 		if(!this.gamestate.equals("BET") && !this.gamestate.equals("HOLD"))
@@ -28,7 +28,6 @@ public class VideoPokerDebug extends VideoPoker {
 		
 		
 		this.collectHand();
-		this.deck.shuffle();
 		this.drawHand();
 		
 		this.gamestate = "DEAL";
