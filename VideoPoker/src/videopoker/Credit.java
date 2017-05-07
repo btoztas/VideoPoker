@@ -2,21 +2,26 @@ package videopoker;
 
 public class Credit {
 	
-	int credit;
+	private int actual_credit;
+	private int initial_credit;
 	
 	Credit(int c){
-		credit = c;
+		initial_credit = actual_credit = c;
 	}
 	
 	void withdraw(int r){
-		credit = credit - r;
+		actual_credit = actual_credit - r;
 	}
 	
 	void add(int a){
-		credit = credit + a;
+		actual_credit = actual_credit + a;
 	}
 	
 	int getCredit(){
-		return this.credit;
+		return this.actual_credit;
+	}
+	
+	int getInitialCredit(){
+		return this.initial_credit;
 	}
 }

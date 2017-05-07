@@ -5,36 +5,38 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import videopoker.*;
+import videopoker107DB.VideoPokerType107DB;
 
 
-public class Debug implements GameMode {
+public class Debug extends GameUI {
 	
-	int credit;
-	String cmd_file;
-	String card_file;
+	private String cmd_file;
+	private String card_file;
 	
 	public void initGame(String[] args){
-		credit = Integer.parseInt(args[1]);
-		cmd_file = args[2];
-		card_file = args[3];
+		this.cmd_file = args[2];
+		this.card_file = args[3];
+		this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB());
 	}
 	
 	public void play(){
 		BufferedReader bufferRead = null;
+		
 		try {
-			bufferRead = new BufferedReader(new FileReader("C:\\Users\\Afonso\\Desktop\\debugtest.txt"));
+			bufferRead = new BufferedReader(new FileReader(cmd_file));
             String s = "";
-    		String state = "hold";
-    		VideoPoker v = new VideoPoker(credit, new VideoPokerType107DB());
-    		int amount=0;
+            int amount=0;
     		if((s = bufferRead.readLine())!=null){
+    			
     	        System.out.println(s);
+    	        
     	        for(int m=0;m<s.length();m++){
+    	        	
     	        	Character ch = s.charAt(m);
 	    			if(ch=='b'){
 	    					int b;
 	    					if((int)s.charAt(m+2)>57 || (int)s.charAt(m+2)==36){
-	    						b = v.bet(5);
+	    						b = videopoker.bet(5);
 	    						amount=5;
 	    						if(b==1){
 	    							System.out.println("player is betting 5");
@@ -52,7 +54,7 @@ public class Debug implements GameMode {
 	    							if(Character.getNumericValue(s.charAt(m+2)) > 5){
 	    								System.out.println("b: illegal amount");
 	    							}else{
-		    							b = v.bet(Character.getNumericValue(s.charAt(m+2)));
+		    							b = videopoker.bet(Character.getNumericValue(s.charAt(m+2)));
 		    							amount = Character.getNumericValue(s.charAt(m+2));
 		    							if(b==1){
 		    								System.out.println("player is betting " + s.charAt(m+2));
@@ -75,10 +77,10 @@ public class Debug implements GameMode {
 	    					System.out.println("can't deal right now. You must choose the cards to hold");
 	    				}else{
 	    					if(amount!=0){
-		    					int b = v.bet(amount);
+		    					int b = videopoker.bet(amount);
 	    						if(b==1){
 	    							System.out.println("player is betting " + amount);
-	    							System.out.println(v.deal());
+	    							System.out.println(videopoker.deal());
 	    							state = "deal";
 	    						}else{
 	    							System.out.println("b: insuficient funds");
@@ -130,7 +132,7 @@ public class Debug implements GameMode {
 	    						//System.out.print(i);
 	    						ho[i]=h[i];
 	    					}
-	    					ResultHold result = v.hold(h);
+	    					ResultHold result = videopoker.hold(h);
 	    					System.out.println(result.getHand());
 	    					if(result.getRes()!=null){
 	    						System.out.println("Player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
@@ -140,17 +142,17 @@ public class Debug implements GameMode {
 	    					state = "hold";
 	    				}
 	    			}else if(ch=='$'){
-	    				System.out.println("player's credit is " + v.credit());
+	    				System.out.println("player's credit is " + videopoker.credit());
 	    				m=m+1;
 	    			}else if(ch=='s'){
-	    				Statistics stat = v.statistics();
+	    				Statistics stat = videopoker.statistics();
 	    				stat.printStatistics();
 	    				double percentage = (stat.getCredit()/credit)*100.0000;
 	    				System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 	    				m=m+1;
 	    			}else if(ch=='a'){
 	    				if(state=="deal"){
-	    					int res [] = v.advice();
+	    					int res [] = videopoker.advice();
 	    					if(res!=null){
 	    						System.out.print("player should hold ");
 	    						for(int i=0;i<res.length;i++){
@@ -173,8 +175,11 @@ public class Debug implements GameMode {
     	        }
     		}
 		} catch (IOException e) {
+			
             e.printStackTrace();
+            
         } finally {
+        	
             try {
                 if (bufferRead != null) {
                 	bufferRead.close();
@@ -183,6 +188,7 @@ public class Debug implements GameMode {
                 ex.printStackTrace();
             }
         }
+		
 	}
 
 }

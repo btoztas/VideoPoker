@@ -1,15 +1,17 @@
-package videopoker;
+package videopoker107DB;
+
+import videopoker.Statistics;
 
 public class Statistics107DB extends Statistics {
 
-	Statistics107DB(String[] hands) {
+	public Statistics107DB(String[] hands) {
 		
 		super(hands);
 		
 	}
 
 	@Override
-	void addStatistics(String type){ 
+	public void addStatistics(String type){ 
 		
 		if(type == null){
 			this.putStatistic("Other");

@@ -1,7 +1,8 @@
-package gameUI;
+package gui;
 
 import java.awt.event.*;
 import javax.swing.*;
+
 import java.awt.*;
 import javax.imageio.*;
 import java.util.*;

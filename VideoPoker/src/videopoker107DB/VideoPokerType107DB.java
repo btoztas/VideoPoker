@@ -1,4 +1,4 @@
-package videopoker;
+package videopoker107DB;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +8,9 @@ import java.util.Map;
 
 import deckofcards.Card;
 import deckofcards.RankComparator;
+import videopoker.Hand;
+import videopoker.Statistics;
+import videopoker.VideoPokerType;
 
 public class VideoPokerType107DB implements VideoPokerType {
 	
@@ -148,11 +151,10 @@ public class VideoPokerType107DB implements VideoPokerType {
 	}
 
 	@Override
-	public int[] getAdvice(Hand hand) {
-			
-		Hand playerHand = hand.copyHand();
+	public int[] getAdvice(Hand playerHand) {
 		
 		ArrayList<Card> holdList;
+		Hand hand = playerHand.copyHand();
 		
 	    ////System.out.println("TESTING RoyalFlush");
 		holdList = isRoyalFlush(playerHand);

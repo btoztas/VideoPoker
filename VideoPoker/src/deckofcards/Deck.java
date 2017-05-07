@@ -1,13 +1,55 @@
 package deckofcards;
 
 import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Deck {
 	
 	LinkedList<Card> deck = new LinkedList<Card>();
-	private char[] suits = {'H', 'S', 'D', 'C'};
-	private char[] ranks = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
+	static private char[] suits  = {'H', 'S', 'D', 'C'};
+	static private char[] ranks  = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
+	static private int[] scores = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+	
+	public Deck(){
+		
+		for(int i=0; i< suits.length; i++)
+			for(int j=0; j<ranks.length; j++){
+				
+				deck.add(new Card(ranks[j], suits[i], scores[j]));
+		
+			}
+	}
+	
+	public Deck(String[] cards) throws InvalidCardException{
+		
+		int suit_index, rank_index;
+		
+		for(int i=0; i<cards.length; i++){
+			
+			suit_index = -1;
+			rank_index = -1;
+			
+			for(int j=0; j<ranks.length; j++){
+				if(cards[i].charAt(0) == ranks[j]){
+					rank_index = j;
+					break;
+				}
+			}
+			for(int j=0; j<suits.length; j++){
+				if(cards[i].charAt(1) == suits[j]){
+					suit_index = j;
+					break;
+				}
+			}
+			
+			if(suit_index==-1 || rank_index==-1)
+				throw new InvalidCardException("Invalid card " + cards[i]);
+			
+			deck.add(new Card(cards[i].charAt(0), cards[i].charAt(1), scores[rank_index]));
+		}
+	}
+	
 	
 	public int rankToScore(char rank){
 		for(Card c: deck){
@@ -17,17 +59,6 @@ public class Deck {
 		}
 		return 0;
 	}
-	
-	public Deck(){
-		
-		for(int i=0; i< suits.length; i++)
-			for(int j=0; j<ranks.length; j++){
-				
-				deck.add(new Card(ranks[j], suits[i], j+2));
-		
-			}
-	}
-	
 	
 	@Override
 	public String toString() {
@@ -57,26 +88,39 @@ public class Deck {
 	
 	public static void main(String[] args) {
 		
+		String input = "AF AC 4C 2S";
 		
-		Deck deck = new Deck();
-		System.out.println(deck);
+		String[] cards = input.split("\\s");
 		
-		deck.shuffle();
-		System.out.println(deck);
+		Deck deck;
 		
-		Card card = deck.drawCard();
+		try {
+			deck = new Deck(cards);
+			System.out.println(deck);
+			
+			deck.shuffle();
+			System.out.println(deck);
+			
+			Card card = deck.drawCard();
+			
+			
+			
+			System.out.println(card);
+			System.out.println(deck);
+			card = deck.drawCard();
+			System.out.println(card);
+			System.out.println(deck);
+			card = deck.drawCard();
+			
+			System.out.println(card);
+			System.out.println(deck);
+			
+		} catch (InvalidCardException e) {
+			
+			System.out.println(e.getMessage());
+			
+		}
 		
-		
-		
-		System.out.println(card);
-		System.out.println(deck);
-		card = deck.drawCard();
-		System.out.println(card);
-		System.out.println(deck);
-		card = deck.drawCard();
-		
-		System.out.println(card);
-		System.out.println(deck);
 		
 		
 		

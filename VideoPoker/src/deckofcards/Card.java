@@ -8,11 +8,12 @@ public class Card{
 	int score;
 
 
-	public Card(char rank, char suit, int score){
+	Card(char rank, char suit, int score){
 		
 		this.rank = rank;
 		this.suit = suit;
 		this.score = score;
+		
 	}
 
 
@@ -21,7 +22,7 @@ public class Card{
 	}
 
 
-	public void setScore(int score) {
+	void setScore(int score) {
 		this.score = score;
 	}
 

@@ -1,14 +1,16 @@
 package videopoker;
 
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public abstract class Statistics {
 	
 	private Map<String, Integer> aMap;
-	int credit;
+	private int actual_credit;
+	private int initial_credit;
 	
-	Statistics(String[] hands){
+	public Statistics(String[] hands){
 		
 		aMap = new LinkedHashMap<String, Integer>();
 		
@@ -21,27 +23,29 @@ public abstract class Statistics {
 		
 	}
 	
-	void updateCredit(int credit){
-		this.credit=credit;
-	}
-	
-	public int getCredit(){
-		return this.credit;
-	}
-	
-	abstract void addStatistics(String type);
-	
-	
-	
-	void putStatistic(String type){
+	public void putStatistic(String type){
 		
 		this.aMap.put(type, this.aMap.get(type)+1);
 		
 	}
 	
-	int getStatistic(String type){
+	public int getStatistic(String type){
 		
 		return this.aMap.get(type);
+		
+	}
+	
+	public abstract void addStatistics(String type);
+	
+	
+	void updateCredit(int credit){
+		this.actual_credit=credit;
+	}
+	
+	
+	void setInitialCredit(int initial_credit){
+		
+		this.initial_credit = initial_credit;
 		
 	}
 	
@@ -51,7 +55,7 @@ public abstract class Statistics {
 		int nspaces;
 		
 		System.out.println("Hand                 Nb");
-		System.out.println("_________________________");
+		System.out.println("---------------------------------");
 	
 		for (Map.Entry<String, Integer> entry : this.aMap.entrySet()) {
 			nspaces=21 - entry.getKey().length();
@@ -65,9 +69,13 @@ public abstract class Statistics {
 			}
 				i++;
 		}
-		System.out.println("_________________________");
+		System.out.println("---------------------------------");
 		System.out.println("Total                " + this.aMap.get("Total"));
-		System.out.println("_________________________");
+		System.out.println("---------------------------------");
+		double percentage = ((double)this.actual_credit/(double)this.initial_credit)*100.0;
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		System.out.println("Credit            " + this.actual_credit + " (" + numberFormat.format(percentage) + "%)");
+		
 		
 	}
 	

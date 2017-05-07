@@ -1,62 +1,111 @@
 package gameUI;
 
 
+import videopoker.InvalidAmountException;
+import videopoker.InvalidCardIndexException;
+import videopoker.InvalidGameStateException;
+import videopoker.PlayResult;
 import videopoker.Statistics;
 import videopoker.VideoPoker;
-import videopoker.VideoPokerType107DB;
+import videopoker107DB.VideoPokerType107DB;
 
-public class Auto implements GameMode {
+public class Auto extends GameUI {
 	
-	int credit;
-	int bet;
-	int nbdeals;
+	private int bet;
+	private int nbdeals;
 	
 	public void initGame(String[] args){
-		credit = Integer.parseInt(args[1]);
+		
+
+		this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB());
 		bet = Integer.parseInt(args[2]);
 		nbdeals = Integer.parseInt(args[3]);
-		if(bet>5){
-			System.out.println("b: illegal ammount");
-			System.exit(0);
-		}
 	}
 	
 	public void play(){
-		int i = 0;
-		VideoPoker v = new VideoPoker(credit, new VideoPokerType107DB());
-		while(i<nbdeals){
-			v.bet(bet);
-			//System.out.println(v.deal());
-			v.deal();
-			int res [] = v.advice();
-			if(res!=null){
-				//System.out.print("player should hold ");
-				for(int k=0;k<res.length;k++){
-					//System.out.print(res[k]+" ");
-				}
-			}else{
-				//System.out.print("player should discard everything");
+		
+		
+		
+		for(int i = 0; i<nbdeals; i++){
+			
+			try {
+				
+				videopoker.bet(bet);
+				
+			} catch (InvalidAmountException e) {
+	
+				System.out.println("b: "+ e.getMessage());
+				System.exit(-1);
+				
+			} catch (InvalidGameStateException e) {
+				
+				System.out.println(e.getMessage());
+				System.exit(-1);
+			
 			}
-			//System.out.println();
-			System.out.println(v.credit());
-			v.hold(res);
-			i++;
+			
+			try {
+				
+				System.out.println(videopoker.deal());
+				
+			} catch (InvalidGameStateException e){
+				
+				System.out.println("d: " + e.getMessage());
+				System.exit(-1);
+				
+			} catch (InvalidAmountException e) {
+				
+				System.out.println("d: " + e.getMessage());
+				System.exit(-1);
+				
+			}
+			int[] res = null;
+			
+			try {
+				
+				res = videopoker.advice();
+				if(res!=null){
+					System.out.print("player should hold ");
+					for(int j=0;j<res.length;j++){
+						System.out.print(res[j]+" ");
+					}
+					System.out.println("");
+					
+				}else{
+					
+					System.out.println("player should discard everything");
+					
+				}
+				
+			} catch (InvalidGameStateException e) {
+				System.out.println("a: " + e.getMessage());
+				System.exit(-1);
+			}
+			
+			try {
+				
+				PlayResult result = videopoker.hold(res);
+				System.out.println(result.getHand());
+				if(result.getRes()!=null){
+					System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
+				}else{
+					System.out.println("player loses and his credit is "+ result.getCredit());
+				}
+				
+			} catch (InvalidGameStateException e) {
+				
+				System.out.println("h: " + e.getMessage());
+				System.exit(-1);
+			} catch (InvalidCardIndexException e) {
+				
+				System.out.println("h: " + e.getMessage());
+				System.exit(-1);
+			}
+			
 		}
-		double perc = (v.credit()/credit)*100.0000;
-		System.out.println(perc);
 		
-		/*int i = 0;
-		while(i<1000){
-			VideoPoker v = new VideoPoker(1000000);
-			System.out.println(v.deal());
-			v.hold(new int[0]);
-			i++;
-		}*/
-		
-		Statistics stat = v.statistics();
+		Statistics stat = videopoker.statistics();
 		stat.printStatistics();
-		double percentage = (stat.getCredit()/credit)*100.0000;
-		System.out.println("Credit            " + stat.getCredit() + " (" + percentage + "%)");
 	}
 
 

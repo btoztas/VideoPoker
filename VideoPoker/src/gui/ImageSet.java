@@ -1,4 +1,4 @@
-package gameUI;
+package gui;
 
 import java.awt.*;
 import java.util.*;

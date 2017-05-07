@@ -1,9 +1,10 @@
 package videopoker;
 
-public class ResultHold {
-	String res;
-	String hand;
-	int credit;
+public class PlayResult {
+
+	private String hand;
+	private String res;
+	private int credit;
 	
 	void updateHand(String hand){
 		this.hand=hand;
