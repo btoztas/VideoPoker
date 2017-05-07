@@ -1,6 +1,7 @@
 package gameUI;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +10,7 @@ import java.nio.file.Paths;
 import deckofcards.InvalidCardException;
 import videopoker.*;
 import videopoker107DB.VideoPokerType107DB;
+import videopokerdebug.VideoPokerDebug;
 
 
 public class Debug extends GameUI {
@@ -19,21 +21,27 @@ public class Debug extends GameUI {
 	public void initGame(String[] args){
 		this.cmd_file = args[2];
 		this.card_file = args[3];
-		String read_file = "";
+		String cards = "";
 		try{
-		read_file = new String(Files.readAllBytes(Paths.get(card_file)));
+			cards = new String(Files.readAllBytes(Paths.get(card_file)));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 		try{
-		this.videopoker = new VideoPoker(Integer.parseInt(args[1]), new VideoPokerType107DB(), read_file);
+			
+			this.videopoker = new VideoPokerDebug(Integer.parseInt(args[1]), new VideoPokerType107DB(), cards);
+			
 		}catch(NumberFormatException e){
+			
 			System.out.println("Invalid credit");
 			System.exit(0);
+			
 		}catch(InvalidCardException e){
+			
 			System.out.println(e.getMessage());
 			System.exit(0);
+			
 		}
 	}
 	
@@ -41,21 +49,25 @@ public class Debug extends GameUI {
 		BufferedReader bufferRead = null;
 		
 		try {
-			bufferRead = new BufferedReader(new FileReader(cmd_file));
+			try{
+				bufferRead = new BufferedReader(new FileReader(cmd_file));
+			}catch(FileNotFoundException e){
+				System.out.println("Invalid command file");
+			}
             String s = "";
     		if((s = bufferRead.readLine())!=null){
     			
     	        System.out.println(s);
     	        String[] tokens = s.split("\\s+");
     	        
-    	        for(int m=0;m<tokens.length;){
+    	        for(int m=0; m<tokens.length;){
     	        	//System.out.print(tokens[m]);
     	        	
 	    			if(tokens[m].equals("b")){
     					if((int)tokens[m+1].charAt(0)>57 || (int)tokens[m+1].charAt(0)==36){
     						try{
-    						videopoker.bet(5);
-    						System.out.println("player is betting 5");
+	    						videopoker.bet(5);
+	    						System.out.println("player is betting 5");
 	    					}catch(InvalidGameStateException e){
 	    						System.out.println("b: " + e.getMessage());
 	    					}catch(InvalidAmountException e){
@@ -106,9 +118,9 @@ public class Debug extends GameUI {
     					PlayResult result = videopoker.hold(h);
     					System.out.println(result.getHand());
     					if(result.getRes()!=null){
-    						System.out.println("Player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
+    						System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
     					}else{
-    						System.out.println("Player loses and his credit is "+ result.getCredit());
+    						System.out.println("player loses and his credit is "+ result.getCredit());
     					}
     					}catch (InvalidGameStateException e) {
     						System.out.println("h: " + e.getMessage());

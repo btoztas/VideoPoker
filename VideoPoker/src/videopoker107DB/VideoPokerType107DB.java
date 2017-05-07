@@ -625,7 +625,6 @@ public class VideoPokerType107DB implements VideoPokerType {
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
-		//Esta função está provavelmente mal
 		
 		for(int i=0; i<4; i++){
 			

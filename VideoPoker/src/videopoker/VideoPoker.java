@@ -5,16 +5,16 @@ import deckofcards.InvalidCardException;
 
 public class VideoPoker {
 	
-	private Pot pot;
-	private Deck deck;
-	private Hand hand;
-	private Credit credit;
-	private Statistics stat;
-	private VideoPokerType type;
+	protected Pot pot;
+	protected Deck deck;
+	protected Hand hand;
+	protected Credit credit;
+	protected Statistics stat;
+	protected VideoPokerType type;
 	
 	// GAME STATE CONTROL
-	private String gamestate;
-	private int lastbet;
+	protected String gamestate;
+	protected int lastbet;
 
 	
 	public VideoPoker(int credit, VideoPokerType type){
@@ -28,20 +28,6 @@ public class VideoPoker {
 		this.stat.setInitialCredit(credit);
 		this.gamestate = "IDLE";
 	}
-	
-	public VideoPoker(int credit, VideoPokerType type, String deck) throws InvalidCardException{
-
-		this.pot = new Pot();
-		this.hand = new Hand();
-		this.credit = new Credit(credit);
-		String[] cards = deck.split("\\s");
-		this.deck = new Deck(cards);
-		this.type = type;
-		this.stat = this.type.initStatistics();
-		this.stat.setInitialCredit(credit);
-		this.gamestate = "IDLE";
-	}
-	
 	
 	public void bet(int bet) throws InvalidAmountException, InvalidGameStateException{
 		
@@ -153,14 +139,14 @@ public class VideoPoker {
 		
 	}
 	
-	private void drawHand(){
+	protected void drawHand(){
 		
 		for(int i=0; i<5; i++)
 		 	this.hand.addCard(this.deck.drawCard());
 		
 	}
 	
-	private void collectHand(){
+	protected void collectHand(){
 		
 		if(this.hand.existsHand()==true)
 			for(int i=0; i<5; i++)
@@ -168,7 +154,7 @@ public class VideoPoker {
 			
 	}
 	
-	private void switchCard(int index){
+	protected void switchCard(int index){
 		
 		deck.collectCard(this.hand.removeCard(index));
 		hand.addCard(index, this.deck.drawCard());
