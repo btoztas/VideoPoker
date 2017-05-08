@@ -11,11 +11,19 @@ public class Hand {
 	
 	private LinkedList<Card> hand;
 	
+	/**
+	 * Constructs an object of type Hand. Initializes a new empty object hand of type LinkedList of Cards
+	 */
+	
 	Hand(){
 		
 		hand = new LinkedList<Card>();
 		
 	}
+	
+	/**
+	 * This method sorts the linked list hand of the object Hand by rank. The lower rank gets the first position.
+	 */
 	
 	public void sortRank(){
 		
@@ -23,11 +31,23 @@ public class Hand {
 		
 	}
 	
+	/**
+	 * This method sorts the linked list hand of the object Hand by suit. The suits don't show up in any specific order. Instead,
+	 *  they just show up grouped.
+	 */
+	
 	public void sortSuit(){
 		
 		Collections.sort(this.hand, new SuitComparator());
 		
 	}
+	
+	/**
+	 * This method returns the object Card that is positioned on the index given by the parameter index of 
+	 * the linked list hand
+	 * 
+	 * 
+	 */
 	
 	public Card getCard(int index){
 		
