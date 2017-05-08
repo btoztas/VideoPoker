@@ -11,6 +11,18 @@ public class Deck {
 	static private char[] ranks  = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
 	static private int[] scores = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 	
+	
+	
+	/**
+	 * This constructor creates a default deck with 52 cards with the following values:
+	 * <br>- Suits: Hearts, Spades, Diamonds, Clubs
+	 * <table>
+	 * <tr><th>Rank</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>T</td><td>J</td><td>Q</td><td>K</td><td>A</td>
+	 * <tr><th>Score</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td>
+	 * </table>
+	 * 
+	 * 
+	 */
 	public Deck(){
 		
 		for(int i=0; i< suits.length; i++)
