@@ -39,7 +39,7 @@ public class Interactive extends GameUI {
 	            e.printStackTrace();
 	        }
 			
-			String[] tokens = s.split("\\s+");
+			String[] tokens = s.split("\\s+|\\s*\\,\\s*");
 			
 			
 			if(tokens[0].equals("b")){
@@ -60,6 +60,8 @@ public class Interactive extends GameUI {
 						System.out.println("b: " + e.getMessage());
 					}catch(InvalidAmountException e){
 						System.out.println("b: " + e.getMessage());
+					}catch(NumberFormatException e){
+						System.out.println("Invalid credit");
 					}
 				}
 				
@@ -76,7 +78,11 @@ public class Interactive extends GameUI {
 				int[] h = new int[tokens.length-1];
 				
 				for(int i=1; i<tokens.length; i++)
-					h[i-1]=Integer.parseInt(tokens[i]);
+					try{
+						h[i-1]=Integer.parseInt(tokens[i]);
+					}catch(NumberFormatException e){
+						System.out.println("Invalid hand index");
+					}
 				
 				PlayResult result;
 				

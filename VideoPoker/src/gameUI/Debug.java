@@ -60,7 +60,7 @@ public class Debug extends GameUI {
     		if((s = bufferRead.readLine())!=null){
     			
     	        System.out.println(s);
-    	        String[] tokens = s.split("\\s+");
+    	        String[] tokens = s.split("\\s+|\\s*\\,\\s*");
     	        
     	        for(int m=0; m<tokens.length;){
     	        	//System.out.print(tokens[m]);
@@ -79,12 +79,14 @@ public class Debug extends GameUI {
 	    						m=m+1;
 	    					}else{
 	    						try{
-	    						videopoker.bet(Integer.parseInt(tokens[m+1]));
-	    						System.out.println("player is betting " + Integer.parseInt(tokens[m+1]));
+	    							videopoker.bet(Integer.parseInt(tokens[m+1]));
+	    							System.out.println("player is betting " + Integer.parseInt(tokens[m+1]));
 		    					}catch(InvalidGameStateException e){
 		    						System.out.println("b: " + e.getMessage());
 		    					}catch(InvalidAmountException e){
 		    						System.out.println("b: " + e.getMessage());
+		    					}catch(NumberFormatException e){
+		    						System.out.println("Invalid credit");
 		    					}
 	    						m=m+2;
 	    					}
@@ -111,8 +113,13 @@ public class Debug extends GameUI {
     						if((int)tokens[m+i+1].charAt(0)>57 || (int)tokens[m+i+1].charAt(0)==36){
     							i=5;
     						}else{
-    							h[i]=Integer.parseInt(tokens[m+i+1]);
-    							count++;
+    							try{
+	    							h[i]=Integer.parseInt(tokens[m+i+1]);
+	    							count++;
+	    						}catch(NumberFormatException e){
+	    							System.out.println("Invalid credit");
+	    							System.exit(-1);
+	    						}
     						}
     					}
     					}catch(ArrayIndexOutOfBoundsException e){
