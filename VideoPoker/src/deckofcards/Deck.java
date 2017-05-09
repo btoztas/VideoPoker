@@ -76,6 +76,11 @@ public class Deck {
 		}
 	}
 	
+	/**
+	 * This method returns the score value of a given rank
+	 * @param rank 		rank to be evaluated
+	 * @return score 	score corresponding to the given rank
+	 */
 	
 	public int rankToScore(char rank){
 		for(Card c: deck){
@@ -91,23 +96,35 @@ public class Deck {
 		return "Deck [deck=" + deck + "]";
 	}
 	
-	
+	/**
+	 * This method shuffles the deck randomly
+	 */
 	
 	public void shuffle(){
 		
-		
 		Collections.shuffle(deck);
 		
-		
 	}
+	
+	/**	
+	 * This method takes a card from the deck to draw it. This card is returned.
+	 * @return card					card to be drawn
+	 * @throws EmptyDeckEception	exception thrown when there are no more cards in the deck
+	 */
+	
 	public Card drawCard() throws EmptyDeckEception{
+		
 		if(this.card_count==0)
 			throw new EmptyDeckEception();
 		this.card_count--;
 		return this.deck.remove(0);
 		
-		
 	}
+	
+	/**
+	 * This method's purpose is to return a dealt card to the deck. This card is given in argument
+	 * @param card 		card to be returned to the deck 
+	 */
 	
 	public void collectCard(Card card){
 		
