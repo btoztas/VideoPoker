@@ -1,7 +1,9 @@
 package videopokerdebug;
 
 import deckofcards.Deck;
+import deckofcards.EmptyDeckEception;
 import deckofcards.InvalidCardException;
+import videopoker.InsufficientFundsException;
 import videopoker.InvalidAmountException;
 import videopoker.InvalidGameStateException;
 import videopoker.VideoPoker;
@@ -16,7 +18,7 @@ public class VideoPokerDebug extends VideoPoker {
 	}
 	
 	@Override
-	public String deal() throws InvalidGameStateException, InvalidAmountException{
+	public String deal() throws InvalidGameStateException, InvalidAmountException, InsufficientFundsException, EmptyDeckEception{
 		
 		if(!this.gamestate.equals("BET") && !this.gamestate.equals("HOLD"))
 			

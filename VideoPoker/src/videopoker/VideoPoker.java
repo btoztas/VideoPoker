@@ -1,6 +1,7 @@
 package videopoker;
 
 import deckofcards.Deck;
+import deckofcards.EmptyDeckEception;
 
 public class VideoPoker {
 	
@@ -35,7 +36,7 @@ public class VideoPoker {
 		this.gamestate = "IDLE";
 	}
 	
-	public void bet(int bet) throws InvalidAmountException, InvalidGameStateException{
+	public void bet(int bet) throws InvalidAmountException, InvalidGameStateException, InsufficientFundsException{
 		
 		
 		if(!this.gamestate.equals("IDLE") && !this.gamestate.equals("HOLD") && !this.gamestate.equals("BET")){
@@ -44,11 +45,15 @@ public class VideoPoker {
 		}
 		
 		
-		if(this.credit.getCredit()-bet<0 || bet>5 || bet<=0){
+		if(bet>5 || bet<=0){
 			
 			throw new InvalidAmountException();
 			
 		}
+		
+		if(credit.getCredit()-bet<0)
+			throw new InsufficientFundsException();
+		
 		
 		if(this.gamestate.equals("BET"))
 			this.credit.add(this.pot.withdraw());
@@ -110,6 +115,8 @@ public class VideoPoker {
 		result.updateCredit(this.credit.getCredit());
 		
 		this.gamestate = "HOLD";
+		
+		
 		return result;
 		
 		
@@ -125,7 +132,7 @@ public class VideoPoker {
 		
 	}
 	
-	public String deal() throws InvalidGameStateException, InvalidAmountException{
+	public String deal() throws InvalidGameStateException, InvalidAmountException, InsufficientFundsException, EmptyDeckEception{
 		
 		if(!this.gamestate.equals("BET") && !this.gamestate.equals("HOLD"))
 			
@@ -145,10 +152,10 @@ public class VideoPoker {
 		
 	}
 	
-	protected void drawHand(){
+	protected void drawHand() throws EmptyDeckEception{
 		
 		for(int i=0; i<5; i++)
-		 	this.hand.addCard(this.deck.drawCard());
+			this.hand.addCard(this.deck.drawCard());
 		
 	}
 	
@@ -163,7 +170,12 @@ public class VideoPoker {
 	protected void switchCard(int index){
 		
 		deck.collectCard(this.hand.removeCard(index));
-		hand.addCard(index, this.deck.drawCard());
+		try {
+			hand.addCard(index, this.deck.drawCard());
+		} catch (EmptyDeckEception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

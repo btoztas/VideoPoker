@@ -97,11 +97,11 @@ public class Hand {
 	}
 	
 	
-	void addCard(int index, Card card){
+	public void addCard(int index, Card card){
 		this.hand.add(index, card);
 	}
 	
-	Card removeCard(int index){
+	public Card removeCard(int index){
 		
 		return this.hand.remove(index);
 		

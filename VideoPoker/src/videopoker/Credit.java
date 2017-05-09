@@ -30,7 +30,7 @@ public class Credit {
 	 * @param a		amount of money to add to credit
 	 */
 	
-	void add(int a){
+	public void add(int a){
 		actual_credit = actual_credit + a;
 	}
 	
@@ -39,7 +39,7 @@ public class Credit {
 	 * @return actual_credit	amount of money available at the moment	
 	 */
 	
-	int getCredit(){
+	public int getCredit(){
 		return this.actual_credit;
 	}
 	

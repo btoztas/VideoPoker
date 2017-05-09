@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import deckofcards.EmptyDeckEception;
 import deckofcards.InvalidCardException;
 import videopoker.*;
 import videopoker107DB.VideoPokerType107DB;
@@ -75,7 +76,9 @@ public class Debug extends GameUI {
 		    						System.out.println("b: " + e.getMessage());
 		    					}catch(InvalidAmountException e){
 		    						System.out.println("b: " + e.getMessage());
-		    					}
+		    					} catch (InsufficientFundsException e) {
+		    						System.out.println("b: " + e.getMessage());
+								}
 	    						m=m+1;
 	    					}else{
 	    						try{
@@ -86,8 +89,10 @@ public class Debug extends GameUI {
 		    					}catch(InvalidAmountException e){
 		    						System.out.println("b: " + e.getMessage());
 		    					}catch(NumberFormatException e){
-		    						System.out.println("Invalid credit");
-		    					}
+		    						System.out.println("b: Invalid credit");
+		    					} catch (InsufficientFundsException e) {
+		    						System.out.println("b: " + e.getMessage());
+								}
 	    						m=m+2;
 	    					}
 	    				}catch(ArrayIndexOutOfBoundsException e){
@@ -100,7 +105,12 @@ public class Debug extends GameUI {
 	    					System.out.println("d: " + e.getMessage());
 	    				} catch (InvalidAmountException e) {
 	    					System.out.println("d: " + e.getMessage());
-	    				}
+	    				} catch (InsufficientFundsException e) {
+	    					System.out.println("d: " + e.getMessage());
+						} catch (EmptyDeckEception e) {
+							System.out.println(e.getMessage());
+							System.exit(-1);
+						}
 	    				m=m+1;
 	    			}else if(tokens[m].equals("h")){
     					int h[] = new int[5];
@@ -109,39 +119,47 @@ public class Debug extends GameUI {
     					}
     					int count=0;
     					try{
-    					for(int i=0;i<5;i++){
-    						if((int)tokens[m+i+1].charAt(0)>57 || (int)tokens[m+i+1].charAt(0)==36){
-    							i=5;
-    						}else{
-    							try{
-	    							h[i]=Integer.parseInt(tokens[m+i+1]);
-	    							count++;
-	    						}catch(NumberFormatException e){
-	    							System.out.println("Invalid credit");
-	    							System.exit(-1);
+	    					for(int i=0;i<5;i++){
+	    						if((int)tokens[m+i+1].charAt(0)>57 || (int)tokens[m+i+1].charAt(0)==36){
+	    							i=5;
+	    						}else{
+	    							try{
+		    							h[i]=Integer.parseInt(tokens[m+i+1]);
+		    							count++;
+		    						}catch(NumberFormatException e){
+		    							System.out.println("Invalid credit");
+		    							System.exit(-1);
+		    						}
 	    						}
-    						}
-    					}
+	    					}
     					}catch(ArrayIndexOutOfBoundsException e){
     						
-    					}
+    					}	
     					try{
-    					int [] ho = new int[count];
-    					for(int i=0;h[i]!=0;i++){
-    						//System.out.print(i);
-    						ho[i]=h[i];
-    					}
-    					PlayResult result = videopoker.hold(h);
-    					System.out.println(result.getHand());
-    					if(result.getRes()!=null){
-    						System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
-    					}else{
-    						System.out.println("player loses and his credit is "+ result.getCredit());
-    					}
+    						
+	    					int [] ho = new int[count];
+	    					
+	    					for(int i=0;h[i]!=0;i++){
+	    						//System.out.print(i);
+	    						ho[i]=h[i];
+	    					}
+	    					
+	    					PlayResult result = videopoker.hold(h);
+	    					System.out.println(result.getHand());
+	    					if(result.getRes()!=null){
+	    						System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
+	    					}else{
+	    						System.out.println("player loses and his credit is "+ result.getCredit());
+	    					}
+	    					
     					}catch (InvalidGameStateException e) {
     						System.out.println("h: " + e.getMessage());
     					} catch (InvalidCardIndexException e) {
     						System.out.println("h: " + e.getMessage());
+    					}
+    					if(videopoker.credit()==0){
+    						System.out.println("no more credit");
+    						System.exit(-1);
     					}
     					m = m + count + 1; 
 	    			}else if(tokens[m].equals("$")){

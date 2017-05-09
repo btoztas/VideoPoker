@@ -1,6 +1,8 @@
 package gameUI;
 
 
+import deckofcards.EmptyDeckEception;
+import videopoker.InsufficientFundsException;
 import videopoker.InvalidAmountException;
 import videopoker.InvalidCardIndexException;
 import videopoker.InvalidGameStateException;
@@ -44,9 +46,12 @@ public class Auto extends GameUI {
 				
 			} catch (InvalidGameStateException e) {
 				
-				System.out.println(e.getMessage());
+				System.out.println("b: "+ e.getMessage());
 				System.exit(-1);
 			
+			} catch (InsufficientFundsException e) {
+				System.out.println("b: "+ e.getMessage());
+				System.exit(-1);
 			}
 			
 			try {
@@ -63,6 +68,12 @@ public class Auto extends GameUI {
 				System.out.println("d: " + e.getMessage());
 				System.exit(-1);
 				
+			} catch (InsufficientFundsException e) {
+				System.out.println("d: "+ e.getMessage());
+				System.exit(-1);
+			} catch (EmptyDeckEception e) {
+				System.out.println(e.getMessage());
+				System.exit(-1);
 			}
 			int[] res = null;
 			
@@ -106,6 +117,12 @@ public class Auto extends GameUI {
 				System.out.println("h: " + e.getMessage());
 				System.exit(-1);
 			}
+			
+			if(videopoker.credit()<bet){
+				System.out.println("no more credit");
+				System.exit(-1);
+			}
+				
 			
 		}
 		

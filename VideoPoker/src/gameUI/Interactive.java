@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import deckofcards.EmptyDeckEception;
+import videopoker.InsufficientFundsException;
 import videopoker.InvalidAmountException;
 import videopoker.InvalidCardIndexException;
 import videopoker.InvalidGameStateException;
@@ -51,6 +53,8 @@ public class Interactive extends GameUI {
 						System.out.println("b: " + e.getMessage());
 					}catch(InvalidAmountException e){
 						System.out.println("b: " + e.getMessage());
+					} catch (InsufficientFundsException e) {
+						System.out.println("b: " + e.getMessage());
 					}
 				}else{
 					try{
@@ -62,6 +66,8 @@ public class Interactive extends GameUI {
 						System.out.println("b: " + e.getMessage());
 					}catch(NumberFormatException e){
 						System.out.println("Invalid credit");
+					} catch (InsufficientFundsException e) {
+						System.out.println("b: " + e.getMessage());
 					}
 				}
 				
@@ -72,6 +78,11 @@ public class Interactive extends GameUI {
 					System.out.println("d: " + e.getMessage());
 				} catch (InvalidAmountException e) {
 					System.out.println("d: " + e.getMessage());
+				} catch (InsufficientFundsException e) {
+					System.out.println("d: " + e.getMessage());
+				} catch (EmptyDeckEception e) {
+					System.out.println(e.getMessage());
+					System.exit(-1);
 				}
 				
 			}else if(tokens[0].equals("h")){
@@ -100,6 +111,11 @@ public class Interactive extends GameUI {
 					System.out.println("h: " + e.getMessage());
 				} catch (InvalidCardIndexException e) {
 					System.out.println("h: " + e.getMessage());
+				}
+				
+				if(videopoker.credit()==0){
+					System.out.println("no more credit");
+					System.exit(-1);
 				}
 				
 				

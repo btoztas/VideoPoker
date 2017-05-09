@@ -6,15 +6,15 @@ public class PlayResult {
 	private String res;
 	private int credit;
 	
-	void updateHand(String hand){
+	public void updateHand(String hand){
 		this.hand=hand;
 	}
 	
-	void updateRes(String res){
+	public void updateRes(String res){
 		this.res=res;
 	}
 	
-	void updateCredit(int credit){
+	public void updateCredit(int credit){
 		this.credit=credit;
 	}
 	
