@@ -10,6 +10,11 @@ public abstract class Statistics {
 	private int actual_credit;
 	private int initial_credit;
 	
+	/**
+	 * Constructs an object of type Statistics. Creates an Hash Map according to the given statistic types given by the 
+	 * parameter hands. Additionally it creates two entries in the Hash Map with names "Other" and "Total"
+	 */
+	
 	public Statistics(String[] hands){
 		
 		aMap = new LinkedHashMap<String, Integer>();
@@ -23,11 +28,21 @@ public abstract class Statistics {
 		
 	}
 	
+	/**
+	 * This method increments by one the value of the entry in the Hash Map given by the parameter type
+	 * @param type		type of statistics we wish to increment
+	 */
+	
 	public void putStatistic(String type){
 		
 		this.aMap.put(type, this.aMap.get(type)+1);
 		
 	}
+	
+	/**
+	 * This method returns the value contained in the entry given by the parameter type
+	 * @param type		type of statistics we wish to get
+	 */
 	
 	public int getStatistic(String type){
 		
@@ -35,13 +50,28 @@ public abstract class Statistics {
 		
 	}
 	
+	/**
+	 * This method makes it possible for the user to manipulate how to add a hand type result to the statistics
+	 * @param type		type of hand
+	 */
+	
 	public abstract void addStatistics(String type);
 	
+	
+	/**
+	 * This method updates the field actual_credit of this class with the value inside the object given in parameter credit
+	 * @param credit		actual credit used to update the field
+	 */
 	
 	void updateCredit(int credit){
 		this.actual_credit=credit;
 	}
 	
+	/**
+	 * This method updates the field initial_credit of this class with the value inside the object given 
+	 * in parameter initial_credit
+	 * @param initial_credit		initial credit used to update the field
+	 */
 	
 	void setInitialCredit(int initial_credit){
 		
@@ -49,6 +79,9 @@ public abstract class Statistics {
 		
 	}
 	
+	/**
+	 * This method prints to the command line a structure with the statistics
+	 */
 	
 	public void printStatistics(){
 		int i = 0;
