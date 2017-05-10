@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
+import videopoker.Statistics;
 
 import javax.swing.*;
 
@@ -18,6 +19,7 @@ import videopoker.InvalidAmountException;
 import videopoker.InvalidCardIndexException;
 import videopoker.InvalidGameStateException;
 import videopoker.PlayResult;
+import videopoker.Statistics;
 //import gameUI.teste.CustomMouseListener;
 import videopoker.VideoPoker;
 import videopoker107DB.VideoPokerType107DB;
@@ -40,7 +42,8 @@ public class GameWindow extends JPanel implements ActionListener{
     final static String FRONT = "front";
     final static String BACK = "back";
     final static int NOTCARD =20;
-    String instr = "teste";
+    protected JLabel text3 = new JLabel();
+    String instr = "Credit: ";
     final ImageIcon back = new ImageIcon("backf.png");
     final ImageIcon not = new ImageIcon("cards/advice.png");
 	protected JLabel[] notCard = new JLabel[5];
@@ -49,14 +52,54 @@ public class GameWindow extends JPanel implements ActionListener{
     protected ImageIcon holdImage = new ImageIcon("hold0.png");
     
     public GameWindow(){
+    	/*final ImageIcon bg = new ImageIcon("fundo1.jpg");
+    	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(bg.getIconWidth(),bg.getIconHeight()));
+        layeredPane.setLayout(null);
+        JLabel label = new JLabel(bg);
+        label.setOpaque(true);
+        label.setBounds(0, 0, bg.getIconWidth(),bg.getIconHeight());
+        layeredPane.add(label, new Integer(0));*/
+        
+        JOptionPane box = new JOptionPane();
+        
+        box.setBounds(500,225,200,200);
+        
+        String s = (String)JOptionPane.showInputDialog(
+                box,
+                "Initial Credit:",
+                "VideoPoker",
+                JOptionPane.PLAIN_MESSAGE);
+        
+        /*layeredPane.add(box, 0);
+        add(layeredPane);*/
     	
+    		
     	 setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     	 v = new VideoPoker(1000, new VideoPokerType107DB());
     	 Vector<JPanel> card = new Vector<JPanel>(); 
  	     String state = "hold";
  	     
+ 	     String st = "Statistics";
+ 	     String stat = "<html>Hand<br>Jacks or Better<br>Two Pair<br>Three of a Kind<br>Straight<br>Flush<br>Full House<br>Four of a Kind<br>Straight Flush<br>Royal Flush<br>Other<br>Total<br>Credit</html>";
+ 	     Statistics statist = v.statistics();
+ 	     String statistics= "<html>Nb<br>";
+ 	     System.out.println(statist.getStatistic("Jacks or Better"));
+ 	     statistics = statistics + statist.getStatistic("Jacks or Better") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Two Pair") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Three of a Kind") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Straight") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Flush") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Full House") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Four of a Kind") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Straight Flush") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Royal Flush") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Other") + "<br>";
+ 	     statistics = statistics + statist.getStatistic("Total") + "</html>";
  	     
-         final ImageIcon bg = new ImageIcon("fundo1.jpg");
+ 	     
+         final ImageIcon bg = new ImageIcon("BG1.png");
          
          final ImageIcon adviceButton = new ImageIcon("advice.png");
          final ImageIcon betUp = new ImageIcon("betbut.png");
@@ -72,8 +115,51 @@ public class GameWindow extends JPanel implements ActionListener{
          
          
         
-         JLabel text = new JLabel(instr);
+         
+         
+         
+         
+         
+         
+         
+         
+         
          layeredPane = new JLayeredPane();
+         
+         JLabel text1 = new JLabel(st);
+         text1.setBounds(1070,120+32,200,50);
+         text1.setBackground(Color.white);
+         text1.setOpaque(false);
+         text1.setForeground(Color.gray);
+         text1.setFont(new Font("Impact", Font.PLAIN, 23));
+         layeredPane.add(text1);
+         
+         
+         JLabel text2 = new JLabel(stat);
+         text2.setBounds(1070,-70+120+32-10,600,500);
+         text2.setBackground(Color.white);
+         text2.setForeground(Color.gray);
+         text2.setOpaque(false);
+         text2.setFont(new Font("Impact", Font.PLAIN, 15));
+         layeredPane.add(text2);
+         
+         text3 = new JLabel(statistics);
+         text3.setBounds(1200,-79+120-10+32,600,500);
+         text3.setBackground(Color.white);
+         text3.setForeground(Color.gray);
+         text3.setOpaque(false);
+         text3.setFont(new Font("Impact", Font.PLAIN, 15));
+         layeredPane.add(text3);
+         
+         
+         
+         JLabel text = new JLabel(instr + Integer.parseInt(s));
+         text.setBounds(460,10,400,100);
+         text.setBackground(Color.white);
+         text.setOpaque(false);
+         text.setFont(new Font("Impact", Font.PLAIN, 40));
+         layeredPane.add(text,new Integer(9));
+         
          layeredPane.setPreferredSize(new Dimension(bg.getIconWidth(),bg.getIconHeight()));
          
          layeredPane.setLayout(null);
@@ -182,15 +268,12 @@ public class GameWindow extends JPanel implements ActionListener{
          hold.addActionListener(this);
          layeredPane.add(hold, new Integer(8));
          
-         text.setBounds(500,10,400,15);
-         text.setBackground(Color.white);
-         text.setOpaque(false);
-         layeredPane.add(text,new Integer(9));
+         
          for(int i=1;i<6;i++){
         	 hand[i-1] = createCard(holdImage,"backf",origin,i-1);
          }
-         
          add(layeredPane);
+         
          
        
     }
@@ -330,6 +413,25 @@ public class GameWindow extends JPanel implements ActionListener{
         	for(int i = 0; i<5 ; i++){
         		holdedCards[i]=false;
         	}
+        	
+        	Statistics statist = v.statistics();
+        	String statistics= "<html>Nb<br>";
+    	    System.out.println(statist.getStatistic("Jacks or Better"));
+    	    statistics = statistics + statist.getStatistic("Jacks or Better") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Two Pair") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Three of a Kind") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Straight") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Flush") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Full House") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Four of a Kind") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Straight Flush") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Royal Flush") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Other") + "<br>";
+    	    statistics = statistics + statist.getStatistic("Total") + "</html>";
+    	    
+    	    //JLabel text3 = new JLabel(statistics);
+    	    text3.setText(statistics);
+            //layeredPane.add(text3);
         	
         }
         	
