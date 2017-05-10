@@ -8,7 +8,7 @@ public class Pot {
 	 * Constructs an object of type Pot. Initializes the object value with 0
 	 */
 	
-	Pot(){
+	public Pot(){
 		value = 0;
 	}
 	
@@ -18,7 +18,7 @@ public class Pot {
 	 * @param bet		amount to add to the pot
 	 */
 	
-	void add(int bet){
+	public void add(int bet){
 		value = bet;
 	}
 	
@@ -27,7 +27,7 @@ public class Pot {
 	 * @param out		amount of money that was in the pot
 	 */
 	
-	int withdraw(){
+	public int withdraw(){
 		int out = value;
 		value = 0;
 		return out;

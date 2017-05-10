@@ -12,7 +12,7 @@ public class Credit {
 	 * @param initial_credit	Initial Credit
 	 */
 	
-	Credit(int c){
+	public Credit(int c){
 		initial_credit = actual_credit = c;
 	}
 	
@@ -21,7 +21,7 @@ public class Credit {
 	 * @param r		amount of money to withdraw from credit
 	 */
 	
-	void withdraw(int r){
+	public void withdraw(int r){
 		actual_credit = actual_credit - r;
 	}
 	
@@ -48,7 +48,7 @@ public class Credit {
 	 * @return actual_credit	initial amount of money
 	 */
 	
-	int getInitialCredit(){
+	public int getInitialCredit(){
 		return this.initial_credit;
 	}
 }

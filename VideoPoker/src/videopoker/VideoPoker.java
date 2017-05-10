@@ -17,7 +17,7 @@ public class VideoPoker {
 	protected int lastbet;
 
 	/**
-	 * Constructs a new Video Poker, game of a given type, initiated with a credit amount.
+	 * Constructs a new Video Poker game, of a given type, initiated with a credit amount.
 	 * In order to construct a new Video Poker, the programmer must first implement a VideoPokerType.
 	 * 
 	 * @param credit   Credit amount to initiate the game with
@@ -36,6 +36,15 @@ public class VideoPoker {
 		this.gamestate = "IDLE";
 	}
 	
+	/**
+	 * With this method, you can place a bet on VideoPoker, with a given credit. 
+	 * <br>Bets can be only between 1 and 5 credits.
+	 * 
+	 * @param bet	Bet to be places
+	 * @throws InvalidAmountException	Thrown when the amount to bet is greater than 5 or lesser than 1 credits
+	 * @throws InvalidGameStateException	Thrown when the game state doesn't allow a bet
+	 * @throws InsufficientFundsException	Thrown when the amount to bet exceed the credit funds
+	 */
 	public void bet(int bet) throws InvalidAmountException, InvalidGameStateException, InsufficientFundsException{
 		
 		
@@ -65,12 +74,23 @@ public class VideoPoker {
 			
 	
 	}
-	
+	/**
+	 * Returns the actual credit the player has
+	 * 
+	 * 
+	 * @return	credit
+	 */
 	public int credit(){
 		
 		return this.credit.getCredit();
 	}
 	
+	/**
+	 * Returns an object of type statistics with the game statistics.
+	 * 
+	 * @return Object of type Statistics
+	 * @see videopoker.Statistics.java
+	 */
 	public Statistics statistics(){
 		
 		this.stat.updateCredit(credit.getCredit());

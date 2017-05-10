@@ -12,7 +12,7 @@ public class PlayResult {
 	 * @param hand		object used to update the field hand
 	 */
 	
-	void updateHand(String hand){
+	public void updateHand(String hand){
 		this.hand=hand;
 	}
 	
@@ -21,7 +21,7 @@ public class PlayResult {
 	 * @param res		object used to update the field res
 	 */
 	
-	void updateRes(String res){
+	public void updateRes(String res){
 		this.res=res;
 	}
 	
@@ -30,7 +30,7 @@ public class PlayResult {
 	 * @param credit		object used to update the field credit
 	 */
 	
-	void updateCredit(int credit){
+	public void updateCredit(int credit){
 		this.credit=credit;
 	}
 	

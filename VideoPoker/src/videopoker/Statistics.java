@@ -63,7 +63,7 @@ public abstract class Statistics {
 	 * @param credit		actual credit used to update the field
 	 */
 	
-	void updateCredit(int credit){
+	public void updateCredit(int credit){
 		this.actual_credit=credit;
 	}
 	
@@ -73,7 +73,7 @@ public abstract class Statistics {
 	 * @param initial_credit		initial credit used to update the field
 	 */
 	
-	void setInitialCredit(int initial_credit){
+	public void setInitialCredit(int initial_credit){
 		
 		this.initial_credit = initial_credit;
 		

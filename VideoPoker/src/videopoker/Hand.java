@@ -15,7 +15,7 @@ public class Hand {
 	 * Constructs an object of type Hand. Initializes a new empty object hand of type LinkedList of Cards
 	 */
 	
-	Hand(){
+	public Hand(){
 		
 		hand = new LinkedList<Card>();
 		
@@ -122,7 +122,7 @@ public class Hand {
 	 * @param card		Card to be added to the hand
 	 */
 		
-	void addCard(Card card){
+	public void addCard(Card card){
 		this.hand.add(card);
 	}
 	
@@ -142,7 +142,7 @@ public class Hand {
 	 * @param index		position of the card we wish to extract from the hand
 	 */
 	
-	Card removeCard(int index){
+	public Card removeCard(int index){
 		
 		return this.hand.remove(index);
 		
@@ -153,7 +153,7 @@ public class Hand {
 	 * @param ver		boolean with the result of the verification
 	 */
 	
-	boolean existsHand(){
+	public boolean existsHand(){
 		if(this.hand.isEmpty()==true)
 			return false;
 		return true;
