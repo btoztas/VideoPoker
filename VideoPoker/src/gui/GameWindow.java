@@ -42,6 +42,7 @@ public class GameWindow extends JPanel implements ActionListener{
     protected JLabel text3 = new JLabel();
     String instr = "Credit: ";
     JLabel text = new JLabel();
+    JLabel winim = new JLabel();
     final ImageIcon back = new ImageIcon("backf.png");
     final ImageIcon not = new ImageIcon("cards/advice.png");
 	protected JLabel[] notCard = new JLabel[5];
@@ -50,19 +51,12 @@ public class GameWindow extends JPanel implements ActionListener{
 	protected int betAmount = 5;
 	protected int credit = 0;
 	protected boolean b = false;
+	protected boolean d = false;
+	protected JLabel[] coin = new JLabel[5];
 	
     protected ImageIcon holdImage = new ImageIcon("hold0.png");
     
     public GameWindow(){
-    	/*final ImageIcon bg = new ImageIcon("fundo1.jpg");
-    	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(bg.getIconWidth(),bg.getIconHeight()));
-        layeredPane.setLayout(null);
-        JLabel label = new JLabel(bg);
-        label.setOpaque(true);
-        label.setBounds(0, 0, bg.getIconWidth(),bg.getIconHeight());
-        layeredPane.add(label, new Integer(0));*/
         
         JOptionPane box = new JOptionPane();
         
@@ -82,7 +76,6 @@ public class GameWindow extends JPanel implements ActionListener{
  	     String stat = "<html>Hand<br>Jacks or Better<br>Two Pair<br>Three of a Kind<br>Straight<br>Flush<br>Full House<br>Four of a Kind<br>Straight Flush<br>Royal Flush<br>Other<br>Total<br>Credit</html>";
  	     Statistics statist = v.statistics();
  	     String statistics= "<html>Nb<br>";
- 	     System.out.println(statist.getStatistic("Jacks or Better"));
  	     statistics = statistics + statist.getStatistic("Jacks or Better") + "<br>";
  	     statistics = statistics + statist.getStatistic("Two Pair") + "<br>";
  	     statistics = statistics + statist.getStatistic("Three of a Kind") + "<br>";
@@ -102,6 +95,7 @@ public class GameWindow extends JPanel implements ActionListener{
          final ImageIcon betUp = new ImageIcon("betbut.png");
          final ImageIcon betBottom = new ImageIcon("betbot.png");
          final ImageIcon holdButton = new ImageIcon("hold.png");
+         final ImageIcon coin1 = new ImageIcon("chips/5.png");
          
          
         
@@ -115,6 +109,15 @@ public class GameWindow extends JPanel implements ActionListener{
          
          
          layeredPane = new JLayeredPane();
+         
+         for(int i =0 ; i<5 ;i++){
+        	 coin[i] = new JLabel(new ImageIcon("chips/"+(i+1)+".png"));
+        	 coin[i].setBounds(265, 485, coin1.getIconWidth(), coin1.getIconHeight());
+        	 coin[i].setOpaque(false);
+        	 coin[i].setVisible(false);
+        	 layeredPane.add(coin[i]);
+         }
+         
          
          JLabel text1 = new JLabel(st);
          text1.setBounds(1070,120+32,200,50);
@@ -144,10 +147,10 @@ public class GameWindow extends JPanel implements ActionListener{
          
          
          text = new JLabel(instr + v.credit());
-         text.setBounds(460,10,400,100);
+         text.setBounds(130,460,400,100);
          text.setBackground(Color.white);
          text.setOpaque(false);
-         text.setFont(new Font("Impact", Font.PLAIN, 40));
+         text.setFont(new Font("Impact", Font.PLAIN, 25));
          layeredPane.add(text,new Integer(9));
          
          layeredPane.setPreferredSize(new Dimension(bg.getIconWidth(),bg.getIconHeight()));
@@ -228,20 +231,38 @@ public class GameWindow extends JPanel implements ActionListener{
          for(int i=1;i<6;i++){
         	 hand[i-1] = createCard(holdImage,"backf",origin,i-1);
          }
+         winim=new JLabel();
+         winim.setIcon(new ImageIcon("royalflush.png"));
+      	 winim.setBounds(200,50,800,100);
+      	 winim.setVisible(false);
+      	 layeredPane.add(winim, new Integer(100));
          add(layeredPane);
          
          
        
     }
     
+    public void paintCoins(int bet){
+
+    	for(int i = 0 ; i<5 ; i++){
+    		if(coin[i].isVisible()){
+    			coin[i].setVisible(false);
+					i=5;
+				}
+    	}
+    	coin[bet].setVisible(true);
+    }
+    
     public void actionPerformed(ActionEvent e) {
         if ("deal".equals(e.getActionCommand())){
+        	advice.setEnabled(true);
+        	d=true;
         	Point origin = new Point(129, 200);
         	String Hand;
 			try {
 				Hand = v.deal();
+				text.setText(instr + v.credit());
 				b = true;
-				System.out.println(Hand);
 	          	 for (int i = 1; i <6; i++) {
 	          		 int index = (i*2)+(i-3);
 	          		 String cardName = Hand.substring(index,index+2);
@@ -256,6 +277,8 @@ public class GameWindow extends JPanel implements ActionListener{
 	                 cardsLayout[i-1].show(hand[i-1], FRONT);
 	                 origin.x += 137;
 	          	 }
+	          	 winim.setIcon(new ImageIcon("goodluck.png"));
+	          	 winim.setVisible(true);
 			} catch (InvalidGameStateException e1) {
 				
 			} catch (InvalidAmountException e1) {
@@ -264,14 +287,19 @@ public class GameWindow extends JPanel implements ActionListener{
 			}
         }else if("bet1".equals(e.getActionCommand())){
         	betAmount = 1;
+        	paintCoins(0);
         }else if("bet2".equals(e.getActionCommand())){
         	betAmount = 2;
+        	paintCoins(1);
         }else if("bet3".equals(e.getActionCommand())){
         	betAmount = 3;
+        	paintCoins(2);
         }else if("bet4".equals(e.getActionCommand())){
         	betAmount = 4;
+        	paintCoins(3);
         }else if("bet5".equals(e.getActionCommand())){
         	betAmount = 5;
+        	paintCoins(4);
         }else if("bet".equals(e.getActionCommand())){
         	try {
 				v.bet(betAmount);
@@ -281,6 +309,8 @@ public class GameWindow extends JPanel implements ActionListener{
 			} catch (InsufficientFundsException e1) {
 			}
         }else if("hold".equals(e.getActionCommand())){
+        	advice.setEnabled(false);
+        	d=false;
         	int j=0;
         	int count=0;
         	for(int i = 0; i<5 ; i++){
@@ -301,7 +331,6 @@ public class GameWindow extends JPanel implements ActionListener{
         		b = false;
 				p = v.hold(toHold);
 				String Hand = p.getHand();
-				System.out.println(Hand);
 	          	baralhoButton.setEnabled(false);
 	          	 for (int i = 1; i <6; i++) {
 	          		 int index = (i*2)+(i-3);
@@ -332,6 +361,46 @@ public class GameWindow extends JPanel implements ActionListener{
 	                 cardsLayout[i-1].show(hand[i-1], FRONT);
 	                 origin.x += 137;
 	          	 }
+	          	 String win = p.getRes();
+	          	 winim.setVisible(true);
+	          	 if(win!=null){
+		          	 if(win.equals("Royal Flush")){
+			          	 winim.setIcon(new ImageIcon("royalflush.png"));
+		          	 }
+		          	 else if(win.equals("Straight Flush")){
+			          	 winim.setIcon(new ImageIcon("straightflush.png"));
+		          	 }
+		          	 else if(win.equals("Four Aces")){
+			          	 winim.setIcon(new ImageIcon("fouraces.png"));
+		          	 }
+		          	 else if(win.equals("Four 2-4")){
+			          	 winim.setIcon(new ImageIcon("four2-4.png"));
+		          	 }
+		          	 else if(win.equals("Four 5-K")){
+			          	 winim.setIcon(new ImageIcon("four5-K.png"));
+		          	 }
+		          	 else if(win.equals("Full House")){
+			          	 winim.setIcon(new ImageIcon("fullhouse.png"));
+		          	 }
+		          	 else if(win.equals("Flush")){
+			          	 winim.setIcon(new ImageIcon("flush.png"));
+		          	 }
+		          	 else if(win.equals("Straight")){
+			          	 winim.setIcon(new ImageIcon("straight.png"));
+		          	 }
+		          	 else if(win.equals("Three of a Kind")){
+			          	 winim.setIcon(new ImageIcon("threeofakind.png"));
+		          	 }
+		          	 else if(win.equals("Two Pair")){
+			          	 winim.setIcon(new ImageIcon("twopair.png"));
+		          	 }
+		          	 else if(win.equals("Jacks or Better")){
+			          	 winim.setIcon(new ImageIcon("jacksorbetter.png"));
+		          	 }
+	          	 }else{
+		          	 winim.setIcon(new ImageIcon("lost.png"));
+	          	 }
+	          	 
 			} catch (InvalidCardIndexException e1) {
 				
 			} catch (InvalidGameStateException e1) {
@@ -344,7 +413,6 @@ public class GameWindow extends JPanel implements ActionListener{
         	
         	Statistics statist = v.statistics();
         	String statistics= "<html>Nb<br>";
-    	    System.out.println(statist.getStatistic("Jacks or Better"));
     	    statistics = statistics + statist.getStatistic("Jacks or Better") + "<br>";
     	    statistics = statistics + statist.getStatistic("Two Pair") + "<br>";
     	    statistics = statistics + statist.getStatistic("Three of a Kind") + "<br>";
@@ -378,7 +446,6 @@ public class GameWindow extends JPanel implements ActionListener{
     	holdCardButton[i].setBounds(origin.x, origin.y, 135, 208);
     	holdCardButton[i].setVisible(true);
     	
-    	System.out.println("Card ="+front);
     	
     	card.add(holdCardButton[i]);
     	card.add(cardHolded[i]);
@@ -411,34 +478,36 @@ public class GameWindow extends JPanel implements ActionListener{
 		      public void mouseClicked(MouseEvent e) {
 		      }
 		      public void mousePressed(MouseEvent e) {    	  
-		    	
-		    	  boolean[] choose = new boolean[5];
-		    	  for(int i =0 ; i<5 ; i++)
-		    		  choose[i] = false;
-		    	  
-		    	  try {
-					for(int i = 0; i<v.advice().length ; i++)
-						  choose[v.advice()[i]-1]=true;
-				} catch (InvalidGameStateException e1) {
-				}
-		    	  
-		    	  a = 0 ;
-		    	  for(int i = 0; i<5; i++){
-		    		  if(!choose[i]){
-		    			  notCard[a] = new JLabel(not);
-		    			  notCard[a].setOpaque(false);
-		    			  notCard[a].setBounds(hand[i].getBounds());
-		    			  layeredPane.add(notCard[a], new Integer(11+i));
-		    			  a++;
-		    		  }
-		    	  } 	
+		    	  if(d==true){
+			    	  boolean[] choose = new boolean[5];
+			    	  for(int i =0 ; i<5 ; i++)
+			    		  choose[i] = false;
+			    	  
+			    	  try {
+						for(int i = 0; i<v.advice().length ; i++)
+							  choose[v.advice()[i]-1]=true;
+					} catch (InvalidGameStateException e1) {
+					}
+			    	  
+			    	  a = 0 ;
+			    	  for(int i = 0; i<5; i++){
+			    		  if(!choose[i]){
+			    			  notCard[a] = new JLabel(not);
+			    			  notCard[a].setOpaque(false);
+			    			  notCard[a].setBounds(hand[i].getBounds());
+			    			  layeredPane.add(notCard[a], new Integer(11+i));
+			    			  a++;
+			    		  }
+			    	  } 
+		    	  }
 		      }
 		      public void mouseReleased(MouseEvent e) {
-		    	  System.out.println(a);
-		    	  a--;
-		    	  while(a>-1){
-		    		  notCard[a].setVisible(false);
-		    		  a--;
+		    	  if(d==true){
+			    	  a--;
+			    	  while(a>-1){
+			    		  notCard[a].setVisible(false);
+			    		  a--;
+			    	  }
 		    	  }
 		      }
 		      public void mouseEntered(MouseEvent e) {
