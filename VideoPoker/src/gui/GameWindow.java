@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Vector;
 import videopoker.Statistics;
 
 import javax.swing.*;
@@ -31,8 +30,6 @@ public class GameWindow extends JPanel implements ActionListener{
 	protected VideoPoker v; 
 	
 	protected JButton advice, hold, betUpButton, baralhoButton;
-	//protected Vector<JPanel> hand = new Vector<JPanel>(); 
-	//protected Vector<CardLayout> cardsLayout = new Vector<CardLayout>();
 	protected JPanel[] hand = new JPanel[5];
 	protected JLabel[] cardHolded = new JLabel[5];
 	protected JPanel moving = new JPanel();
@@ -44,11 +41,16 @@ public class GameWindow extends JPanel implements ActionListener{
     final static int NOTCARD =20;
     protected JLabel text3 = new JLabel();
     String instr = "Credit: ";
+    JLabel text = new JLabel();
     final ImageIcon back = new ImageIcon("backf.png");
     final ImageIcon not = new ImageIcon("cards/advice.png");
 	protected JLabel[] notCard = new JLabel[5];
 	protected JButton[] holdCardButton = new JButton[5];
-
+	protected JButton[] bet = new JButton[5];
+	protected int betAmount = 5;
+	protected int credit = 0;
+	protected boolean b = false;
+	
     protected ImageIcon holdImage = new ImageIcon("hold0.png");
     
     public GameWindow(){
@@ -71,15 +73,10 @@ public class GameWindow extends JPanel implements ActionListener{
                 "Initial Credit:",
                 "VideoPoker",
                 JOptionPane.PLAIN_MESSAGE);
-        
-        /*layeredPane.add(box, 0);
-        add(layeredPane);*/
-    	
+        credit = Integer.parseInt(s);
     		
     	 setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    	 v = new VideoPoker(1000, new VideoPokerType107DB());
-    	 Vector<JPanel> card = new Vector<JPanel>(); 
- 	     String state = "hold";
+    	 v = new VideoPoker(credit, new VideoPokerType107DB());
  	     
  	     String st = "Statistics";
  	     String stat = "<html>Hand<br>Jacks or Better<br>Two Pair<br>Three of a Kind<br>Straight<br>Flush<br>Full House<br>Four of a Kind<br>Straight Flush<br>Royal Flush<br>Other<br>Total<br>Credit</html>";
@@ -104,14 +101,7 @@ public class GameWindow extends JPanel implements ActionListener{
          final ImageIcon adviceButton = new ImageIcon("advice.png");
          final ImageIcon betUp = new ImageIcon("betbut.png");
          final ImageIcon betBottom = new ImageIcon("betbot.png");
-         final ImageIcon bet1 = new ImageIcon("1.png");
-         final ImageIcon bet2 = new ImageIcon("2.png");
-         final ImageIcon bet3 = new ImageIcon("3.png");
-         final ImageIcon bet4 = new ImageIcon("4.png");
-         final ImageIcon bet5 = new ImageIcon("5.png");
          final ImageIcon holdButton = new ImageIcon("hold.png");
-         final ImageIcon not = new ImageIcon("cards/advice.png");
-         //final ImageIcon holdImage = new ImageIcon("hold0.png");
          
          
         
@@ -153,7 +143,7 @@ public class GameWindow extends JPanel implements ActionListener{
          
          
          
-         JLabel text = new JLabel(instr + Integer.parseInt(s));
+         text = new JLabel(instr + v.credit());
          text.setBounds(460,10,400,100);
          text.setBackground(Color.white);
          text.setOpaque(false);
@@ -166,19 +156,15 @@ public class GameWindow extends JPanel implements ActionListener{
          
          Point origin = new Point(129, 200);
          JLabel label = new JLabel(bg);
-         //label.setVerticalAlignment(JLabel.TOP);
-         //label.setHorizontalAlignment(JLabel.LEFT);
          label.setOpaque(true);
          label.setBounds(0, 0, bg.getIconWidth(),bg.getIconHeight());
          layeredPane.add(label, new Integer(0));         
          
 
          baralhoButton = new JButton(back);
-         //baralhoButton.setIcon(back);
          baralhoButton.setBounds(870, origin.y-1, 135, 208);
          baralhoButton.setBackground(Color.black);
          baralhoButton.setOpaque(false);
-         //baralhoButton.setBorderPainted(false);
          
          baralhoButton.setMnemonic(KeyEvent.VK_D);
          baralhoButton.setActionCommand("deal");
@@ -194,8 +180,8 @@ public class GameWindow extends JPanel implements ActionListener{
          
          
          betUpButton = new JButton(betUp);
-         betUpButton.setVerticalAlignment(JButton.CENTER);
-         betUpButton.setHorizontalAlignment(JButton.CENTER);
+         betUpButton.setActionCommand("bet");
+         betUpButton.addActionListener(this);
          betUpButton.setOpaque(true);
          betUpButton.setBounds(397,468,110,45);
          layeredPane.add(betUpButton, new Integer(7));
@@ -207,51 +193,24 @@ public class GameWindow extends JPanel implements ActionListener{
          betBottomButton.setBounds(397, 512, 110, 43);
          layeredPane.add(betBottomButton, new Integer(8));
          
-         JButton betone = new JButton(bet1);
-         betone.setVerticalAlignment(JButton.CENTER);
-         betone.setHorizontalAlignment(JButton.CENTER);
-         betone.setOpaque(true);
-         betone.setBounds(398,532,20,23);
-         layeredPane.add(betone, new Integer(9));
-         
-         JButton bettwo = new JButton(bet2);
-         bettwo.setVerticalAlignment(JButton.CENTER);
-         bettwo.setHorizontalAlignment(JButton.CENTER);
-         bettwo.setOpaque(true);
-         bettwo.setBounds(420,532,21,23);
-         layeredPane.add(bettwo, new Integer(10));
+         for(int i =0; i<5;i++){
+        	 bet[i]=new JButton();
+        	 bet[i].setIcon(new ImageIcon((i+1)+".png"));
+        	 bet[i].setOpaque(true);
+        	 bet[i].setBounds(398+(22*i),532,20,23);
+        	 bet[i].setActionCommand("bet"+(i+1));
+        	 bet[i].addActionListener(this);
+        	 layeredPane.add(bet[i], new Integer(9));
+         }
          
          
-         JButton betthree = new JButton(bet3);
-         betthree.setVerticalAlignment(JButton.CENTER);
-         betthree.setHorizontalAlignment(JButton.CENTER);
-         betthree.setOpaque(true);
-         betthree.setBounds(443,532,20,23);
-         layeredPane.add(betthree, new Integer(9));
          
-         JButton betfour = new JButton(bet4);
-         betfour.setVerticalAlignment(JButton.CENTER);
-         betfour.setHorizontalAlignment(JButton.CENTER);
-         betfour.setOpaque(true);
-         betfour.setBounds(465,532,20,23);
-         layeredPane.add(betfour, new Integer(9));
-         
-         JButton betfive = new JButton(bet5);
-         betfive.setVerticalAlignment(JButton.CENTER);
-         betfive.setHorizontalAlignment(JButton.CENTER);
-         betfive.setOpaque(true);
-         betfive.setBounds(487,532,20,23);
-         layeredPane.add(betfive, new Integer(9));
          
          
          advice = new JButton(adviceButton);
          advice.setMnemonic(KeyEvent.VK_A);
          advice.setActionCommand("advice");
          advice.setToolTipText("Click to get a hint");
-         //baralhoButton.setEnabled(true);
-         //advice.setVerticalAlignment(JButton.CENTER);
-        // advice.setHorizontalAlignment(JButton.CENTER);
-        // advice.setOpaque(true);
          advice.setBounds(553,468,110,87);
          advice.addActionListener(this);
          advice.addMouseListener(new adviceMouseListener());
@@ -259,9 +218,6 @@ public class GameWindow extends JPanel implements ActionListener{
          layeredPane.add(advice, new Integer(7));
          
          hold = new JButton(holdButton);
-        // hold.setVerticalAlignment(JButton.CENTER);
-         //hold.setHorizontalAlignment(JButton.CENTER);
-         //hold.setOpaque(true);
          hold.setMnemonic(KeyEvent.VK_H);
          hold.setActionCommand("hold");         
          hold.setBounds(709,468,110,87);
@@ -281,42 +237,16 @@ public class GameWindow extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if ("deal".equals(e.getActionCommand())){
         	Point origin = new Point(129, 200);
-        	try {
-				v.bet(5);
-			} catch (InvalidAmountException e2) {
-				// TODO Auto-generated catch block
-			} catch (InvalidGameStateException e2) {
-				// TODO Auto-generated catch block
-			} catch (InsufficientFundsException e2) {
-				// TODO Auto-generated catch block
-			}
         	String Hand;
-        	System.out.println("ola");
 			try {
 				Hand = v.deal();
+				b = true;
 				System.out.println(Hand);
-	          	baralhoButton.setEnabled(false);
-	          	//hand = new Vector<JPanel>(); 
 	          	 for (int i = 1; i <6; i++) {
 	          		 int index = (i*2)+(i-3);
 	          		 String cardName = Hand.substring(index,index+2);
-	          		 int k = 0;
 	          		 layeredPane.remove(hand[i-1]);
 	          		 hand[i-1] = createCard(holdImage,cardName,origin,i-1);
-	          		 /*while(k<137){
-	          			moving = createCard(back,"backf.png",origin,i-1);
-	          			layeredPane.add(moving, 0);
-	          			//cardsLayout[i-1] = (CardLayout) hand[i-1].getLayout();
-		                //cardsLayout[i-1].show(hand[i-1], FRONT);
-	          			origin.x += 1;
-	          			try {
-							Thread.sleep(3);
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-	          			k++;
-	          		 }*/
 	          		 holdMouse = new holdMouseListener();
 	          		 holdMouse.a=i-1;
 	          		 holdMouse.holded=0;
@@ -327,17 +257,30 @@ public class GameWindow extends JPanel implements ActionListener{
 	                 origin.x += 137;
 	          	 }
 			} catch (InvalidGameStateException e1) {
-				// TODO Auto-generated catch block
 				
 			} catch (InvalidAmountException e1) {
-				// TODO Auto-generated catch block
 			} catch (InsufficientFundsException e1) {
-				// TODO Auto-generated catch block
 			} catch (EmptyDeckEception e1) {
-				// TODO Auto-generated catch block
+			}
+        }else if("bet1".equals(e.getActionCommand())){
+        	betAmount = 1;
+        }else if("bet2".equals(e.getActionCommand())){
+        	betAmount = 2;
+        }else if("bet3".equals(e.getActionCommand())){
+        	betAmount = 3;
+        }else if("bet4".equals(e.getActionCommand())){
+        	betAmount = 4;
+        }else if("bet5".equals(e.getActionCommand())){
+        	betAmount = 5;
+        }else if("bet".equals(e.getActionCommand())){
+        	try {
+				v.bet(betAmount);
+				text.setText(instr + v.credit());
+			} catch (InvalidAmountException e1) {
+			} catch (InvalidGameStateException e1) {
+			} catch (InsufficientFundsException e1) {
 			}
         }else if("hold".equals(e.getActionCommand())){
-        	advice.setEnabled(false);
         	int j=0;
         	int count=0;
         	for(int i = 0; i<5 ; i++){
@@ -355,15 +298,14 @@ public class GameWindow extends JPanel implements ActionListener{
         	Point origin = new Point(129, 200);
         	PlayResult p;
         	try {
+        		b = false;
 				p = v.hold(toHold);
 				String Hand = p.getHand();
 				System.out.println(Hand);
 	          	baralhoButton.setEnabled(false);
-	          	//hand = new Vector<JPanel>(); 
 	          	 for (int i = 1; i <6; i++) {
 	          		 int index = (i*2)+(i-3);
 	          		 String cardName = Hand.substring(index,index+2);
-	          		 int k = 0;
 	          		 layeredPane.remove(hand[i-1]);
 	          		 JLabel cardFront = new JLabel(new ImageIcon ("cards/"+cardName+".jpg"));
 	          		 cardHolded[i-1] = new JLabel(new ImageIcon ("hold1.png"));
@@ -373,28 +315,14 @@ public class GameWindow extends JPanel implements ActionListener{
 	            	 holdCardButton[i-1] = new JButton(holdImage);
 	            	 holdCardButton[i-1].setOpaque(false);
 	            	 holdCardButton[i-1].setBounds(origin.x, origin.y, 135, 208);
-	            	 holdCardButton[i-1].setVisible(true);
+	            	 holdCardButton[i-1].setVisible(false);
 	            	 hand[i-1].add(holdCardButton[i-1]);
 	             	 hand[i-1].add(cardHolded[i-1]);
-	          		 hand[i-1].add(cardFront, FRONT);// = createCard(holdImage,cardName,origin,i-1);
+	          		 hand[i-1].add(cardFront, FRONT);
 	          		 hand[i-1].setName(cardName);
 	          		 hand[i-1].setOpaque(false);
 	          		 hand[i-1].setBounds(origin.x, origin.y, 135, 208);
 	          		 hand[i-1].setVisible(true);
-	          		 /*while(k<137){
-	          			moving = createCard(back,"backf.png",origin,i-1);
-	          			layeredPane.add(moving, 0);
-	          			//cardsLayout[i-1] = (CardLayout) hand[i-1].getLayout();
-		                //cardsLayout[i-1].show(hand[i-1], FRONT);
-	          			origin.x += 1;
-	          			try {
-							Thread.sleep(3);
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-	          			k++;
-	          		 }*/
 	          		 holdMouse = new holdMouseListener();
 	          		 holdMouse.a=i-1;
 	          		 holdMouse.holded=0;
@@ -429,9 +357,8 @@ public class GameWindow extends JPanel implements ActionListener{
     	    statistics = statistics + statist.getStatistic("Other") + "<br>";
     	    statistics = statistics + statist.getStatistic("Total") + "</html>";
     	    
-    	    //JLabel text3 = new JLabel(statistics);
     	    text3.setText(statistics);
-            //layeredPane.add(text3);
+    	    text.setText(instr + v.credit());
         	
         }
         	
@@ -458,9 +385,6 @@ public class GameWindow extends JPanel implements ActionListener{
     	card.add(cardFront, FRONT);
     	
     	card.setName(front);
-    	
-       // card.setVerticalAlignment(JLabel.TOP);
-       // card.setHorizontalAlignment(JLabel.CENTER);
     	card.setOpaque(false);
         card.setBounds(origin.x, origin.y, 135, 208);
         
@@ -496,7 +420,6 @@ public class GameWindow extends JPanel implements ActionListener{
 					for(int i = 0; i<v.advice().length ; i++)
 						  choose[v.advice()[i]-1]=true;
 				} catch (InvalidGameStateException e1) {
-					// TODO Auto-generated catch block
 				}
 		    	  
 		    	  a = 0 ;
@@ -535,14 +458,16 @@ public class GameWindow extends JPanel implements ActionListener{
 		    	
 		      }
 		      public void mouseReleased(MouseEvent e) {
-		    	  holded++;
-		    	  if(!(holded%2==0)){
-		    		  cardHolded[a].setOpaque(false);
-			    	  cardHolded[a].setVisible(true);
-			    	  holdedCards[a]=true;
-		    	  }else{
-		    		  cardHolded[a].setVisible(false);
-		    		  holdedCards[a]=false;
+		    	  if(b == true){
+			    	  holded++;
+			    	  if(!(holded%2==0)){
+			    		  cardHolded[a].setOpaque(false);
+				    	  cardHolded[a].setVisible(true);
+				    	  holdedCards[a]=true;
+			    	  }else{
+			    		  cardHolded[a].setVisible(false);
+			    		  holdedCards[a]=false;
+			    	  }
 		    	  }
 		      }
 		      public void mouseEntered(MouseEvent e) {
