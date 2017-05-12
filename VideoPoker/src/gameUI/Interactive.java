@@ -145,6 +145,9 @@ public class Interactive extends GameUI {
 					System.out.println("a: " + e.getMessage());
 				}
 				
+			}else if(tokens[0].equals("q")){
+				System.out.println("Goodbye");
+				System.exit(0);
 			}else{
 				System.out.println(tokens[0]+": invalid option");
 			}

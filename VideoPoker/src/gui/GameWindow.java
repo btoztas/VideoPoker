@@ -627,8 +627,10 @@ public class GameWindow extends JPanel implements ActionListener{
 			    		  choose[i] = false;
 			    	  
 			    	  try {
-						for(int i = 0; i<v.advice().length ; i++)
-							  choose[v.advice()[i]-1]=true;
+			    		if(v.advice()!=null){
+							for(int i = 0; i<v.advice().length ; i++)
+								  choose[v.advice()[i]-1]=true;
+			    		}
 					} catch (InvalidGameStateException e1) {
 					}
 			    	  

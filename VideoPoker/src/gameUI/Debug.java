@@ -63,7 +63,7 @@ public class Debug extends GameUI {
     	        String[] tokens = s.split("\\s+|\\s*\\,\\s*");
     	        
     	        for(int m=0; m<tokens.length;){
-    	        	//System.out.print(tokens[m]);
+    	        	System.out.println();
     	        	
 	    			if(tokens[m].equals("b")){
 	    				try{

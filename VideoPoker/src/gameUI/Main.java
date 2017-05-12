@@ -2,6 +2,11 @@ package gameUI;
 
 public class Main {
 	
+	/**
+	 * This method issues an error message for bad usage
+	 */
+	
+	
 	static private void usage(){
 		System.out.println("Usage:");
 		System.out.println("VideoPoker <gamemode> [ options ]");
