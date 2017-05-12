@@ -116,6 +116,8 @@ public class Auto extends GameUI {
 				
 				System.out.println("h: " + e.getMessage());
 				System.exit(-1);
+			} catch (EmptyDeckEception e) {
+				System.out.println("empty deck");
 			}
 			
 			if(videopoker.credit()<bet){

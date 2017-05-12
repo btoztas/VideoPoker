@@ -161,7 +161,10 @@ public class Debug extends GameUI {
     						System.out.println("h: " + e.getMessage());
     					} catch (InvalidCardIndexException e) {
     						System.out.println("h: " + e.getMessage());
-    					}
+    					} catch (EmptyDeckEception e) {
+    						System.out.println("empty deck");
+    						System.exit(-1);
+						}
     					if(videopoker.credit()==0){
     						System.out.println("no more credit");
     						System.exit(-1);

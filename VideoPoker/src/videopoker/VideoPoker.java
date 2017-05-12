@@ -98,7 +98,7 @@ public class VideoPoker {
 		
 	}
 	
-	public PlayResult hold(int[] indexes) throws InvalidCardIndexException, InvalidGameStateException{
+	public PlayResult hold(int[] indexes) throws InvalidCardIndexException, InvalidGameStateException, EmptyDeckEception{
 		
 		if(!this.gamestate.equals("DEAL"))
 			throw new InvalidGameStateException("can't hold right now");
@@ -187,15 +187,10 @@ public class VideoPoker {
 			
 	}
 	
-	protected void switchCard(int index){
+	protected void switchCard(int index) throws EmptyDeckEception{
 		
 		deck.collectCard(this.hand.removeCard(index));
-		try {
-			hand.addCard(index, this.deck.drawCard());
-		} catch (EmptyDeckEception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		hand.addCard(index, this.deck.drawCard());
 		
 	}
 	
