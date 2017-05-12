@@ -551,6 +551,8 @@ public class GameWindow extends JPanel implements ActionListener{
 				
 			} catch (InvalidGameStateException e1) {
 				
+			} catch (EmptyDeckEception e1) {
+				
 			}
         	
         	Statistics statist = v.statistics();

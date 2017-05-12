@@ -109,7 +109,7 @@ public class VideoPoker {
 	 * @see videopoker.PlayReusult.java
 	 */
 	
-	public PlayResult hold(int[] indexes) throws InvalidCardIndexException, InvalidGameStateException{
+	public PlayResult hold(int[] indexes) throws InvalidCardIndexException, InvalidGameStateException, EmptyDeckEception{
 		
 		if(!this.gamestate.equals("DEAL"))
 			throw new InvalidGameStateException("can't hold right now");
@@ -226,22 +226,16 @@ public class VideoPoker {
 				this.deck.collectCard(this.hand.removeCard(0));
 			
 	}
-	
 	/**
 	 * this method gives the card in the index given by the parameter index to the deck and substitutes it with the first
 	 * card of the deck
 	 * @param index		index of the card to switch
 	 */
-	
-	protected void switchCard(int index){
+
+	protected void switchCard(int index) throws EmptyDeckEception{
 		
 		deck.collectCard(this.hand.removeCard(index));
-		try {
-			hand.addCard(index, this.deck.drawCard());
-		} catch (EmptyDeckEception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		hand.addCard(index, this.deck.drawCard());
 		
 	}
 	

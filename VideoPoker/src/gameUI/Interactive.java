@@ -111,6 +111,8 @@ public class Interactive extends GameUI {
 					System.out.println("h: " + e.getMessage());
 				} catch (InvalidCardIndexException e) {
 					System.out.println("h: " + e.getMessage());
+				} catch (EmptyDeckEception e) {
+					System.out.println("h: deck is empty");
 				}
 				
 				if(videopoker.credit()==0){

@@ -21,7 +21,7 @@ public class Deck {
 	LinkedList<Card> deck = new LinkedList<Card>();
 	static private char[] suits  = {'H', 'S', 'D', 'C'};
 	static private char[] ranks  = {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
-	static private int[] scores = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+	static private int[]  scores = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 	private int card_count;
 	
 	
