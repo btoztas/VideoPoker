@@ -1,5 +1,7 @@
 package gameUI;
 
+import gui.GameWindow;
+
 public class Main {
 	
 	/**
@@ -49,6 +51,8 @@ public class Main {
 			GameUI Game = new Auto();
             Game.initGame(args);
             Game.play();
+        }else if (args[0].equals("-g")){
+            GameWindow.main();
         }else{
         	
         	usage();
