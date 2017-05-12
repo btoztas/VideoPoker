@@ -19,7 +19,6 @@ public class Main {
 		System.out.println("\t\t\t\toptions <credit> <bet> <nbdeals>");
 		System.out.println("\t-g\t\tGraphic Interface");
 		System.exit(-1);
-		
 	}
 
 	public static void main(String[] args) {

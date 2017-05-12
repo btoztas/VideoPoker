@@ -97,6 +97,17 @@ public class VideoPoker {
 		return this.stat;
 		
 	}
+
+	/**
+	 * 
+	 * This method changes the cards on the indexes given in the parameter indexes with the cards on the top
+	 * of the deck
+	 * @param indexes 
+	 * @return result 		hand and type of hand that result from holding
+	 * @throws InvalidCardIndexException
+	 * @throws InvalidGameStateException
+	 * @see videopoker.PlayReusult.java
+	 */
 	
 	public PlayResult hold(int[] indexes) throws InvalidCardIndexException, InvalidGameStateException{
 		
@@ -142,6 +153,13 @@ public class VideoPoker {
 		
 	}
 	
+	/**
+	 * 
+	 * this method gets the indexes of the cards that are advised to hold and returns them. 
+	 * @return indexes 		indexes advised to hold
+	 * @throws InvalidGameStateException
+	 */
+	
 	public int[] advice() throws InvalidGameStateException{
 		
 		if(!this.gamestate.equals("DEAL"))
@@ -151,6 +169,17 @@ public class VideoPoker {
 		return type.getAdvice(playerHand);
 		
 	}
+	
+	/**
+	 * 
+	 * this method gets the first five cards from the deck and returns them in the shape of a string
+	 * 
+	 * @return hand		hand that was dealt and is to be shown
+	 * @throws InvalidGameStateException
+	 * @throws InvalidAmountException
+	 * @throws InsufficientFundsException
+	 * @throws EmptyDeckEception
+	 */
 	
 	public String deal() throws InvalidGameStateException, InvalidAmountException, InsufficientFundsException, EmptyDeckEception{
 		
@@ -172,12 +201,23 @@ public class VideoPoker {
 		
 	}
 	
+	/**
+	 * this method adds the first five cards to the hand
+	 * @throws EmptyDeckEception
+	 */
+	
 	protected void drawHand() throws EmptyDeckEception{
 		
 		for(int i=0; i<5; i++)
 			this.hand.addCard(this.deck.drawCard());
 		
 	}
+	
+	/**
+	 * 
+	 * this method gives to the deck the cards from the hand
+	 * 
+	 */
 	
 	protected void collectHand(){
 		
@@ -186,6 +226,12 @@ public class VideoPoker {
 				this.deck.collectCard(this.hand.removeCard(0));
 			
 	}
+	
+	/**
+	 * this method gives the card in the index given by the parameter index to the deck and substitutes it with the first
+	 * card of the deck
+	 * @param index		index of the card to switch
+	 */
 	
 	protected void switchCard(int index){
 		

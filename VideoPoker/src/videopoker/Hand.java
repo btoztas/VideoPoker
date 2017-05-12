@@ -47,6 +47,7 @@ public class Hand {
 	 * the linked list hand
 	 * @param index		index in the Linked List of the Card we wish to get
 	 * @return card		the card in the index given in parameter
+	 * @see deckofcard.Card.java
 	 */
 	
 	public Card getCard(int index){
@@ -58,6 +59,7 @@ public class Hand {
 	 * This method returns an object Hand hand with a copy of the original hand in order to able us to
 	 * manipulate it without shuffling the order of the cards in the original hand
 	 * @return hand		copy of the original hand
+	 * @see videopoker.Hand.java
 	 */
 	
 	public Hand copyHand(){
@@ -140,6 +142,7 @@ public class Hand {
 	/**
 	 * This method removes an object Card from the Linked List hand that is in the position given by the parameter index
 	 * @param index		position of the card we wish to extract from the hand
+	 * @see deckofcard.Card.java
 	 */
 	
 	public Card removeCard(int index){

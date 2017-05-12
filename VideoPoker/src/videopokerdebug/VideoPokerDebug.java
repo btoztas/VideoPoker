@@ -11,6 +11,14 @@ import videopoker.VideoPokerType;
 
 public class VideoPokerDebug extends VideoPoker {
 	
+	/**
+	 * Construction of a Video Poker game of type Debug. This redefinition is necessary because we can't shuffle the deck
+	 * @param credit   Credit amount to initiate the game with
+	 * @param type     Video Poker type implemented
+	 * @param deck	   deck of card to use in the game
+	 * @throws InvalidCardException
+	 */
+	
 	public VideoPokerDebug(int credit, VideoPokerType type, String deck) throws InvalidCardException{
 		super(credit, type);
 		String[] cards = deck.split("\\s+");

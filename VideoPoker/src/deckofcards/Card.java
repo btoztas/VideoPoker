@@ -1,5 +1,10 @@
 package deckofcards;
 
+/**
+ * 
+ * Element of a deck. Has a suit and a rank. Also has a auxiliary score
+ *
+ */
 
 public class Card{
 	

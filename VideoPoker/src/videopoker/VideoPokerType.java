@@ -34,6 +34,7 @@ public interface VideoPokerType {
 	 * This method allows user to initialize a statistics structure as he/she wishes. An object of 
 	 * type Statistics is returned
 	 * @return statistic		 object of type Statistics initialized
+	 * @see videopoker.Statistics.java
 	 */
 	
 	Statistics initStatistics();

@@ -110,6 +110,7 @@ public class Deck {
 	 * This method takes a card from the deck to draw it. This card is returned.
 	 * @return card					card to be drawn
 	 * @throws EmptyDeckEception	exception thrown when there are no more cards in the deck
+	 * @see deckofcards.Card.java
 	 */
 	
 	public Card drawCard() throws EmptyDeckEception{
