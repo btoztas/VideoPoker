@@ -73,7 +73,7 @@ public class Interactive extends GameUI {
 				
 			}else if(tokens[0].equals("d")){
 				try {
-					System.out.println(videopoker.deal());
+					System.out.println("player's hand " + videopoker.deal());
 				} catch (InvalidGameStateException e){
 					System.out.println("d: " + e.getMessage());
 				} catch (InvalidAmountException e) {
@@ -100,7 +100,7 @@ public class Interactive extends GameUI {
 				try {
 					
 					result = videopoker.hold(h);
-					System.out.println(result.getHand());
+					System.out.println("player's hand " + result.getHand());
 					if(result.getRes()!=null){
 						System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
 					}else{

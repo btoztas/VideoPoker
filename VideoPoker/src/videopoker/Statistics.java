@@ -79,6 +79,12 @@ public abstract class Statistics {
 		
 	}
 	
+	public String getPercentage(){
+		double percentage = ((double)this.actual_credit/(double)this.initial_credit)*100.0;
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		return this.actual_credit + " (" + numberFormat.format(percentage) + "%)";
+	}
+	
 	/**
 	 * This method prints to the command line a structure with the statistics
 	 */

@@ -18,8 +18,6 @@ import videopoker.InvalidAmountException;
 import videopoker.InvalidCardIndexException;
 import videopoker.InvalidGameStateException;
 import videopoker.PlayResult;
-import videopoker.Statistics;
-//import gameUI.teste.CustomMouseListener;
 import videopoker.VideoPoker;
 import videopoker107DB.VideoPokerType107DB;
 
@@ -43,7 +41,7 @@ public class GameWindow extends JPanel implements ActionListener{
     String instr = "Credit: ";
     JLabel text = new JLabel();
     JLabel winim = new JLabel();
-    final ImageIcon back = new ImageIcon("backf.png");
+    final ImageIcon back = new ImageIcon("otherim/backf.png");
     final ImageIcon not = new ImageIcon("cards/advice.png");
 	protected JLabel[] notCard = new JLabel[5];
 	protected JButton[] holdCardButton = new JButton[5];
@@ -54,7 +52,18 @@ public class GameWindow extends JPanel implements ActionListener{
 	protected boolean d = false;
 	protected JLabel[] coin = new JLabel[5];
 	
-    protected ImageIcon holdImage = new ImageIcon("hold0.png");
+    protected ImageIcon holdImage = new ImageIcon("otherim/hold0.png");
+	private JLabel handdown;
+	private JLabel textdeal;
+	private JLabel handleft1;
+	private JLabel handdown1;
+	private JLabel handdown2;
+	private JLabel textha;
+	private JLabel texthold;
+	private JButton tutorialButton;
+	private int tut = 1;
+	private JLabel textbet;
+	private JLabel textperc;;
     
     public GameWindow(){
         
@@ -67,7 +76,14 @@ public class GameWindow extends JPanel implements ActionListener{
                 "Initial Credit:",
                 "VideoPoker",
                 JOptionPane.PLAIN_MESSAGE);
-        credit = Integer.parseInt(s);
+        if(s==null){
+        	System.exit(0);
+        }
+        if (s.matches("[0-9]+") && s.length() > 0) {
+        	credit = Integer.parseInt(s);
+        }else{
+        	System.exit(0);
+        }
     		
     	 setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     	 v = new VideoPoker(credit, new VideoPokerType107DB());
@@ -86,16 +102,17 @@ public class GameWindow extends JPanel implements ActionListener{
  	     statistics = statistics + statist.getStatistic("Straight Flush") + "<br>";
  	     statistics = statistics + statist.getStatistic("Royal Flush") + "<br>";
  	     statistics = statistics + statist.getStatistic("Other") + "<br>";
- 	     statistics = statistics + statist.getStatistic("Total") + "</html>";
+ 	     statistics = statistics + statist.getStatistic("Total") + "</html>"; 	     
  	     
  	     
-         final ImageIcon bg = new ImageIcon("BG1.png");
+         final ImageIcon bg = new ImageIcon("otherim/BG1.png");
          
-         final ImageIcon adviceButton = new ImageIcon("advice.png");
-         final ImageIcon betUp = new ImageIcon("betbut.png");
-         final ImageIcon betBottom = new ImageIcon("betbot.png");
-         final ImageIcon holdButton = new ImageIcon("hold.png");
+         final ImageIcon adviceButton = new ImageIcon("otherim/advice.png");
+         final ImageIcon betUp = new ImageIcon("otherim/betbut.png");
+         final ImageIcon betBottom = new ImageIcon("otherim/betbot.png");
+         final ImageIcon holdButton = new ImageIcon("otherim/hold.png");
          final ImageIcon coin1 = new ImageIcon("chips/5.png");
+         final ImageIcon tutorial = new ImageIcon("otherim/tutorial.png");
          
          
         
@@ -189,6 +206,13 @@ public class GameWindow extends JPanel implements ActionListener{
          betUpButton.setBounds(397,468,110,45);
          layeredPane.add(betUpButton, new Integer(7));
          
+         tutorialButton = new JButton(tutorial);
+         tutorialButton.setActionCommand("tutorial");
+         tutorialButton.addActionListener(this);
+         tutorialButton.setOpaque(true);
+         tutorialButton.setBounds(1030,100,200,20);
+         layeredPane.add(tutorialButton, new Integer(7));
+         
          JLabel betBottomButton = new JLabel(betBottom);
          betBottomButton.setVerticalAlignment(JLabel.TOP);
          betBottomButton.setHorizontalAlignment(JLabel.CENTER);
@@ -198,7 +222,7 @@ public class GameWindow extends JPanel implements ActionListener{
          
          for(int i =0; i<5;i++){
         	 bet[i]=new JButton();
-        	 bet[i].setIcon(new ImageIcon((i+1)+".png"));
+        	 bet[i].setIcon(new ImageIcon("otherim/"+(i+1)+".png"));
         	 bet[i].setOpaque(true);
         	 bet[i].setBounds(398+(22*i),532,20,23);
         	 bet[i].setActionCommand("bet"+(i+1));
@@ -232,10 +256,88 @@ public class GameWindow extends JPanel implements ActionListener{
         	 hand[i-1] = createCard(holdImage,"backf",origin,i-1);
          }
          winim=new JLabel();
-         winim.setIcon(new ImageIcon("royalflush.png"));
+         winim.setIcon(new ImageIcon("otherim/royalflush.png"));
       	 winim.setBounds(200,50,800,100);
       	 winim.setVisible(false);
       	 layeredPane.add(winim, new Integer(100));
+      	 
+      	 handdown = new JLabel();
+      	 handdown.setIcon(new ImageIcon("otherim/handdown.png"));
+     	 handdown.setBounds(870,50,120,150);
+     	 handdown.setVisible(false);
+     	 handdown.setOpaque(false);
+     	 layeredPane.add(handdown, new Integer(100));
+     	 
+     	 handdown1 = new JLabel();
+     	 handdown1.setIcon(new ImageIcon("otherim/handdown.png"));
+    	 handdown1.setBounds(710,50,120,150);
+    	 handdown1.setVisible(false);
+    	 handdown1.setOpaque(false);
+    	 layeredPane.add(handdown1, new Integer(100));
+      	 
+    	 handdown2 = new JLabel();
+      	 handdown2.setIcon(new ImageIcon("otherim/handdown.png"));
+     	 handdown2.setBounds(100,50,120,150);
+     	 handdown2.setVisible(false);
+     	 handdown2.setOpaque(false);
+     	 layeredPane.add(handdown2, new Integer(100));
+     	 
+     	 textdeal = new JLabel("YOU CAN DEAL");
+     	 textdeal.setBounds(845,-14,200,100);
+     	 textdeal.setBackground(Color.white);
+     	 textdeal.setForeground(Color.LIGHT_GRAY);
+     	 textdeal.setOpaque(false);
+     	 textdeal.setVisible(false);
+     	 textdeal.setFont(new Font("Impact", Font.PLAIN, 35));
+     	 layeredPane.add(textdeal,new Integer(9));
+     	 
+     	 handleft1 = new JLabel();
+     	 handleft1.setIcon(new ImageIcon("otherim/handleft.png"));
+    	 handleft1.setBounds(870,430,150,150);
+    	 handleft1.setVisible(true);
+    	 handleft1.setOpaque(false);
+    	 layeredPane.add(handleft1, new Integer(100));
+     	 
+    	 
+    	 textbet = new JLabel("PLACE YOUR BET");
+    	 textbet.setBounds(1020,450,300,100);
+    	 textbet.setBackground(Color.white);
+    	 textbet.setForeground(Color.LIGHT_GRAY);
+    	 textbet.setOpaque(false);
+    	 textbet.setVisible(true);
+    	 textbet.setFont(new Font("Impact", Font.PLAIN, 35));
+    	 layeredPane.add(textbet,new Integer(9));
+    	 
+   	 
+	   	 textha = new JLabel("HOLD OR ADVICE");
+	   	 textha.setBounds(1020,450,300,100);
+	   	 textha.setBackground(Color.white);
+	   	 textha.setForeground(Color.LIGHT_GRAY);
+	   	 textha.setOpaque(false);
+	   	 textha.setVisible(false);
+	   	 textha.setFont(new Font("Impact", Font.PLAIN, 35));
+	   	 layeredPane.add(textha,new Integer(9));
+	   	 
+	   	 texthold = new JLabel("CHOOSE THE CARDS YOU WISH TO HOLD");
+	   	 texthold.setBounds(210,50,800,100);
+	   	 texthold.setBackground(Color.white);
+	   	 texthold.setForeground(Color.LIGHT_GRAY);
+	   	 texthold.setOpaque(false);
+	   	 texthold.setVisible(false);
+	   	 texthold.setFont(new Font("Impact", Font.PLAIN, 35));
+	   	 layeredPane.add(texthold,new Integer(9));
+	   	 
+	   	 textperc = new JLabel(statist.getPercentage());
+	   	 textperc.setBounds(1123,413,140,60);
+	   	 textperc.setBackground(Color.white);
+	   	 textperc.setForeground(Color.gray);
+	   	 textperc.setOpaque(false);
+	   	 textperc.setVisible(true);
+	   	 textperc.setFont(new Font("Impact", Font.PLAIN, 15));
+	   	 layeredPane.add(textperc,new Integer(9));
+	   	 
+	   	 paintCoins(4);
+      	 
          add(layeredPane);
          
          
@@ -255,12 +357,21 @@ public class GameWindow extends JPanel implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
         if ("deal".equals(e.getActionCommand())){
-        	advice.setEnabled(true);
-        	d=true;
         	Point origin = new Point(129, 200);
         	String Hand;
 			try {
 				Hand = v.deal();
+				d=true;
+				advice.setEnabled(true);
+				if(tut==1){
+					handdown.setVisible(false);
+		        	handdown1.setVisible(true);
+		        	handdown2.setVisible(true);
+		        	handleft1.setVisible(true);
+		        	textdeal.setVisible(false);
+		        	textha.setVisible(true);
+		        	texthold.setVisible(true);
+				}
 				text.setText(instr + v.credit());
 				b = true;
 	          	 for (int i = 1; i <6; i++) {
@@ -277,8 +388,11 @@ public class GameWindow extends JPanel implements ActionListener{
 	                 cardsLayout[i-1].show(hand[i-1], FRONT);
 	                 origin.x += 137;
 	          	 }
-	          	 winim.setIcon(new ImageIcon("goodluck.png"));
-	          	 winim.setVisible(true);
+	          	 if(tut==0){
+	          		 winim.setIcon(new ImageIcon("otherim/goodluck.png"));
+	          		 winim.setVisible(true);
+	          	 }
+	          	 
 			} catch (InvalidGameStateException e1) {
 				
 			} catch (InvalidAmountException e1) {
@@ -304,13 +418,29 @@ public class GameWindow extends JPanel implements ActionListener{
         	try {
 				v.bet(betAmount);
 				text.setText(instr + v.credit());
+				if(tut==1){
+					handdown.setVisible(true);
+					textdeal.setVisible(true);
+					handleft1.setVisible(false);
+					textbet.setVisible(false);
+				}
 			} catch (InvalidAmountException e1) {
 			} catch (InvalidGameStateException e1) {
 			} catch (InsufficientFundsException e1) {
 			}
+        }else if("tutorial".equals(e.getActionCommand())){
+        	tutorialButton.setVisible(false);
+        	tut=0;
+        	handdown.setVisible(false);
+        	handdown1.setVisible(false);
+        	handdown2.setVisible(false);
+        	handleft1.setVisible(false);
+        	textdeal.setVisible(false);
+        	textbet.setVisible(false);
+        	textha.setVisible(false);
+        	texthold.setVisible(false);
         }else if("hold".equals(e.getActionCommand())){
-        	advice.setEnabled(false);
-        	d=false;
+        	
         	int j=0;
         	int count=0;
         	for(int i = 0; i<5 ; i++){
@@ -328,8 +458,20 @@ public class GameWindow extends JPanel implements ActionListener{
         	Point origin = new Point(129, 200);
         	PlayResult p;
         	try {
-        		b = false;
 				p = v.hold(toHold);
+				advice.setEnabled(false);
+            	d=false;
+        		handdown.setVisible(false);
+            	handdown1.setVisible(false);
+            	handdown2.setVisible(false);
+            	handleft1.setVisible(false);
+            	textdeal.setVisible(false);
+            	textbet.setVisible(false);
+            	textha.setVisible(false);
+            	texthold.setVisible(false);
+            	tut=0;
+            	tutorialButton.setVisible(false);
+        		b = false;
 				String Hand = p.getHand();
 	          	baralhoButton.setEnabled(false);
 	          	 for (int i = 1; i <6; i++) {
@@ -337,7 +479,7 @@ public class GameWindow extends JPanel implements ActionListener{
 	          		 String cardName = Hand.substring(index,index+2);
 	          		 layeredPane.remove(hand[i-1]);
 	          		 JLabel cardFront = new JLabel(new ImageIcon ("cards/"+cardName+".jpg"));
-	          		 cardHolded[i-1] = new JLabel(new ImageIcon ("hold1.png"));
+	          		 cardHolded[i-1] = new JLabel(new ImageIcon ("otherim/hold1.png"));
 	            	 cardHolded[i-1].setOpaque(false);
 	            	 cardHolded[i-1].setVisible(false);
 	            	
@@ -365,51 +507,51 @@ public class GameWindow extends JPanel implements ActionListener{
 	          	 winim.setVisible(true);
 	          	 if(win!=null){
 		          	 if(win.equals("Royal Flush")){
-			          	 winim.setIcon(new ImageIcon("royalflush.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/royalflush.png"));
 		          	 }
 		          	 else if(win.equals("Straight Flush")){
-			          	 winim.setIcon(new ImageIcon("straightflush.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/straightflush.png"));
 		          	 }
 		          	 else if(win.equals("Four Aces")){
-			          	 winim.setIcon(new ImageIcon("fouraces.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/fouraces.png"));
 		          	 }
 		          	 else if(win.equals("Four 2-4")){
-			          	 winim.setIcon(new ImageIcon("four2-4.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/four2-4.png"));
 		          	 }
 		          	 else if(win.equals("Four 5-K")){
-			          	 winim.setIcon(new ImageIcon("four5-K.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/four5-K.png"));
 		          	 }
 		          	 else if(win.equals("Full House")){
-			          	 winim.setIcon(new ImageIcon("fullhouse.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/fullhouse.png"));
 		          	 }
 		          	 else if(win.equals("Flush")){
-			          	 winim.setIcon(new ImageIcon("flush.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/flush.png"));
 		          	 }
 		          	 else if(win.equals("Straight")){
-			          	 winim.setIcon(new ImageIcon("straight.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/straight.png"));
 		          	 }
 		          	 else if(win.equals("Three of a Kind")){
-			          	 winim.setIcon(new ImageIcon("threeofakind.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/threeofakind.png"));
 		          	 }
 		          	 else if(win.equals("Two Pair")){
-			          	 winim.setIcon(new ImageIcon("twopair.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/twopair.png"));
 		          	 }
 		          	 else if(win.equals("Jacks or Better")){
-			          	 winim.setIcon(new ImageIcon("jacksorbetter.png"));
+			          	 winim.setIcon(new ImageIcon("otherim/jacksorbetter.png"));
 		          	 }
 	          	 }else{
-		          	 winim.setIcon(new ImageIcon("lost.png"));
+		          	 winim.setIcon(new ImageIcon("otherim/lost.png"));
 	          	 }
+	          	 baralhoButton.setEnabled(true);
+	        	 for(int i = 0; i<5 ; i++){
+	        		 holdedCards[i]=false;
+	         	 }
 	          	 
 			} catch (InvalidCardIndexException e1) {
 				
 			} catch (InvalidGameStateException e1) {
 				
 			}
-        	baralhoButton.setEnabled(true);
-        	for(int i = 0; i<5 ; i++){
-        		holdedCards[i]=false;
-        	}
         	
         	Statistics statist = v.statistics();
         	String statistics= "<html>Nb<br>";
@@ -424,6 +566,7 @@ public class GameWindow extends JPanel implements ActionListener{
     	    statistics = statistics + statist.getStatistic("Royal Flush") + "<br>";
     	    statistics = statistics + statist.getStatistic("Other") + "<br>";
     	    statistics = statistics + statist.getStatistic("Total") + "</html>";
+    	    textperc.setText(statist.getPercentage());
     	    
     	    text3.setText(statistics);
     	    text.setText(instr + v.credit());
@@ -437,7 +580,7 @@ public class GameWindow extends JPanel implements ActionListener{
     	JPanel card = new JPanel(new CardLayout());
     	JLabel cardFront = new JLabel(new ImageIcon ("cards/"+front+".jpg"));
     	
-    	cardHolded[i] = new JLabel(new ImageIcon ("hold1.png"));
+    	cardHolded[i] = new JLabel(new ImageIcon ("otherim/hold1.png"));
     	cardHolded[i].setOpaque(false);
     	cardHolded[i].setVisible(false);
     	

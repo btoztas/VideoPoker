@@ -58,9 +58,8 @@ public class Debug extends GameUI {
 				System.exit(0);
 			}
             String s = "";
-    		if((s = bufferRead.readLine())!=null){
+    		if((s = new String(Files.readAllBytes(Paths.get(cmd_file))))!=null){
     			
-    	        System.out.println(s);
     	        String[] tokens = s.split("\\s+|\\s*\\,\\s*");
     	        
     	        for(int m=0; m<tokens.length;){
@@ -69,6 +68,7 @@ public class Debug extends GameUI {
 	    			if(tokens[m].equals("b")){
 	    				try{
 	    					if((int)tokens[m+1].charAt(0)>57 || (int)tokens[m+1].charAt(0)==36){
+	    						System.out.println("-cmd " + tokens[m]);
 	    						try{
 		    						videopoker.bet(5);
 		    						System.out.println("player is betting 5");
@@ -81,6 +81,7 @@ public class Debug extends GameUI {
 								}
 	    						m=m+1;
 	    					}else{
+	    						System.out.println("-cmd " + tokens[m] + " " + tokens[m+1]);
 	    						try{
 	    							videopoker.bet(Integer.parseInt(tokens[m+1]));
 	    							System.out.println("player is betting " + Integer.parseInt(tokens[m+1]));
@@ -99,8 +100,9 @@ public class Debug extends GameUI {
     						
     					}
 	    			}else if(tokens[m].equals("d")){
+	    				System.out.println("-cmd " + tokens[m]);
 	    				try {
-	    					System.out.println(videopoker.deal());
+	    					System.out.println("player's hand " + videopoker.deal());
 	    				} catch (InvalidGameStateException e){
 	    					System.out.println("d: " + e.getMessage());
 	    				} catch (InvalidAmountException e) {
@@ -113,6 +115,7 @@ public class Debug extends GameUI {
 						}
 	    				m=m+1;
 	    			}else if(tokens[m].equals("h")){
+	    				System.out.print("-cmd " + tokens[m]);
     					int h[] = new int[5];
     					for(int i=0;i<5;i++){
     						h[i]=0;
@@ -123,6 +126,7 @@ public class Debug extends GameUI {
 	    						if((int)tokens[m+i+1].charAt(0)>57 || (int)tokens[m+i+1].charAt(0)==36){
 	    							i=5;
 	    						}else{
+	    							System.out.print(" " + tokens[m+i+1]);
 	    							try{
 		    							h[i]=Integer.parseInt(tokens[m+i+1]);
 		    							count++;
@@ -135,6 +139,7 @@ public class Debug extends GameUI {
     					}catch(ArrayIndexOutOfBoundsException e){
     						
     					}	
+    					System.out.println();
     					try{
     						
 	    					int [] ho = new int[count];
@@ -145,7 +150,7 @@ public class Debug extends GameUI {
 	    					}
 	    					
 	    					PlayResult result = videopoker.hold(h);
-	    					System.out.println(result.getHand());
+	    					System.out.println("player's hand " + result.getHand());
 	    					if(result.getRes()!=null){
 	    						System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
 	    					}else{
@@ -161,15 +166,18 @@ public class Debug extends GameUI {
     						System.out.println("no more credit");
     						System.exit(-1);
     					}
-    					m = m + count + 1; 
+    					m = m + count + 1;
 	    			}else if(tokens[m].equals("$")){
+	    				System.out.println("-cmd " + tokens[m]);
 	    				System.out.println("player's credit is " + videopoker.credit());
 	    				m=m+1;
 	    			}else if(tokens[m].equals("s")){
+	    				System.out.println("-cmd " + tokens[m]);
 	    				Statistics stat = videopoker.statistics();
 	    				stat.printStatistics();
 	    				m=m+1;
 	    			}else if(tokens[m].equals("a")){
+	    				System.out.println("-cmd " + tokens[m]);
 	    				try {
 	    					int res [] = videopoker.advice();
 	    					if(res!=null){
