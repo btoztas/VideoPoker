@@ -203,7 +203,16 @@ public class Debug extends GameUI {
 	    					System.out.println("a: " + e.getMessage());
 	    				}
 	    				m=m+1;
-	    			}
+	    			}else if(tokens[m].equals("q")){
+	    				System.out.println("-cmd " + tokens[m]);
+	    				try {
+	    					videopoker.quit();
+	    				} catch (InvalidGameStateException e) {
+	    					System.out.println("q: "+ e.getMessage());
+	    				}
+	    				m=m+1;
+	    			}else
+	    				m=m+1;
     	        }
     		}
 		} catch (IOException e) {

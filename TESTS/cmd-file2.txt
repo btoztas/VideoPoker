@@ -1,0 +1,9 @@
+a d h s $ b
+q a h 1 2 3 b 4 s $ d
+q d b 4 s $ a h 1 2 3
+a h 1 2 3 s $ b 3
+q a h 1 2 3 b 4 s $ d
+q d b 4 s $ a h 1 2 3
+a h 1 2 3 s $ d
+q d b 4 s $ a h 1 2 3
+s $ q
