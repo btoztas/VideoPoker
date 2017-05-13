@@ -1,0 +1,15 @@
+#! /bin/bash
+cd VideoPoker/src
+javac deckofcards/*.java
+javac gameUI/*.java
+javac gui/*.java
+javac videopoker/*.java
+javac videopoker107DB/*.java
+javac videopokerdebug/*.java
+jar cfm ../../videopoker.jar ../manif deckofcards gameUI gui videopoker videopoker107DB videopokerdebug
+rm deckofcards/*.class
+rm gameUI/*.class
+rm gui/*.class
+rm videopoker/*.class
+rm videopoker107DB/*.class
+rm videopokerdebug/*.class
