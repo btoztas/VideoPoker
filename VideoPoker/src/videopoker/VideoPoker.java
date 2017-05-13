@@ -82,6 +82,17 @@ public class VideoPoker {
 			
 	
 	}
+	
+	public void quit() throws InvalidGameStateException{
+		
+		if(!this.gamestate.equals("IDLE") && !this.gamestate.equals("HOLD")){
+			throw new InvalidGameStateException("can't quit right now");
+		}
+		
+		System.out.println("Goodbye");
+		System.exit(0);
+	}
+	
 	/**
 	 * Returns the actual credit the player has
 	 * 

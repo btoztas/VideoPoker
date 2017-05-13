@@ -154,8 +154,11 @@ public class Interactive extends GameUI {
 				}
 				
 			}else if(tokens[0].equals("q")){
-				System.out.println("Goodbye");
-				System.exit(0);
+				try {
+					videopoker.quit();
+				} catch (InvalidGameStateException e) {
+					System.out.println(e.getMessage());
+				}
 			}else{
 				System.out.println(tokens[0]+": invalid option");
 			}
