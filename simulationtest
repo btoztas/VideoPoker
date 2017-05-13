@@ -1,0 +1,17 @@
+#!/bin/bash
+
+i="0"
+nrsimul="100"
+betval="1"
+ntry="100000"
+inicialmoney="100000"
+
+rm tempfile.txt
+while [ $i -lt $nrsimul ]
+do
+java -jar videopoker.jar -s $inicialmoney $betval $ntry | grep "(*)" >> tempfile.txt
+i=$[$i+1]
+echo $i
+done
+rm testresult.txt
+awk -F "[()]" '{ for (i=2; i<NF; i+=2) print $i }' tempfile.txt > testresult.txt
