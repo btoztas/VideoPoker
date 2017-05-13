@@ -1,5 +1,11 @@
 package videopoker;
 
+/**
+ * 
+ * class that stores the value that was bet
+ *
+ */
+
 public class Pot {
 	
 	private int value;

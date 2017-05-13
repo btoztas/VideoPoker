@@ -3,6 +3,14 @@ package videopoker;
 import deckofcards.Deck;
 import deckofcards.EmptyDeckEception;
 
+/**
+ * 
+ * class that makes possible to play the various commands allowed by the game: bet, deal, hold,
+ * advise, credit, statistics.
+ * 
+ *
+ */
+
 public class VideoPoker {
 	
 	protected Pot pot;

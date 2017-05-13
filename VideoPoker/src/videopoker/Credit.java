@@ -1,5 +1,11 @@
 package videopoker;
 
+/**
+ * 
+ * Class that contains int objects to store the credit in different states
+ *
+ */
+
 public class Credit {
 	
 	private int actual_credit;

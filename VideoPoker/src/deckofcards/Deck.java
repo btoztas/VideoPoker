@@ -3,6 +3,13 @@ package deckofcards;
 import java.util.LinkedList;
 import java.util.Collections;
 
+/**
+ * 
+ * A deck is a group of cards that can be used to play a game. Cards are drawn from the top of the deck
+ * and inserted in the bottom
+ *
+ */
+
 public class Deck {
 	
 	/**

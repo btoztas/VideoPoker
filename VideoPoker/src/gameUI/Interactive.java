@@ -14,6 +14,12 @@ import videopoker.Statistics;
 import videopoker.VideoPoker;
 import videopoker107DB.VideoPokerType107DB;
 
+/**
+ * 
+ * Extends GameUI. Its a mode of game that allows the user to play with no restrictions issuing the commands
+ * he/she wants
+ *
+ */
 
 public class Interactive extends GameUI {
 	

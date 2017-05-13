@@ -2,6 +2,13 @@ package deckofcards;
 
 import java.util.Comparator;
 
+/**
+ * 
+ * 
+ * Compares two cards according to its score
+ *
+ */
+
 public class RankComparator implements Comparator<Card> {
 
 	@Override

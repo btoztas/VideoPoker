@@ -1,5 +1,13 @@
 package videopoker;
 
+/**
+ * 
+ * interface that allows the user to implement the methods to define the video poker type. One can implement
+ * strategies, ways to evaluate an hand and the amounts for the payouts.
+ *
+ */
+
+
 public interface VideoPokerType {
 	
 	/**

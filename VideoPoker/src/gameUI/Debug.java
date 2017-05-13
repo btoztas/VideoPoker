@@ -13,6 +13,11 @@ import videopoker.*;
 import videopoker107DB.VideoPokerType107DB;
 import videopokerdebug.VideoPokerDebug;
 
+/**
+ * 
+ * Extends GameUI. Its a mode of game that allows the user to test a file with commands to play
+ *
+ */
 
 public class Debug extends GameUI {
 	

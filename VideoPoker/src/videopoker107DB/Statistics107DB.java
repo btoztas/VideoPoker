@@ -2,6 +2,12 @@ package videopoker107DB;
 
 import videopoker.Statistics;
 
+/**
+ * 
+ * Specific class to implement statistics for the type of video poker 10/7 Double Bonus
+ *
+ */
+
 public class Statistics107DB extends Statistics {
 
 	public Statistics107DB(String[] hands) {

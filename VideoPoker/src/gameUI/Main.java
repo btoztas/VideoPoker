@@ -2,6 +2,13 @@ package gameUI;
 
 import gui.GameWindow;
 
+/**
+ * 
+ * 
+ * Main class to launch the program and decide the game mode respectively
+ *
+ */
+
 public class Main {
 	
 	/**

@@ -9,6 +9,12 @@ import videopoker.InvalidGameStateException;
 import videopoker.VideoPoker;
 import videopoker.VideoPokerType;
 
+/**
+ * 
+ * Extends VideoPoker. New definition of methods in order for the debug mode to work properly
+ *
+ */
+
 public class VideoPokerDebug extends VideoPoker {
 	
 	/**

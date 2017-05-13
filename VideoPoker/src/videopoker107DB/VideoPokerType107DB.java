@@ -12,18 +12,27 @@ import videopoker.Hand;
 import videopoker.Statistics;
 import videopoker.VideoPokerType;
 
+/**
+ * 
+ * Specific class to implement the type of video poker 10/7 Double Bonus
+ *
+ */
+
 public class VideoPokerType107DB implements VideoPokerType {
 	
 	private List<Map<String, Integer>> payouts;
-	
-	
+
 	public VideoPokerType107DB(){
 		super();
 		
 		initPayouts();
 		
 	}
-	
+	/**
+	 * this method creates a 2D Hash Map addressed by a string with the name of the hand and an integer with the 
+	 * various bets. Those address the correspondent payouts.
+	 * 
+	 */
 	private void initPayouts(){
 		
 		payouts = new ArrayList<Map<String, Integer>>();
@@ -412,9 +421,12 @@ public class VideoPokerType107DB implements VideoPokerType {
 	}
 
 	
-	
-
-	// Implemented methods to evaluate parts of the strategy
+	/**
+	 * this method returns true if the two cards given in parameters are equal in Score/Rank and false otherwise.
+	 * @param card1
+	 * @param card2
+	 * @return bool		true if the cards have the same score
+	 */
 	
 	private boolean isPair(Card card1, Card card2){
 			
@@ -423,7 +435,16 @@ public class VideoPokerType107DB implements VideoPokerType {
 			return false;
 			
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing two pairs among those. 
+	 * This condition is checked given an hand. Returns null if there are no 2 pairs
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form two pairs or null
+	 * @see	deckofcards.Card.java
+	 */
+	
+	
 	private ArrayList<Card> isTwoPair(Hand hand){
 
 		// On a sorted by rank hand, there are three cases we need to check to know if there is a two pair:
@@ -466,7 +487,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		
 		
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing a three of a kind among those. 
+	 * This condition is checked given an hand. Returns null if there is no three of a kind
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a three of a kind or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isThreeOfAKind(Hand hand){
 		
 		// To understand this analysis check the following examples of a sorted by rank hand:
@@ -489,6 +518,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a three of a kind of aces among those. 
+	 * This condition is checked given an hand. Returns null if there is no three of a kind of aces
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a three of a kind of aces or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isThreeOfAKindAces(Hand hand){
 				
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -503,6 +540,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a straight flush.
+	 * This condition is checked given an hand. Returns null if there is no straight flush
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a straight flush or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isStraightFlush(Hand hand){
 		
@@ -520,6 +565,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing n cards to a straight flush.
+	 * This condition is checked given an hand. Returns null if there are no n cards to straight flush
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a n cards to a straight flush or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isNToStraightFlush(Hand hand, int n){
 		
@@ -547,6 +600,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing n cards to a straight flush of a certain type.
+	 * This condition is checked given an hand. Returns null if there are no n cards to straight flush of a certain type
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a n cards to a straight flush of a certain type or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isNToStraightFlushNType(Hand hand, int n, int type){
 		
@@ -620,7 +681,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
-			
+	
+	/**
+	 * this method returns an array list of cards containing a straight. 
+	 * This condition is checked given an hand. Returns null if there is no straight
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a straigth or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isStraight(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -642,6 +711,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return toHold;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a four to an outside straight.
+	 * This condition is checked given an hand. Returns null if there are no four to an outside straight
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a 4 to an outside straight or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> is4OutsideStraight(Hand hand){
 		
@@ -680,6 +757,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 			return null;
 		}	
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a four to an inside straight.
+	 * This condition is checked given an hand. Returns null if there are no four to an inside straight
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a 4 to an inside straight or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> is4InsideStraight(Hand hand){
 		
@@ -720,6 +805,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		
 		
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a four to an inside straight with n high cards.
+	 * This condition is checked given an hand. Returns null if there are no four to an inside straight with n high cards
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a 4 to an inside straight with n high cards or null
+	 * @see	deckofcards.Card.java
+	 */
 
 	private ArrayList<Card> is4InsideStraightNHighCards(Hand hand, int n){
 		
@@ -739,7 +832,16 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
-			
+	
+	
+	/**
+	 * this method returns an array list of cards containing a A and K and Q and J unsuited among those. 
+	 * This condition is checked given an hand. Returns null if there is no A and K and Q and J unsuited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a A and K and Q and J unsuited or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isAKQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
@@ -750,6 +852,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a K and Q and J unsuited among those. 
+	 * This condition is checked given an hand. Returns null if there is no K and Q and J unsuited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a K and Q and J unsuited or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isKQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -765,7 +875,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing a Royal Flush. 
+	 * This condition is checked given an hand. Returns null if there is no Royal Flush.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Royal Flush or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isRoyalFlush(Hand hand){
 		
 		if(isFlush(hand)!=null){
@@ -784,6 +902,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing n cards to a Royal Flush. 
+	 * This condition is checked given an hand. Returns null if there are not n cards Royal Flush.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form n cards to a Royal Flush or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isNToRoyalFlush(Hand hand, int n){
 		
@@ -807,7 +933,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return toHold;
 		
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing a Q and J suited among those. 
+	 * This condition is checked given an hand. Returns null if there is no Q and J suited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Q and J suited or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isQJSuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -827,6 +961,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a T and J suited among those. 
+	 * This condition is checked given an hand. Returns null if there is no T and J suited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a T and J suited or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isJTSuited(Hand hand){
 		
@@ -848,6 +990,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a Q and T suited among those. 
+	 * This condition is checked given an hand. Returns null if there is no Q and T suited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Q and T suited or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isQTSuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -867,6 +1017,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a K and T suited among those. 
+	 * This condition is checked given an hand. Returns null if there is no K and T suited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a K and T suited or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isKTSuited(Hand hand){
 		
@@ -888,6 +1046,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a Q and K unsuited among those. 
+	 * This condition is checked given an hand. Returns null if there is no Q and K unsuited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Q and K unsuited or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isKQUnsuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -906,6 +1072,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a K and J unsuited among those. 
+	 * This condition is checked given an hand. Returns null if there is no K and J unsuited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a K and J unsuited or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isKJUnsuited(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -923,6 +1097,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a K or Q or J among those. 
+	 * This condition is checked given an hand. Returns null if there is no K or Q or J.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards with a K or Q or J or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isJKQ(Hand hand){
 		
 		ArrayList<Card> toHold = new ArrayList<Card>();
@@ -934,6 +1116,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
+	
+	/**
+	 * this method returns an array list of cards containing two suited high cards among those. 
+	 * This condition is checked given an hand. Returns null if there are no two suited high cards.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form two suited high cards or null
+	 * @see	deckofcards.Card.java
+	 */
 		
 	private ArrayList<Card> isTwoSuitedHCard(Hand hand){
 		
@@ -955,6 +1145,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a Q and J unsuited among those. 
+	 * This condition is checked given an hand. Returns null if there is no Q and J unsuited.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Q and J unsuited or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isQJUnsuited(Hand hand){
 		ArrayList<Card> toHold = new ArrayList<Card>();
 		hand.sortRank();
@@ -973,7 +1171,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing the pair among those. 
+	 * This condition is checked given an hand. Returns null if there are no pairs
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a pair or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isThereAPair(Hand hand){
 		
 		// Cases for Jacks or Better on a sorted by rank hand:
@@ -996,6 +1202,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 	}
 	
+	/**
+	 * this method returns an array list of cards containing an high pair among those. 
+	 * This condition is checked given an hand. Returns null if there are no high pairs
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a high pair or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isJacksOrBetter(Hand hand){
 		
 		ArrayList<Card> toHold = isThereAPair(hand);
@@ -1006,6 +1220,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a low pair among those. 
+	 * This condition is checked given an hand. Returns null if there are no low pairs
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a low pair or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isLowPair(Hand hand){
 		
 		ArrayList<Card> tohold = isThereAPair(hand);
@@ -1015,6 +1237,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a Full House. 
+	 * This condition is checked given an hand. Returns null if there is no Full House.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Full House or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private	ArrayList<Card> isFullHouse(Hand hand){
 		
@@ -1039,7 +1269,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing a Four of a Kind among them. 
+	 * This condition is checked given an hand. Returns null if there is no Four of a Kind.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Four of a Kind or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isFourOfAKind(Hand hand){
 		
 		hand.sortRank();
@@ -1056,6 +1294,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		
 	}
 	
+	/**
+	 * this method returns an array list of cards containing a Four of a Kind of Aces among them. 
+	 * This condition is checked given an hand. Returns null if there is no Four of a Kind of Aces.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Four of a Kind of Aces or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isFourAces(Hand hand){
 		
 		ArrayList<Card> tohold = isFourOfAKind(hand);
@@ -1068,7 +1314,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing a Four of a Kind 5-K among them. 
+	 * This condition is checked given an hand. Returns null if there is no Four of a Kind 5-K.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Four of a Kind 5-K or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isFour5_K(Hand hand){
 		
 		ArrayList<Card> tohold = isFourOfAKind(hand);
@@ -1080,7 +1334,15 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
-
+	
+	/**
+	 * this method returns an array list of cards containing a Four of a Kind 2-4 among them. 
+	 * This condition is checked given an hand. Returns null if there is no Four of a Kind 2-4.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Four of a Kind 2-4 or null
+	 * @see	deckofcards.Card.java
+	 */
+	
 	private ArrayList<Card> isFour2_4(Hand hand){
 		
 
@@ -1093,6 +1355,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
+	
+	/**
+	 * this method returns an array list of cards containing a Flush. 
+	 * This condition is checked given an hand. Returns null if there is no Flush.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form a Flush or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isFlush(Hand hand){
 		
@@ -1107,6 +1377,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
+	
+	/**
+	 * this method returns an array list of cards containing n cards to a Flush. 
+	 * This condition is checked given an hand. Returns null if there are not n cards to a Flush.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form c cards to a Flush or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isNToFlush(Hand hand, int n){
 		
@@ -1123,6 +1401,14 @@ public class VideoPokerType107DB implements VideoPokerType {
 		return null;
 		
 	}
+	
+	/**
+	 * this method returns an array list of cards containing n cards to a Flush with n High Cards. 
+	 * This condition is checked given an hand. Returns null if there are not n cards to a Flush with n High Cards.
+	 * @param hand			hand to be checked
+	 * @return tohold		cards that form c cards to a Flush with n High Cards or null
+	 * @see	deckofcards.Card.java
+	 */
 	
 	private ArrayList<Card> isNToFlushNHighCards(Hand hand, int n, int n1){
 		

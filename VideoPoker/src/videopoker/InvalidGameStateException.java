@@ -1,5 +1,11 @@
 package videopoker;
 
+/**
+ * 
+ * Exception to be thrown when the command can't be executed in a certain state
+ *
+ */
+
 public class InvalidGameStateException extends Exception {
 	
 	/**

@@ -2,6 +2,13 @@ package gameUI;
 
 import videopoker.VideoPoker;
 
+/**
+ * 
+ * abstract class that lets the programmer implement functions that will tell how to play the game. Always
+ * has an object of type VideoPoker
+ *
+ */
+
 public abstract class GameUI {
 
 	VideoPoker videopoker;

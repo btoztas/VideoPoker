@@ -397,6 +397,7 @@ public class GameWindow extends JPanel implements ActionListener{
 				
 			} catch (InvalidAmountException e1) {
 			} catch (InsufficientFundsException e1) {
+				
 			} catch (EmptyDeckEception e1) {
 			}
         }else if("bet1".equals(e.getActionCommand())){
@@ -554,6 +555,9 @@ public class GameWindow extends JPanel implements ActionListener{
 			} catch (EmptyDeckEception e1) {
 				
 			}
+        	if(v.credit()==0){
+        		System.exit(0);
+        	}
         	
         	Statistics statist = v.statistics();
         	String statistics= "<html>Nb<br>";

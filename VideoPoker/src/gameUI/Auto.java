@@ -11,6 +11,13 @@ import videopoker.Statistics;
 import videopoker.VideoPoker;
 import videopoker107DB.VideoPokerType107DB;
 
+/**
+ * 
+ * Extends GameUI. Its a mode of game that allows the user to run the game without needing to interact with it. The
+ * amount to bet is always the same and held cards are always correspondent to the advice.
+ *
+ */
+
 public class Auto extends GameUI {
 	
 	private int bet;

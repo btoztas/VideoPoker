@@ -1,5 +1,11 @@
 package videopoker;
 
+/**
+ * 
+ * auxiliary class to store the information needed to present to the user after an hold
+ *
+ */
+
 public class PlayResult {
 
 	private String hand;

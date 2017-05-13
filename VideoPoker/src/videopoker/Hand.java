@@ -1,5 +1,11 @@
 package videopoker;
 
+/**
+ * 
+ * Group of five cards that represent the hand of a player
+ *
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

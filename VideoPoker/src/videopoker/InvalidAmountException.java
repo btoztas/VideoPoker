@@ -1,5 +1,11 @@
 package videopoker;
 
+/**
+ * 
+ * Exception to be thrown when one tries to bet more then he/she should
+ *
+ */
+
 public class InvalidAmountException extends Exception {
 	
 	/**

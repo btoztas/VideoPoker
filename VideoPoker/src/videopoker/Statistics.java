@@ -4,6 +4,12 @@ import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 
+ * abstract class that always the user to define its own statistics
+ * 
+ */
+
 public abstract class Statistics {
 	
 	private Map<String, Integer> aMap;
