@@ -143,13 +143,15 @@ public class Debug extends GameUI {
     					try{
     						
 	    					int [] ho = new int[count];
-	    					
-	    					for(int i=0;h[i]!=0;i++){
-	    						//System.out.print(i);
-	    						ho[i]=h[i];
+	    					if(h!=null){
+		    					for(int i=0;i<5;i++){
+		    						if(h[i]!=0){
+		    							ho[i]=h[i];
+		    						}
+		    					}
 	    					}
 	    					
-	    					PlayResult result = videopoker.hold(h);
+	    					PlayResult result = videopoker.hold(ho);
 	    					System.out.println("player's hand " + result.getHand());
 	    					if(result.getRes()!=null){
 	    						System.out.println("player wins with a " + result.getRes() + " and his credit is " + result.getCredit());
